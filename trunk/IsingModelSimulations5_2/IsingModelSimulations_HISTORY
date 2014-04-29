@@ -1,0 +1,105 @@
+
+******************************
+************PROJECT***********
+******************************
+** IsingModelSimulations5_2 **
+******************************
+******************************
+
+Metropolis simulation of 1D Ising model
+(based on project written in March 2014 by Tomek)
+The goal is the developpement of the initial project in collaborative way.
+
+LIST HERE FUNCTION ADDED TO PROJECT
+
+------------------------------
+Date: March - 16 April 2014
+Function:class Ising 
+Author: Tomasz Wydro
+Comment: This class contain: chain of interacting spins, Metropolis Monte Carlo 
+generating equilibrium evolution of Ising chain and functions calculating lattice 
+(instantaneous) and time averages.
+------------------------------
+Date: March - 16 April 2014
+Function: Ising::Ising(int NN, double TT, double hh, double p, int maxGd, int maxTsep)
+Author: Tomasz Wydro
+Comment: Constructor for the class Ising
+------------------------------
+Date: March 2014
+Function: vector<short> Ising::Metropolis_cycle() 
+Author: Tomasz Wydro
+Comment: One Metropolis chain sweep.
+------------------------------
+Date: March 2014
+Function: void Ising::MC_simulation(int therm_t, int prod_t, int measure_f)
+Author: Tomasz Wydro
+Comment: Call in time loop Metropolis_cycle to generate time series of equilibrium 
+states of the chain.
+------------------------------
+Date: 16 April 2014
+Function:double Ising::order_parameter()
+Author: Tomasz Wydro
+Comment: instantaneous value of magnetisation,
+------------------------------
+Date: 16 April 2014
+Function:vector<double> Ising::S_correlation(int maxGdist, double OP)
+Author: Tomasz Wydro
+Comment: instantaneous value of spin-spin correlation
+------------------------------
+Date: 16 April 2014
+Function: vector<double> Ising::mean_S_corrrelation(string totalFname) 
+Author: Tomasz Wydro
+Comment: Time mean of spin-spin correlation. 
+Provides macroscopic behavior of the correlation.
+------------------------------
+Date: 16 April 2014
+Function: vector<vector<short> > readDATAtoVectors(string totalFname, int N);
+Author: Tomasz Wydro
+Comment: Takes raw Metropolis data from disk and put them into memory in vector
+of vectors container.
+------------------------------
+Date: 28 April 2014
+Function: double Ising::Chi(string totalFname) 
+Author: Travelers
+Comment: 
+
+------------------------------
+Date: 28 Apr 2014
+Function: t_correlation
+Author: mdyndal
+Comment function update
+
+------------------------------
+Date: 28 Apr 2014
+Function: E(), CC(), cluster_freq()
+Author: kaczmarczyk&jędraczka inc.
+Comment: functions implementation
+
+------------------------------
+Date:
+Function:
+Author:
+Comment:
+
+------------------------------
+Date:
+Function:
+Author:
+Comment:
+
+------------------------------
+Date:
+Function:
+Author:
+Comment:
+
+------------------------------
+Date:
+Function:
+Author:
+Comment:
+
+
+
+
+

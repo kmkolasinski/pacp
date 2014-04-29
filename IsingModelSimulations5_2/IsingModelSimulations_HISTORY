@@ -61,12 +61,14 @@ of vectors container.
 Date: 28 April 2014
 Function: double Ising::Chi(string totalFname) 
 Author: Travelers
-Comment: Magnetic susceptibility calculated using order parameter fluctuation method from raw data located in file totalFname
+Comment: Magnetic susceptibility calculated using order parameter fluctuation method 
+from raw data located in file totalFname.
 ------------------------------
 Date: 28 April 2014
 Function: double Chi( vector<vector<short> > SS )
 Author: Travelers
-Comment: Magnetic susceptibility calculated using order parameter fluctuation method from double array SS
+Comment: Magnetic susceptibility calculated using order parameter fluctuation method 
+from double array SS.
 
 ------------------------------
 Date: 28 Apr 2014

@@ -25,6 +25,8 @@
 //#include "Tools.h"
 
 
+bool bTestChiTemp = false; // test caclulate Chi(T)
+
 using namespace std;
 
 string gettotalFname(); //forward (Tools)
@@ -46,42 +48,42 @@ int main(int argc, char** argv) {
     //1.0 --> low temperature limit --> totally ordered state, <S>=1.
     //***When needed add other initializations here
     
-    
-    // ------------------------------------------------------------------------
-    // test w funkcji temperatury
-    // ------------------------------------------------------------------------
-    
-    
-    ofstream data_out("Temp_test.txt");
-    for( double temperature = 0.3 ; temperature < 3.0 ; temperature += 0.05  ){
-    //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
-    Ising chain(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
+    if(bTestChiTemp){
+        // ------------------------------------------------------------------------
+        // Chi in function of Temperature
+        // ------------------------------------------------------------------------
 
 
-    //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
-    chain.MC_simulation(therm_t, prod_t, measure_f);
+        ofstream data_out("Temp_test.txt");
+        for( double temperature = 0.3 ; temperature < 3.0 ; temperature += 0.05  ){
+        //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
+        Ising chain(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
 
-    
-    //Exemple from section D of implementation file (Ising5_2.cpp)
-    //chain.mean_S_corrrelation( gettotalFname().c_str());
-    //cout<< endl << chain.Chi(gettotalFname().c_str()) << " " << exp(2./temperature)/temperature << endl;
-    
-    double chi = chain.Chi(gettotalFname().c_str());
-    double chi_anal = exp(2./temperature)/temperature;
-    double error=chain.ERROR( gettotalFname().c_str() );
-    
-    data_out << std::scientific <<  temperature  << "\t"
-                                     << chi_anal << "\t"
-                                     << chi      << "\t"
-                                     << error    << "\t"
-                                    << chi-error << "\t"
-                                    << chi+error << endl;
-    
-    cout << std::scientific <<  temperature  << "\t" << chi << "\t" << chi_anal << "\t" <<  error << endl;
-    
-    }
-    data_out.close();
-    
+
+        //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
+        chain.MC_simulation(therm_t, prod_t, measure_f);
+
+
+        //Exemple from section D of implementation file (Ising5_2.cpp)
+        //chain.mean_S_corrrelation( gettotalFname().c_str());
+        //cout<< endl << chain.Chi(gettotalFname().c_str()) << " " << exp(2./temperature)/temperature << endl;
+
+        double chi = chain.Chi(gettotalFname().c_str());
+        double chi_anal = exp(2./temperature)/temperature;
+        double error=chain.ERROR( gettotalFname().c_str() );
+
+        data_out << std::scientific <<  temperature  << "\t"
+                                         << chi_anal << "\t"
+                                         << chi      << "\t"
+                                         << error    << "\t"
+                                        << chi-error << "\t"
+                                        << chi+error << endl;
+
+        cout << std::scientific <<  temperature  << "\t" << chi << "\t" << chi_anal << "\t" <<  error << endl;
+
+        }
+        data_out.close();
+    } // end of if(bTestChiTemp)
     // ------------------------------------------------------------------------
     // test w funkcji production time
     // ------------------------------------------------------------------------

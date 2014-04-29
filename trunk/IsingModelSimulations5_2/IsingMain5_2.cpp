@@ -25,7 +25,8 @@
 //#include "Tools.h"
 
 
-bool bTestChiTemp = false; // test caclulate Chi(T)
+bool bTestChiTemp       = false; // test caclulate Chi(T)
+bool bErrorProdTimeTest = false; // test caclulate Errro of Chi in function of prod_t
 
 using namespace std;
 
@@ -84,6 +85,8 @@ int main(int argc, char** argv) {
         }
         data_out.close();
     } // end of if(bTestChiTemp)
+    
+    if(bErrorProdTimeTest){
     // ------------------------------------------------------------------------
     // test w funkcji production time
     // ------------------------------------------------------------------------
@@ -96,7 +99,7 @@ int main(int argc, char** argv) {
         cout   << std::scientific <<  prod_t << "\t" << error  << "\n";
     }
     data_out.close();
-    
+    }
     
     
     //Check of data. To be used for small time x space values

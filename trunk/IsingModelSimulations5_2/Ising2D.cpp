@@ -122,11 +122,11 @@ void Ising2D::MC_simulation(int therm_t, int prod_t, int measure_f) {
 
     RNG::initializeRNG(seed1); // initializes integer random number generator
     
-    cout << "----------------------------------------" << endl;
-    cout << "MC simulation start..." << endl;
-    cout << "Thermalization time:" <<  therm_t    << endl;
-    cout << "Production     time:" <<  prod_t     << endl;
-    cout << "Measure frequency  :" <<  measure_f  << endl;
+//    cout << "----------------------------------------" << endl;
+//    cout << "MC simulation start..." << endl;
+//    cout << "Thermalization time:" <<  therm_t    << endl;
+//    cout << "Production     time:" <<  prod_t     << endl;
+//    cout << "Measure frequency  :" <<  measure_f  << endl;
     
     
     //*** INITIAL MC CYCLES ***
@@ -134,7 +134,7 @@ void Ising2D::MC_simulation(int therm_t, int prod_t, int measure_f) {
     for (int t = 0; t < therm_t; t++) {
         Metropolis_cycle();
     }
-    cout << "Thermalization done..." << endl;
+//    cout << "Thermalization done..." << endl;
     //SOME LOCAL VARIABLES; ADD NEW WHEN NECESSARY
     nb_rejected = 0; //Provides information about the efficiency of sumulation
 
@@ -184,5 +184,5 @@ double Ising2D::E(){
     for(int j=0;j<nx;j++){        
         E+= -S[To2D(i,j)]*( S[To2D((i+1)%nx,j)] + S[To2D(i,(j+1)%nx)] ) + h*S[To2D(i,j)]; 
     }}
-    return E/(N);
+    return E;
 }

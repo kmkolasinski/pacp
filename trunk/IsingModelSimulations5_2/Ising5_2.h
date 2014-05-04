@@ -67,9 +67,7 @@ public:
     double order_parameter();   //measure m for a given spin configuration (instantaneous value)
     double mean_order_parameter();   //macroscopic observable
     
-    //ENERGY
-    virtual double E(); //measure energy per spin of a given spin configuration (lattice mean or instantaneous value) 
-    
+
     //CORRELATION FUNCTIONS
     vector<double> S_correlation(int maxGdist,double OP); //function measuring instant spin-spin correlation
     vector<double> Gs;   //measured macroscopic correlation function Gs(spin separation)  
@@ -87,6 +85,10 @@ public:
     double CC();          //specific heat measured using energy fluctuation method calclutated from simulation
     double CC(string totalFname); // specific heat calculated from raw data file
     double CC(vector<vector<short> > SS); // specific heat calculated from raw data stored in memory
+    
+    //ENERGY
+    virtual double E(); //measure energy per spin of a given spin configuration (lattice mean or instantaneous value) 
+    double aveE(string totalFname); // energy from 
     
     //CLUSTER (DOMAIN) STATISTICS
     cluster_stat CFD;   //distribution CF of cluster length 

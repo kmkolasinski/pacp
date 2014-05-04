@@ -106,7 +106,6 @@ vector<short> Ising::Metropolis_cycle() {
     /* Domain : Monte Carlo simulation
      * Perform Metropolis update of N randomly chosen lattice sites 
      * i.e. one MC cycle  (one sweep of the lattice)*/
-    cout << "asd" << endl;
     int site, siteL, siteR; //site=randomly chosen site, 
     //siteL its left interacting neighbor,
     //siteR its right interacting neighbor.
@@ -263,7 +262,7 @@ double Ising::CC() {
     meanE*=meanE;
     meanEsq/=n;
     
-    return (meanEsq-meanE)/T/T/N; 
+    return (meanEsq-meanE)/T/T/N; //per site
 }
 
 double Ising::CC(string totalFname){
@@ -316,7 +315,7 @@ double Ising::Chi(string totalFname) {
 }
 
 double Ising::Chi( vector<vector<short> > SS ) {
-    // Calculates the magnetic susceptibility of the system
+ // Calculates the magnetic susceptibility of the system
     // which is stored in vector SS
     //parameter: SS - Raw simulation data
     
@@ -342,6 +341,26 @@ double Ising::Chi( vector<vector<short> > SS ) {
     
     return (aM2-aM*aM)/T; //Chi
 }
+
+double Ising::aveE(string totalFname) {    
+    // Calculates the average value of Energy over all simulation time
+    
+    //Raw simulation data flows from disk to vector container
+    vector<vector<short> > SS = readDATAtoVectors(totalFname, N);    
+    //number of time samples
+    int t_steps=SS.size();
+    //auxiliary variables
+    double mean_E = 0;
+    for(int j=0;j<t_steps;j++){
+        for(int i=0;i<N;i++){            
+            S[i]=SS[j][i];
+        }
+        double ee = E();        
+        mean_E   += ee; 
+    }
+    return mean_E/t_steps;         
+}
+
 
 vector<double> Ising::t_correlation(int maxTime, string totalFname) {
     /*Domain: data analysis, calculation of MC characteristic

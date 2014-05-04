@@ -266,6 +266,42 @@ double Ising::CC() {
     return (meanEsq-meanE)/T/T/N; 
 }
 
+double Ising::CC(string totalFname){
+    // Calculates the specific heat 
+    // which is stored in file totalFname
+    // parameter: totalFname - name of file    
+    //Raw simulation data flows from disk to vector container
+    vector<vector<short> > SS = readDATAtoVectors(totalFname, N);
+    return CC(SS);
+}
+
+double Ising::CC(vector<vector<short> > SS) {
+    /*
+     * returns value of the specific heat according to relation:
+     * C=bheta/T <E^2>-<E>^2
+     * SS - is the raw data vector stored in memory
+     * this function needs E() to work properly.
+     */   
+    double meanE,meanEsq;
+    int t_steps=SS.size();
+    
+    meanE   = 0;
+    meanEsq = 0;   
+    for(int j=0;j<t_steps;j++){
+        for(int i=0;i<N;i++){            
+            S[i]=SS[j][i];
+        }
+        double ee = E();            
+        meanE    += ee;
+        meanEsq  += ee*ee;                
+    }    
+    
+    meanE  /= t_steps;
+    meanE  *= meanE;
+    meanEsq/= t_steps;
+    
+    return (meanEsq-meanE)/T/T/N; 
+}
 
 
 double Ising::Chi(string totalFname) {
@@ -404,8 +440,8 @@ vector<double> Ising::t_correlation(int maxTime, string totalFname) {
 
 }
 
-//function returning sigma
-double Ising::ERROR(string totalFname) {
+//function returning sigma for specific error_type (see enum file in *.h file)
+double Ising::ERROR(string totalFname, ISING_ERROR_TYPE error_type) {
    /* BOOTSTRAP RECIPE OF ERROR CALCULATION
     * Let n be a number of elements in dataSet.
     * 1. Pick at random n elements (with returns).
@@ -418,12 +454,12 @@ double Ising::ERROR(string totalFname) {
     *    sigma= sqrt( <C^2> - <C>^2 )
     */
    
-//Raw simulation data flows from disk to vector container
+   //Raw simulation data flows from disk to vector container
    vector<vector<short> > SSdata = readDATAtoVectors(totalFname, N);
    vector<vector<short> > SS = SSdata;
    int n = SS.size();
     
-   double chi ;
+   double observable ;
    double sum2=0, sum1=0;
    int m=100;
    
@@ -434,18 +470,22 @@ double Ising::ERROR(string totalFname) {
            int time_step = (int) ( n * RNG::drandom(seed2));
            SS[i] =  SSdata[time_step];              
         }
-   
-        chi = Chi(SS);
+        switch(error_type){ // choose of which observable error is calculated
+            case ERROR_CHI:
+                observable = Chi(SS);break;
+            case ERROR_CC :                   
+                observable = CC(SS);break;
+        }
 
-        sum2 += chi*chi;
-        sum1 += chi;
+        sum2 += observable*observable;
+        sum1 += observable;
    }
    sum2 /= m;
    sum1 /= m;
    
    double sigma = sqrt( sum2 - sum1*sum1 );
    
-    return sigma;
+   return sigma;
 
 
 }

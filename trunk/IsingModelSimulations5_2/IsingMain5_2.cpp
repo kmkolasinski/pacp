@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
 
         double chi = chain.Chi(gettotalFname().c_str());
         double chi_anal = exp(2./temperature)/temperature;
-        double error=chain.ERROR( gettotalFname().c_str() );
+        double error=chain.ERROR(gettotalFname().c_str(), ERROR_CHI);
 
         data_out << std::scientific <<  temperature  << "\t"
                                          << chi_anal << "\t"
@@ -95,7 +95,7 @@ int main(int argc, char** argv) {
     Ising chain(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
     for ( int prod_t = 1000 ; prod_t < 100000 ; prod_t *= 2  ){
         chain.MC_simulation(therm_t, prod_t, measure_f);
-        double error=chain.ERROR( gettotalFname().c_str() );
+        double error=chain.ERROR(gettotalFname().c_str(), ERROR_CHI);
         data_out << std::scientific <<  prod_t << "\t" << error  << "\n";
         cout   << std::scientific <<  prod_t << "\t" << error  << "\n";
     }
@@ -109,20 +109,21 @@ int main(int argc, char** argv) {
     //displayDATAfromVectors(gettotalFname().c_str(),chainLength); 
     
     
-    //  -------------------------  Ising 2D -----------------------------------------
+    //  -------------------------  Ising 2D -----------------------------------
     //
     {
     chainLength = 2;
-    measure_f   = 2;
+    measure_f   = 1;
     prod_t      = 10000;
     ofstream file("tests2d/CC(T).txt");
-    cout << "asd" << endl;
-    for(double T = 0.5 ; T < 5.0 ; T += 0.5 ){    
-        Ising2D lattice2d(chainLength, T, magneticField, initState, maxGdist, maxTsep);
-        //lattice2d.Metropolis_cycle();
-        //lattice2d.MC_simulation(therm_t, prod_t, measure_f);
-        //double chi = lattice2d.Chi(gettotalFname().c_str());
-        file << T << "\t" <<  lattice2d.CC() << endl;
+
+    for(double T = 0.5 ; T < 5.0 ; T += 0.1 ){    
+        Ising2D lattice2d(chainLength, T, magneticField, initState, maxGdist, maxTsep);        
+        lattice2d.MC_simulation(therm_t, prod_t, measure_f);
+        double error = lattice2d.ERROR(gettotalFname().c_str(), ERROR_CHI);
+        double cc    = lattice2d.CC(gettotalFname().c_str());
+        file << T << "\t" <<  cc << "\t" <<  cc-error << "\t" <<  cc+error << endl;
+
     }// end of for
     file.close();
     };

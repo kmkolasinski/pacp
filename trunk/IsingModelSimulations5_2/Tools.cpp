@@ -70,7 +70,7 @@ void displayDATAfromVectors(string totalFname, int N) {
 string gettotalFname() {
     string path, fname, totalFname; //path to the project folder on your laptop
     //***Replace this path by the path on your laptop
-    path = "/home/tomek/Desktop/NetBeansProjects/IsingModelSimulations5_2/";
+    path = "";
     fname = "MCdata";
     totalFname = path + fname;
     return totalFname;

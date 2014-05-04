@@ -26,7 +26,7 @@
 
 
 bool bTestChiTemp       = false; // test caclulate Chi(T)
-bool bErrorProdTimeTest = false; // test caclulate Errro of Chi in function of prod_t
+bool bErrorProdTimeTest = true; // test caclulate Errro of Chi in function of prod_t
 
 using namespace std;
 

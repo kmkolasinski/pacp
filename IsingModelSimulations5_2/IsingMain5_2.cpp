@@ -21,21 +21,25 @@
 
 //#include<stack> //LIFO (Last In First Out) container for Wolff MC algorithm
 
+#include "Tools.h"
 #include "Ising5_2.h"
 #include "Ising2D.h"
-//#include "Tools.h"
+#include "Tests/IsingTestChi.h"
+#include "Tests/IsingTestCC2D.h"
 
 
-bool bTestChiTemp       = false; // test caclulate Chi(T)
-bool bErrorProdTimeTest = false; // test caclulate Errro of Chi in function of prod_t
 
 using namespace std;
 
-string gettotalFname(); //forward (Tools)
-void displayDATAfromVectors(string totalFname, int N); //forward (Tools)
+
 
 int main(int argc, char** argv) {
 
+    
+    // IsingTestChi isingTestChi;   //  Ising1D test of Chi in function of T
+    // IsingTestCC2D isingTestCC2D; //  Ising2D test of CC in function of T for different lattices
+    
+    
     //SIMULATION INPUT DATA
     int chainLength = 500;
     double temperature = 1.0;
@@ -48,46 +52,10 @@ int main(int argc, char** argv) {
     double initState = 0.7; //values between 0.5 and 1.0
     //0.5 --> high temperature limit --> totally disordered state, <S>=0.
     //1.0 --> low temperature limit --> totally ordered state, <S>=1.
-    //***When needed add other initializations here
+    //***When needed add other initializations here    
     
-    if(bTestChiTemp){
-        // ------------------------------------------------------------------------
-        // Chi in function of Temperature
-        // ------------------------------------------------------------------------
-
-
-        ofstream data_out("Temp_test.txt");
-        for( double temperature = 0.3 ; temperature < 3.0 ; temperature += 0.05  ){
-        //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
-        Ising chain(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
-
-
-        //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
-        chain.MC_simulation(therm_t, prod_t, measure_f);
-
-
-        //Exemple from section D of implementation file (Ising5_2.cpp)
-        //chain.mean_S_corrrelation( gettotalFname().c_str());
-        //cout<< endl << chain.Chi(gettotalFname().c_str()) << " " << exp(2./temperature)/temperature << endl;
-
-        double chi = chain.Chi(gettotalFname().c_str());
-        double chi_anal = exp(2./temperature)/temperature;
-        double error=chain.ERROR(gettotalFname().c_str(), ERROR_CHI);
-
-        data_out << std::scientific <<  temperature  << "\t"
-                                         << chi_anal << "\t"
-                                         << chi      << "\t"
-                                         << error    << "\t"
-                                        << chi-error << "\t"
-                                        << chi+error << endl;
-
-        cout << std::scientific <<  temperature  << "\t" << chi << "\t" << chi_anal << "\t" <<  error << endl;
-
-        }
-        data_out.close();
-    } // end of if(bTestChiTemp)
     
-    if(bErrorProdTimeTest){
+    if(false){
     // ------------------------------------------------------------------------
     // test w funkcji production time
     // ------------------------------------------------------------------------
@@ -102,31 +70,6 @@ int main(int argc, char** argv) {
     data_out.close();
     }
     
-    
-    
-    
-    //Check of data. To be used for small time x space values
-    //displayDATAfromVectors(gettotalFname().c_str(),chainLength); 
-    
-    
-    //  -------------------------  Ising 2D -----------------------------------
-    //
-    {
-    chainLength = 2;
-    measure_f   = 1;
-    prod_t      = 10000;
-    ofstream file("tests2d/CC(T).txt");
-
-    for(double T = 0.5 ; T < 5.0 ; T += 0.1 ){    
-        Ising2D lattice2d(chainLength, T, magneticField, initState, maxGdist, maxTsep);        
-        lattice2d.MC_simulation(therm_t, prod_t, measure_f);
-        double error = lattice2d.ERROR(gettotalFname().c_str(), ERROR_CHI);
-        double cc    = lattice2d.CC(gettotalFname().c_str());
-        file << T << "\t" <<  cc << "\t" <<  cc-error << "\t" <<  cc+error << endl;
-
-    }// end of for
-    file.close();
-    };
     cout << "\n\n     T H E   E N D " << endl;
 
     return 0;

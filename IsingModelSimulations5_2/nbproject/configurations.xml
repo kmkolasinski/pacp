@@ -23,12 +23,20 @@
       <itemPath>RNG.cpp</itemPath>
       <itemPath>Tools.cpp</itemPath>
     </logicalFolder>
+    <logicalFolder name="Tests" displayName="Tests" projectFiles="true">
+      <itemPath>Tests/IsingTest.h</itemPath>
+      <itemPath>Tests/IsingTestCC2D.h</itemPath>
+      <itemPath>Tests/IsingTestChi.h</itemPath>
+    </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>Tests</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -55,6 +63,12 @@
       </item>
       <item path="RNG.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Tests/IsingTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestCC2D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestChi.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Tools.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Tools.h" ex="false" tool="3" flavor2="0">
@@ -72,6 +86,7 @@
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
+          <commandLine>-ITests</commandLine>
         </ccTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>
@@ -95,6 +110,12 @@
       <item path="RNG.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="RNG.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTest.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestCC2D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestChi.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tools.cpp" ex="false" tool="1" flavor2="0">
       </item>

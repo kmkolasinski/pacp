@@ -46,8 +46,8 @@ OBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=
-CXXFLAGS=
+CCFLAGS=-ITests
+CXXFLAGS=-ITests
 
 # Fortran Compiler Flags
 FFLAGS=

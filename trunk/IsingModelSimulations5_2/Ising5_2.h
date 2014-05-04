@@ -62,7 +62,7 @@ public:
     double mean_order_parameter();   //macroscopic observable
     
     //ENERGY
-    double E(); //measure energy per spin of a given spin configuration (lattice mean or instantaneous value) 
+    virtual double E(); //measure energy per spin of a given spin configuration (lattice mean or instantaneous value) 
     
     //CORRELATION FUNCTIONS
     vector<double> S_correlation(int maxGdist,double OP); //function measuring instant spin-spin correlation
@@ -95,9 +95,9 @@ public:
     double ERROR(string totalFname); //function returning sigma
     
 //*** MONTE CARLO ENGINS, MC WRAPPER, SOME MC PARAMETERS 
-    vector<short> Metropolis_cycle();
+    virtual vector<short> Metropolis_cycle();
     //void Wolff_cycle(int k);
-    void MC_simulation(int therm_t, int prod_t, int measure_f);
+    virtual void MC_simulation(int therm_t, int prod_t, int measure_f);
     int measure_f;      //frequency of measures, indicate number of MC cycles separating two consecutive measures
     int therm_t;        //thermalization time = number of initial cycles to thermalize (equilibrate) the initial state
     
@@ -105,7 +105,7 @@ public:
     //Selected seed values for random number generators -- must belong to [1, 2^31 - 1]
     static long int seed1;// seed for random long integer generator
     static long int seed2;// seed for shuffling algorithm
-private:
+
     int nb_rejected;
     double rejected;
 

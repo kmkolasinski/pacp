@@ -106,7 +106,7 @@ vector<short> Ising::Metropolis_cycle() {
     /* Domain : Monte Carlo simulation
      * Perform Metropolis update of N randomly chosen lattice sites 
      * i.e. one MC cycle  (one sweep of the lattice)*/
-
+    cout << "asd" << endl;
     int site, siteL, siteR; //site=randomly chosen site, 
     //siteL its left interacting neighbor,
     //siteR its right interacting neighbor.
@@ -245,23 +245,25 @@ double Ising::CC() {
      * measurements. The value if acquired with frequency declared as measure_f
      * variable in main function.
      * this function needs E() to work properly.
-     */
+     */   
     double meanE,meanEsq;
+    
+    meanE   = 0;
+    meanEsq = 0;
     int n=0;
-    for (int t = 0; t < 1000; t++) {
-        if (!(t % 5)){
-            meanE+=E();
-            meanEsq+=meanE*meanE;
+    for (int t = 0; t < 100000; t++) {        
+        
             Metropolis_cycle();
+            double ee = E();            
+            meanE  += ee;
+            meanEsq+= ee*ee;
             n++;
-        }else{
-            Metropolis_cycle();
-        }
     }
     meanE/=n;
     meanE*=meanE;
     meanEsq/=n;
-    return (meanEsq-meanE)/T;
+    
+    return (meanEsq-meanE)/T/T/N; 
 }
 
 

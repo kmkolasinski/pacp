@@ -22,11 +22,12 @@
 //#include<stack> //LIFO (Last In First Out) container for Wolff MC algorithm
 
 #include "Ising5_2.h"
+#include "Ising2D.h"
 //#include "Tools.h"
 
 
 bool bTestChiTemp       = false; // test caclulate Chi(T)
-bool bErrorProdTimeTest = true; // test caclulate Errro of Chi in function of prod_t
+bool bErrorProdTimeTest = false; // test caclulate Errro of Chi in function of prod_t
 
 using namespace std;
 
@@ -102,9 +103,28 @@ int main(int argc, char** argv) {
     }
     
     
+    
+    
     //Check of data. To be used for small time x space values
     //displayDATAfromVectors(gettotalFname().c_str(),chainLength); 
     
+    
+    //  -------------------------  Ising 2D -----------------------------------------
+    //
+    {
+    chainLength = 2;
+    measure_f   = 2;
+    prod_t      = 10000;
+    ofstream file("tests2d/CC(T).txt");
+    for(double T = 0.5 ; T < 5.0 ; T += 0.5 ){    
+        Ising2D lattice2d(chainLength, T, magneticField, initState, maxGdist, maxTsep);
+        //lattice2d.Metropolis_cycle();
+        //lattice2d.MC_simulation(therm_t, prod_t, measure_f);
+        //double chi = lattice2d.Chi(gettotalFname().c_str());
+        file << T << "\t" <<  lattice2d.CC() << endl;
+    }// end of for
+    file.close();
+    };
     cout << "\n\n     T H E   E N D " << endl;
 
     return 0;

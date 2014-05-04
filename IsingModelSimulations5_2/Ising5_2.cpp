@@ -24,17 +24,7 @@
  *** 
  *** HANG BACK THE FUNCTIONS YOU HAVE CREATED ON OUR EXCHANGE BLACKBOARD.*/
 
-#include <iostream>
-#include <fstream>
-#include "stdio.h"
-#include "math.h"
-#include <string>
-#include <sstream>		// stringstream class
-#include <cstring>		// Includes c_strings for file names
-#include <vector>
-#include <cmath>
-#include <iomanip>
-#include "RNG.h"
+
 //#include<stack> //LIFO (Last In First Out) container for Wolff MC algorithm
 
 #include "Ising5_2.h"
@@ -44,9 +34,8 @@
 
 using namespace std;
 
-//Selected seed values for random number generators -- must belong to [1, 2^31 - 1]
-long int seed1 = 46723; // seed for random long integer generator
-long int seed2 = 2593459; // seed for shuffling algorithm
+long int Ising::seed1 = 46723;   
+long int Ising::seed2 = 2593459;
 
 vector<vector<short> > readDATAtoVectors(string totalFname, int N); //forward declaration (Tools)
 
@@ -71,9 +60,9 @@ Ising::Ising(int NN, double TT, double hh, double p, int maxGd, int maxTsep) {
     m = 0; //set to zero initial value of magnetization
 
     //Creation of initial state of the chain
-    initializeRNG(seed1); // initializes integer random number generator
+    RNG::initializeRNG(seed1); // initializes integer random number generator
     for (int i = 0; i < N; i++) {
-        if (drandom(seed2) <= p)
+        if (RNG::drandom(seed2) <= p)
             S.push_back(1);
         else
             S.push_back(-1);
@@ -124,7 +113,7 @@ vector<short> Ising::Metropolis_cycle() {
     double deltaE;
 
     for (int i = 0; i < N; i++) {
-        site = (int) (N * drandom(seed2));
+        site = (int) (N * RNG::drandom(seed2));
         siteL = (site - 1 + N) % N; //periodic boundary conditions
         siteR = (site + 1) % N; //periodic boundary conditions
         deltaE = 2 * S[site]*(S[siteL] + S[siteR]); //change of energy if spin
@@ -132,7 +121,7 @@ vector<short> Ising::Metropolis_cycle() {
         if (deltaE <= 0) {
             S[site] = -S[site];
         } else {
-            if (drandom(seed2) < exp(-deltaE / T)) {
+            if (RNG::drandom(seed2) < exp(-deltaE / T)) {
                 S[site] = -S[site];
             } else
                 nb_rejected++;
@@ -148,7 +137,7 @@ void Ising::MC_simulation(int therm_t, int prod_t, int measure_f) {
      * prod_t  = production cycles
      * Store raw results (states of the chain) in the disk file. */
 
-    initializeRNG(seed1); // initializes integer random number generator
+    RNG::initializeRNG(seed1); // initializes integer random number generator
 
     //*** INITIAL MC CYCLES ***
     //Thermalization of initial non-equilibrium state.
@@ -440,7 +429,7 @@ double Ising::ERROR(string totalFname) {
       
         // we choose random set (with returns)
         for( int i = 0 ; i < n ; i++ ){
-           int time_step = (int) ( n * drandom(seed2));
+           int time_step = (int) ( n * RNG::drandom(seed2));
            SS[i] =  SSdata[time_step];              
         }
    

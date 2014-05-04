@@ -11,10 +11,18 @@
 
 #include <iostream>
 #include <fstream>
+
 #include <string>
 #include <sstream>
 #include <vector>
-
+#include <cstdio>
+#include <cmath>
+#include <string>
+#include <sstream>		// stringstream class
+#include <cstring>		// Includes c_strings for file names
+#include <cmath>
+#include <iomanip>
+#include "RNG.h"
 
 
 using namespace std;
@@ -27,6 +35,7 @@ struct cluster_stat {
     
 class Ising {
 public:
+    Ising(){};
     Ising(int NN,double TT, double hh, double p, int maxGd, int maxTsep); //Constructor of the class
     virtual ~Ising();
     
@@ -93,7 +102,9 @@ public:
     int therm_t;        //thermalization time = number of initial cycles to thermalize (equilibrate) the initial state
     
     
-
+    //Selected seed values for random number generators -- must belong to [1, 2^31 - 1]
+    static long int seed1;// seed for random long integer generator
+    static long int seed2;// seed for shuffling algorithm
 private:
     int nb_rejected;
     double rejected;

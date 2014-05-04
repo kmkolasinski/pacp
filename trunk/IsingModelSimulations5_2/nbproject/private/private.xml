@@ -14,8 +14,12 @@
             <file>file:/home/tomek/NetBeansProjects/IsingModelSimulations5_2/Tools.h</file>
         </group>
         <group name="Pacp">
+            <file>file:/media/DANE/STUDIA/Doktorat/ZAJECIA/PhysicsAtCP/IsingModelSimulations5_2/Ising2D.cpp</file>
+            <file>file:/media/DANE/STUDIA/Doktorat/ZAJECIA/PhysicsAtCP/IsingModelSimulations5_2/Tests/IsingTestCC2D.h</file>
+            <file>file:/media/DANE/STUDIA/Doktorat/ZAJECIA/PhysicsAtCP/IsingModelSimulations5_2/Tests/IsingTestChi.h</file>
+            <file>file:/media/DANE/STUDIA/Doktorat/ZAJECIA/PhysicsAtCP/IsingModelSimulations5_2/Tests/IsingTest.h</file>
+            <file>file:/media/DANE/STUDIA/Doktorat/ZAJECIA/PhysicsAtCP/IsingModelSimulations5_2/IsingMain5_2.cpp</file>
             <file>file:/media/DANE/STUDIA/Doktorat/ZAJECIA/PhysicsAtCP/IsingModelSimulations5_2/Ising5_2.cpp</file>
-            <file>file:/media/DANE/STUDIA/Doktorat/ZAJECIA/PhysicsAtCP/IsingModelSimulations5_2/Ising5_2.h</file>
         </group>
     </open-files>
 </project-private>

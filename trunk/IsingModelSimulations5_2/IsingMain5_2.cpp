@@ -116,6 +116,7 @@ int main(int argc, char** argv) {
     measure_f   = 2;
     prod_t      = 10000;
     ofstream file("tests2d/CC(T).txt");
+    cout << "asd" << endl;
     for(double T = 0.5 ; T < 5.0 ; T += 0.5 ){    
         Ising2D lattice2d(chainLength, T, magneticField, initState, maxGdist, maxTsep);
         //lattice2d.Metropolis_cycle();

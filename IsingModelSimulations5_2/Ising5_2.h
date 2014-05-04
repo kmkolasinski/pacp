@@ -32,6 +32,12 @@ struct cluster_stat {
     //cluster of length x in a given state of the Ising chain 
     int cmax; //maximal length of the cluster 
 } ;
+// enum field used to choose kind of error calculated by ERROR function
+enum ISING_ERROR_TYPE{
+    ERROR_CHI,// calculate error of magnetic susceptibility 
+    ERROR_CC  // calculate error of specific heat
+};
+
     
 class Ising {
 public:
@@ -78,7 +84,9 @@ public:
     double Chi( vector<vector<short> > SS );
     
     //SPECIFIC HEAT
-    double CC();          //specific heat measured using energy fluctuation method
+    double CC();          //specific heat measured using energy fluctuation method calclutated from simulation
+    double CC(string totalFname); // specific heat calculated from raw data file
+    double CC(vector<vector<short> > SS); // specific heat calculated from raw data stored in memory
     
     //CLUSTER (DOMAIN) STATISTICS
     cluster_stat CFD;   //distribution CF of cluster length 
@@ -92,7 +100,7 @@ public:
     
     //ERROR ANALYSIS, BOOTSTRAP METHOD
     double sigma; //standard deviation
-    double ERROR(string totalFname); //function returning sigma
+    double ERROR(string totalFname,ISING_ERROR_TYPE error_type); //function returning sigma
     
 //*** MONTE CARLO ENGINS, MC WRAPPER, SOME MC PARAMETERS 
     virtual vector<short> Metropolis_cycle();
@@ -108,6 +116,7 @@ public:
 
     int nb_rejected;
     double rejected;
+    
 
 };
 

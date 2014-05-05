@@ -25,7 +25,7 @@
  *** HANG BACK THE FUNCTIONS YOU HAVE CREATED ON OUR EXCHANGE BLACKBOARD.*/
 
 
-//#include<stack> //LIFO (Last In First Out) container for Wolff MC algorithm
+#include<stack> //LIFO (Last In First Out) container for Wolff MC algorithm
 
 #include "Ising5_2.h"
 #include "Tools.h"

@@ -40,7 +40,9 @@ int main(int argc, char** argv) {
     // IsingTestChi isingTestChi;     //  Ising1D test of Chi in function of T
     // IsingTestError isingTestError; //  Ising1D test of ERROR funtion for Chi for different prod_t
     // IsingTestCC2D isingTestCC2D;   //  Ising2D test of CC in function of T for different lattices
-    // IsingTestM2D isingTestM2D;     //  Ising2D test of M in function of T for different lattices
+     IsingTestM2D isingTestM2D;     //  Ising2D test of M in function of T for different lattices
+    
+    //Robie test conflictu!
     
     cout << "\n\n     T H E   E N D " << endl;
     return 0;

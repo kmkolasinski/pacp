@@ -21,5 +21,11 @@
             <file>file:/media/DANE/STUDIA/Doktorat/ZAJECIA/PhysicsAtCP/IsingModelSimulations5_2/IsingMain5_2.cpp</file>
             <file>file:/media/DANE/STUDIA/Doktorat/ZAJECIA/PhysicsAtCP/IsingModelSimulations5_2/Ising5_2.cpp</file>
         </group>
+        <group name="PatCP">
+            <file>file:/home/mkk/DANE/Doktorat/WYKLADY/PhysicsAtCP/trunk/IsingModelSimulations5_2/Tests/IsingTestCC2D.h</file>
+            <file>file:/home/mkk/DANE/Doktorat/WYKLADY/PhysicsAtCP/trunk/IsingModelSimulations5_2/IsingMain5_2.cpp</file>
+            <file>file:/home/mkk/DANE/Doktorat/WYKLADY/PhysicsAtCP/trunk/IsingModelSimulations5_2/Ising5_2.cpp</file>
+            <file>file:/home/mkk/DANE/Doktorat/WYKLADY/PhysicsAtCP/trunk/IsingModelSimulations5_2/Tests/IsingTest.h</file>
+        </group>
     </open-files>
 </project-private>

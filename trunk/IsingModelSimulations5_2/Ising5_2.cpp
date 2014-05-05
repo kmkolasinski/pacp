@@ -540,31 +540,53 @@ cluster_stat Ising::cluster_freq() {
     int stat=1;//statistic of spin domain orientation in fixed temperature
     for(int i=0;i<stat;i++){
         pos=0;
+        bool nbound_c=1;
+        if(sg==S[N-1]) nbound_c=0;
+        int temp=0;//first domain check
+        int sg_size=0;//size of first domain
         while(pos<N){
-            if(pos<(N-1)){///periodic boundary conditions
-                if(S[pos++]==sg)cl_L++;
-                else{
-                    tt[cl_L]+=1;
+            if(nbound_c){
+                if(pos!=(N-1)){
+                    if(S[pos]==S[++pos])cl_L++;
+                    else{
+                        tt[cl_L-1]+=1;
+                        if(max<cl_L) max=cl_L;
+                        cl_L=1;
+                    }  
+                }else{
+                    tt[cl_L-1]+=1;
                     if(max<cl_L) max=cl_L;
                     cl_L=1;
+                    pos++;
                 }
             }else{
-                if(S[pos]==S[++pos])cl_L++;
-                else{
-                    tt[cl_L]+=1;
+                if(pos!=(N-1)){
+                    if(S[pos]==S[++pos])cl_L++;
+                    else{
+                        temp++;
+                        if(temp==1) sg_size=cl_L;
+                        tt[cl_L-1]+=1;
+                        if(max<cl_L) max=cl_L;
+                        cl_L=1;
+                    }  
+                }else{
+                    if(cl_L!=N){
+                        cl_L+=sg_size;
+                        tt[sg_size-1]-=1;
+                    }
+                    tt[cl_L-1]+=1;
                     if(max<cl_L) max=cl_L;
                     cl_L=1;
+                    pos++;
                 }
             }
         }
         if(amax<max) amax=max;
         mmax+=max;
         max=0;
-        Metropolis_cycle();
+        //Metropolis_cycle();
     }
-    for(int i=0;i<N;i++){
-        tt[i]/=stat;
-    }
+    for(int i=0;i<N;i++) tt[i]/=stat;
     cls.CF=tt;
     cls.cmax=amax;
     mmax/=stat;

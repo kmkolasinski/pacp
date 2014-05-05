@@ -32,6 +32,7 @@ using namespace std;
 
 int main(int argc, char** argv) {
     
+    // Comment or uncomment following tests.
     // IsingTestChi isingTestChi;     //  Ising1D test of Chi in function of T
     // IsingTestError isingTestError; //  Ising1D test of ERROR funtion for Chi for different prod_t
     // IsingTestCC2D isingTestCC2D;   //  Ising2D test of CC in function of T for different lattices

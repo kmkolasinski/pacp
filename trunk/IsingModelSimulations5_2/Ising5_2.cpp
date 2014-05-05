@@ -130,7 +130,7 @@ vector<short> Ising::Metropolis_cycle() {
 }
 
 
-void Ising::Wolff_cycle(int k) {
+void Ising::Wolff_cycle() {
     /* Domain : Monte Carlo simulation
      * Perform N Wolff updates of cluster of spins 
      * i.e. one MC cycle or sweep*/

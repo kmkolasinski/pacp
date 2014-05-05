@@ -494,6 +494,8 @@ double Ising::ERROR(string totalFname, ISING_ERROR_TYPE error_type) {
                 observable = Chi(SS);break;
             case ERROR_CC :                   
                 observable = CC(SS);break;
+            case ERROR_OP :                   
+                observable = order_parameter(SS);break;
         }
 
         sum2 += observable*observable;

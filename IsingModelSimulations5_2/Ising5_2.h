@@ -35,7 +35,8 @@ struct cluster_stat {
 // enum field used to choose kind of error calculated by ERROR function
 enum ISING_ERROR_TYPE{
     ERROR_CHI,// calculate error of magnetic susceptibility 
-    ERROR_CC  // calculate error of specific heat
+    ERROR_CC, // calculate error of specific heat
+    ERROR_OP  // calculate error of order parameter - op
 };
 
     

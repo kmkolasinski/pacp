@@ -129,6 +129,52 @@ vector<short> Ising::Metropolis_cycle() {
     return S; //The state of the system after one lattice sweep is returned
 }
 
+
+void Ising::Wolff_cycle(int k) {
+    /* Domain : Monte Carlo simulation
+     * Perform N Wolff updates of cluster of spins 
+     * i.e. one MC cycle or sweep*/
+    stack<int> border;
+    int oldspin, newspin;
+    double padd = 1 - exp(-2 / T); //probability of adding a site to border
+    int site, siteL, siteR;
+
+
+    for (int i = 0; i < N; i++) {
+
+        site = (int) (N * RNG::drandom(seed2));
+
+        border.push(site);
+        oldspin = S[site];
+        newspin = -S[site];
+        S[site] = newspin;
+
+        while (!border.empty()) {
+            site = border.top();
+            border.pop();
+
+            siteL = (site - 1 + N) % N;
+            if (S[siteL] == oldspin)
+                if (RNG::drandom(seed2) < padd) {
+                    border.push(siteL);
+                    S[siteL] = newspin;
+                }
+
+            siteR = (site + 1) % N;
+            if (S[siteR] == oldspin)
+                if (RNG::drandom(seed2) < padd) {
+                    border.push(siteR);
+                    S[siteR] = newspin;
+                }
+
+        }
+    }
+}
+
+
+
+
+
 void Ising::MC_simulation(int therm_t, int prod_t, int measure_f) {
     /* Domain : Metropolis simulation of Ising 1d model
      * Perform desired number of MC cycles
@@ -173,18 +219,6 @@ void Ising::MC_simulation(int therm_t, int prod_t, int measure_f) {
     }
     DATA.close();
 }
-
-
-//void Ising::Wolff_cycle(int k) {
-//    /* Domain : Monte Carlo simulation
-//     * Perform Wolff updates of cluster of spins 
-//     */
-//     /*
-//      * To be completed later
-//      */
-//}
-
-
 
 
 

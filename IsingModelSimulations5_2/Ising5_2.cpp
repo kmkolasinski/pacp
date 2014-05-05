@@ -28,7 +28,7 @@
 //#include<stack> //LIFO (Last In First Out) container for Wolff MC algorithm
 
 #include "Ising5_2.h"
-//#include "Tools.h"
+#include "Tools.h"
 
 
 

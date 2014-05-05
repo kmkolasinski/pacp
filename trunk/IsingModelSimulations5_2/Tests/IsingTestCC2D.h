@@ -49,7 +49,7 @@ class IsingTestCC2D : public IsingTest {
             dataT.push_back(T);
         }
         // ---------------------------------------------------------
-        // Calculation for 2x2 lattice.
+        // Calculation for NxN lattice.
         // ---------------------------------------------------------
         for(int i=0 ; i < 4 ; i++){                    
             chainLength  = pow(2,i+1); // choosing proper lattice size

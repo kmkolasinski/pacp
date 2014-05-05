@@ -108,7 +108,7 @@ public:
     
 //*** MONTE CARLO ENGINS, MC WRAPPER, SOME MC PARAMETERS 
     virtual vector<short> Metropolis_cycle();
-    //void Wolff_cycle(int k);
+    void Wolff_cycle();
     virtual void MC_simulation(int therm_t, int prod_t, int measure_f);
     int measure_f;      //frequency of measures, indicate number of MC cycles separating two consecutive measures
     int therm_t;        //thermalization time = number of initial cycles to thermalize (equilibrate) the initial state

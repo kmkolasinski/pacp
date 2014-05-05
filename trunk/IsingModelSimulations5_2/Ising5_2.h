@@ -66,7 +66,8 @@ public:
     double m;           //measured order parameter m=<S> (mean spin, magnetization)
     double order_parameter();   //measure m for a given spin configuration (instantaneous value)
     double mean_order_parameter();   //macroscopic observable
-    
+    double order_parameter(string totalFname);
+    double order_parameter(vector<vector<short> > SS);
 
     //CORRELATION FUNCTIONS
     vector<double> S_correlation(int maxGdist,double OP); //function measuring instant spin-spin correlation

@@ -611,6 +611,49 @@ double Ising::order_parameter() {
     return OP /= N;
 }
 
+
+double Ising::order_parameter(string totalFname) {
+    // Calculates the magnetization (order parameter) of the system
+    // which is stored in file totalFname
+    //parameter: totalFname - name of file
+    
+    //Raw simulation data flows from disk to vector container
+    vector<vector<short> > SS = readDATAtoVectors(totalFname, N);
+
+    return order_parameter(SS);
+    
+}
+
+double Ising::order_parameter( vector<vector<short> > SS ) {
+ // Calculates the magnetization (order parameter) of the system
+    // which is stored in vector SS
+    //parameter: SS - Raw simulation data
+    
+    //number of time samples
+    int t_steps=SS.size();
+    //auxiliary variables
+    double M_temp, aM;
+    
+    aM=0.; 
+    for(int j=0;j<t_steps;j++){
+        M_temp=0.;
+        //calculation of magnetisation M
+        for(int i=0;i<N;i++){
+            M_temp+=SS[j][i];
+        }
+        //calculation of <M>
+        aM+=M_temp;
+    }
+    //normalization by number of measures and sites
+    aM=aM/t_steps/N; 
+    
+    return aM; //M
+
+    
+}
+
+
+
 vector<double> Ising::S_correlation(int maxGdist, double OP) {
     /* Domain : calculation of physical quantities.
      * Calculate instantaneous connected correlation function 

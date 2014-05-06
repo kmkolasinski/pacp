@@ -50,7 +50,7 @@ class IsingTestM2D : public IsingTest {
                 
         vector<double> dataNxN[4];
         vector<double> dataT;
-        for(double T = 1.0 ; T < 5.0 ; T += 0.2 ){ 
+        for(double T = 1.0 ; T < 5.0 ; T += 0.1 ){ 
             dataT.push_back(T);
         }
         // ---------------------------------------------------------
@@ -64,7 +64,7 @@ class IsingTestM2D : public IsingTest {
                 double T = dataT[t];
                 cout << "T=" << T << "\t:";
                 Ising2D lattice2d(chainLength, T, magneticField, initState, maxGdist, maxTsep);        
-                lattice2d.MC_simulation(therm_t, prod_t, measure_f);
+                lattice2d.MC_simulation(therm_t, prod_t, measure_f,METHOD_METROPOLIS);
                 double M = lattice2d.order_parameter(gettotalFname().c_str());
                 dataNxN[i].push_back(M);
             }// end of for            
@@ -77,7 +77,7 @@ class IsingTestM2D : public IsingTest {
         for(int t = 0 ; t < dataT.size() ; t++ ){
              data_out << std::scientific << dataT[t] << "\t";   
              for(int i = 0; i < 4 ; i++){
-                 data_out << dataNxN[i][t] << "\t";
+                 data_out << fabs(dataNxN[i][t]) << "\t";
              }
              data_out << endl;
         }

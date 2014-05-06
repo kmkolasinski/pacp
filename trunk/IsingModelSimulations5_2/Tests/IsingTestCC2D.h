@@ -35,9 +35,9 @@ class IsingTestCC2D : public IsingTest {
         //SIMULATION INPUT DATA
         int chainLength      = 2;        
         double magneticField = 0.0;
-        int therm_t          = 1000;   //thermalization time
+        int therm_t          =  50;   //thermalization time
         int measure_f        = 1;     //measure frequency
-        int prod_t           =10000;  //productiontime
+        int prod_t           =1000;  //productiontime
         int maxGdist         = 10;     //domain of correlation function extends from 0 to maxGdist-1
         int maxTsep          = 2;
         double initState     = 0.7;    //values between 0.5 and 1.0
@@ -45,7 +45,7 @@ class IsingTestCC2D : public IsingTest {
                 
         vector<vector<double> > dataNxN[4];
         vector<double> dataT;
-        for(double T = 1.0 ; T < 5.0 ; T += 0.2 ){ 
+        for(double T = 1.0 ; T < 5.0 ; T += 0.1 ){ 
             dataT.push_back(T);
         }
         // ---------------------------------------------------------
@@ -59,7 +59,7 @@ class IsingTestCC2D : public IsingTest {
                 double T = dataT[t];
                 cout << "T=" << T << "\t:";
                 Ising2D lattice2d(chainLength, T, magneticField, initState, maxGdist, maxTsep);        
-                lattice2d.MC_simulation(therm_t, prod_t, measure_f);
+                lattice2d.MC_simulation(therm_t, prod_t, measure_f,METHOD_WOLFF);
                 double error = lattice2d.ERROR(gettotalFname().c_str(), ERROR_CHI);
                 double cc    = lattice2d.CC(gettotalFname().c_str());                
                 vector<double> data;

@@ -25,10 +25,10 @@
  *** HANG BACK THE FUNCTIONS YOU HAVE CREATED ON OUR EXCHANGE BLACKBOARD.*/
 
 
-#include<stack> //LIFO (Last In First Out) container for Wolff MC algorithm
+
 
 #include "Ising5_2.h"
-#include "Tools.h"
+//#include "Tools.h"
 
 
 
@@ -51,8 +51,9 @@ Ising::Ising(int NN, double TT, double hh, double p, int maxGd, int maxTsep) {
     N = NN; //set length of the chain
     T = TT; //set temperature
     h = hh; //set magnetic field
-    maxGdist = maxGd;
+    maxGdist          = maxGd;
     maxTimeseparation = maxTsep;
+    ising_method_type      = METHOD_METROPOLIS; // default method for calulation
 
     //INITIALISATIONS 
     //***ADD OTHER VARIABLES AND INITIALISATIONS WHEN NECESSARY 
@@ -89,6 +90,7 @@ Ising::Ising(int NN, double TT, double hh, double p, int maxGd, int maxTsep) {
     }
 
 }
+
 
 Ising::~Ising() {
 }
@@ -130,7 +132,7 @@ vector<short> Ising::Metropolis_cycle() {
 }
 
 
-void Ising::Wolff_cycle() {
+vector<short> Ising::Wolff_cycle() {
     /* Domain : Monte Carlo simulation
      * Perform N Wolff updates of cluster of spins 
      * i.e. one MC cycle or sweep*/
@@ -169,25 +171,35 @@ void Ising::Wolff_cycle() {
 
         }
     }
+    return S;
+}
+
+vector<short> Ising::cycle(){
+
+    switch(ising_method_type){
+        case  METHOD_METROPOLIS: return Metropolis_cycle();break;
+        case  METHOD_WOLFF:      return Wolff_cycle();break;
+        default: return Metropolis_cycle();
+    }
+    
 }
 
 
 
-
-
-void Ising::MC_simulation(int therm_t, int prod_t, int measure_f) {
+void Ising::MC_simulation(int therm_t, int prod_t, int measure_f,ISING_METHOD_TYPE mt) {
     /* Domain : Metropolis simulation of Ising 1d model
      * Perform desired number of MC cycles
      * therm_t = thermalization cycles
      * prod_t  = production cycles
      * Store raw results (states of the chain) in the disk file. */
 
+    ising_method_type = mt;    
     RNG::initializeRNG(seed1); // initializes integer random number generator
 
     //*** INITIAL MC CYCLES ***
     //Thermalization of initial non-equilibrium state.
     for (int t = 0; t < therm_t; t++) {
-        Metropolis_cycle();
+        cycle();
     }
 
     //SOME LOCAL VARIABLES; ADD NEW WHEN NECESSARY
@@ -207,11 +219,11 @@ void Ising::MC_simulation(int therm_t, int prod_t, int measure_f) {
     vector<short> s(N, 0);
     for (int t = 0; t < prod_t; t++) {
         if (!(t % measure_f)) {
-            s = Metropolis_cycle();
+            s = cycle();
             for (int i = 0; i < N; i++)
                 DATA << s[i] << " ";
         } else
-            Metropolis_cycle();
+            cycle();
         /*
          Please make copy of this file (Ising5_2.cpp)
          */
@@ -286,7 +298,7 @@ double Ising::CC() {
     int n=0;
     for (int t = 0; t < 100000; t++) {        
         
-            Metropolis_cycle();
+            cycle();
             double ee = E();            
             meanE  += ee;
             meanEsq+= ee*ee;

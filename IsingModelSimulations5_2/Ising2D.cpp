@@ -112,14 +112,85 @@ vector<short> Ising2D::Metropolis_cycle() {
     return S; //The state of the system after one lattice sweep is returned
 }
 
+vector<short> Ising2D::Wolff_cycle(){
+    
+    // cout << "Not implemented::Ising2D::Wolff_cycle" << endl;
+    /* Domain : Monte Carlo simulation
+     * Perform N Wolff updates of cluster of spins 
+     * i.e. one MC cycle or sweep*/
+    int* border = new int[N];
+    int bindex = 0;
+    int oldspin, newspin;
+    double padd = 1 - exp(-2 / T); //probability of adding a site to border
+    int site, siteL, siteR, siteU, siteD,site_i,site_j;
+    
 
-void Ising2D::MC_simulation(int therm_t, int prod_t, int measure_f) {
+    for (int i = 0; i < N; i++) {
+
+        site_i = (int) (nx * RNG::drandom(seed2));
+        site_j = (int) (nx * RNG::drandom(seed2));
+        site  = To2D(site_i,site_j);
+        
+        // periodic representation
+        siteL = To2D((site_i - 1 + nx)%nx,site_j); 
+        siteR = To2D((site_i + 1     )%nx,site_j); 
+        siteD = To2D(site_i,(site_j- 1 + nx)%nx); 
+        siteU = To2D(site_i,(site_j+1      )%nx);         
+        
+        bindex = 0;
+        border[bindex] = site;        
+        oldspin =  S[site];
+        newspin = -S[site];
+        S[site] = newspin;
+
+        while (bindex >= 0) {
+            site = border[bindex--];
+            site_i = Xfrom2D(site);
+            site_j = Yfrom2D(site);
+            
+            siteL = To2D((site_i - 1 + nx)%nx,site_j); 
+            if (S[siteL] == oldspin)
+                if (RNG::drandom(seed2) < padd) {                    
+                    border[++bindex] = siteL;
+                    S[siteL] = newspin;
+                }
+           
+            siteR = To2D((site_i + 1     )%nx,site_j); 
+            if (S[siteR] == oldspin)
+                if (RNG::drandom(seed2) < padd) {                    
+                     border[++bindex] = siteR;
+                    S[siteR] = newspin;
+                }
+            
+            siteD = To2D(site_i,(site_j- 1 + nx)%nx);
+            if (S[siteD] == oldspin)
+                if (RNG::drandom(seed2) < padd) {
+                    border[++bindex] = siteD;                    
+                    S[siteD] = newspin;
+                }
+           
+            siteU = To2D(site_i,(site_j+1      )%nx);        
+            if (S[siteU] == oldspin)
+                if (RNG::drandom(seed2) < padd) {                    
+                    border[++bindex] = siteU;
+                    S[siteU] = newspin;
+                }
+        }
+    }
+    
+    delete[] border;
+    return S;
+    
+}
+
+
+void Ising2D::MC_simulation(int therm_t, int prod_t, int measure_f,ISING_METHOD_TYPE mt) {
     /* Domain : Metropolis simulation of Ising 2d model
      * Perform desired number of MC cycles
      * therm_t = thermalization cycles
      * prod_t  = production cycles
      * Store raw results (states of the chain) in the disk file. */
-
+    ising_method_type = mt;
     RNG::initializeRNG(seed1); // initializes integer random number generator
     
 //    cout << "----------------------------------------" << endl;
@@ -132,7 +203,7 @@ void Ising2D::MC_simulation(int therm_t, int prod_t, int measure_f) {
     //*** INITIAL MC CYCLES ***
     //Thermalization of initial non-equilibrium state.
     for (int t = 0; t < therm_t; t++) {
-        Metropolis_cycle();
+        cycle();
     }
 //    cout << "Thermalization done..." << endl;
     //SOME LOCAL VARIABLES; ADD NEW WHEN NECESSARY
@@ -153,11 +224,11 @@ void Ising2D::MC_simulation(int therm_t, int prod_t, int measure_f) {
     int progress = 0;
     for (int t = 0; t < prod_t; t++) {
         if (!(t % measure_f)) {
-            s = Metropolis_cycle();
+            s = cycle();
             for (int i = 0; i < N; i++)
                 DATA << s[i] << " ";
         } else
-            Metropolis_cycle();
+                cycle();
         /*
          Please make copy of this file (Ising5_2.cpp)
          */

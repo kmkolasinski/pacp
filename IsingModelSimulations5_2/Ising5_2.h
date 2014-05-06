@@ -22,8 +22,8 @@
 #include <cstring>		// Includes c_strings for file names
 #include <cmath>
 #include <iomanip>
+#include<stack> //LIFO (Last In First Out) container for Wolff MC algorithm
 #include "RNG.h"
-
 
 using namespace std;
 
@@ -38,12 +38,16 @@ enum ISING_ERROR_TYPE{
     ERROR_CC, // calculate error of specific heat
     ERROR_OP  // calculate error of order parameter - op
 };
-
+// enum filed allow to chose which method to use
+enum ISING_METHOD_TYPE{
+    METHOD_METROPOLIS,
+    METHOD_WOLFF
+};
     
 class Ising {
 public:
     Ising(){};
-    Ising(int NN,double TT, double hh, double p, int maxGd, int maxTsep); //Constructor of the class
+    Ising(int NN,double TT, double hh, double p, int maxGd, int maxTsep); //Constructor of the class    
     virtual ~Ising();
     
     //***Ising spins chain and environmental parameters
@@ -108,8 +112,9 @@ public:
     
 //*** MONTE CARLO ENGINS, MC WRAPPER, SOME MC PARAMETERS 
     virtual vector<short> Metropolis_cycle();
-    void Wolff_cycle();
-    virtual void MC_simulation(int therm_t, int prod_t, int measure_f);
+    virtual vector<short> Wolff_cycle();
+    vector<short> cycle(); // performs the Metropolis_cycle or Wolff_cycle depending on ising_method_type value
+    virtual void MC_simulation(int therm_t, int prod_t, int measure_f,ISING_METHOD_TYPE mt = METHOD_METROPOLIS);
     int measure_f;      //frequency of measures, indicate number of MC cycles separating two consecutive measures
     int therm_t;        //thermalization time = number of initial cycles to thermalize (equilibrate) the initial state
     
@@ -120,6 +125,7 @@ public:
 
     int nb_rejected;
     double rejected;
+    ISING_METHOD_TYPE ising_method_type;
     
 
 };

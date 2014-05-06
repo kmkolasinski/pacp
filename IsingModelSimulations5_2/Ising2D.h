@@ -11,6 +11,9 @@
 #include "Ising5_2.h"
 
 #define To2D(i,j)( i + (j)*nx )
+#define Yfrom2D(site)( int(site/nx) ) // map from 1D array to y coordinate of 2D array
+#define Xfrom2D(site)(  (site%nx) )   // map from 1D array to x coordinate of 2D array
+
 
 class Ising2D : public Ising {
 public:
@@ -21,7 +24,8 @@ public:
     
 //*** MONTE CARLO ENGINS, MC WRAPPER, SOME MC PARAMETERS     
     vector<short> Metropolis_cycle();
-    void MC_simulation(int therm_t, int prod_t, int measure_f);
+    vector<short> Wolff_cycle();
+    void MC_simulation(int therm_t, int prod_t, int measure_f,ISING_METHOD_TYPE mt = METHOD_METROPOLIS);
 
 
 private:

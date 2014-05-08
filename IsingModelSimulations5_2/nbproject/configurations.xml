@@ -30,6 +30,7 @@
       <itemPath>Tests/IsingTestClusterStat.h</itemPath>
       <itemPath>Tests/IsingTestError.h</itemPath>
       <itemPath>Tests/IsingTestM2D.h</itemPath>
+      <itemPath>Tests/IsingTestRenormGroup1D.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -77,6 +78,8 @@
       <item path="Tests/IsingTestError.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestM2D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestRenormGroup1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tools.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -134,6 +137,8 @@
       <item path="Tests/IsingTestError.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestM2D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestRenormGroup1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tools.cpp" ex="false" tool="1" flavor2="0">
       </item>

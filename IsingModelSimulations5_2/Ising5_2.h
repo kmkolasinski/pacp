@@ -82,7 +82,7 @@ public:
     vector<double> Ge;   //measured correlation function Ge(local energy separation)  
     vector<double> E_correlation(int maxGdist,double E);  //function measuring instant energy-energy correlation
     vector<double> mean_E_correlation(int maxGdist,double E);  //function measuring macroscopic energy-energy correlation
-    
+
     
     //ZERO FIELD SUSCEPTIBILITY
     double Chi(string totalFname);         //magnetic susceptibility calculated using order parameter fluctuation method

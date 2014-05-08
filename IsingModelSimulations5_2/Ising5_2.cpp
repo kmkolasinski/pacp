@@ -34,7 +34,7 @@
 
 using namespace std;
 
-long int Ising::seed1 = 46723;   
+long int Ising::seed1 = 46723;
 long int Ising::seed2 = 2593459;
 
 vector<vector<short> > readDATAtoVectors(string totalFname, int N); //forward declaration (Tools)
@@ -131,7 +131,6 @@ vector<short> Ising::Metropolis_cycle() {
     return S; //The state of the system after one lattice sweep is returned
 }
 
-
 vector<short> Ising::Wolff_cycle() {
     /* Domain : Monte Carlo simulation
      * Perform N Wolff updates of cluster of spins 
@@ -174,6 +173,7 @@ vector<short> Ising::Wolff_cycle() {
     return S;
 }
 
+
 vector<short> Ising::cycle(){
 
     switch(ising_method_type){
@@ -183,7 +183,6 @@ vector<short> Ising::cycle(){
     }
     
 }
-
 
 
 void Ising::MC_simulation(int therm_t, int prod_t, int measure_f,ISING_METHOD_TYPE mt) {
@@ -240,17 +239,17 @@ void Ising::MC_simulation(int therm_t, int prod_t, int measure_f,ISING_METHOD_TY
 // section C                  DATA ANALYSIS                                 //          
 //////////////////////////////////////////////////////////////////////////////
 
-double Ising::E(){
+double Ising::E() {
     double E;
-    E=0;
-    for(int i=0;i<N;i++){
-        if(i==(N-1)){
-            E+=-S[i]*S[0];
-        }else{
-            E+=-S[i]*S[i+1];
+    E = 0;
+    for (int i = 0; i < N; i++) {
+        if (i == (N - 1)) {
+            E += -S[i] * S[0];
+        } else {
+            E += -S[i] * S[i + 1];
         }
     }
-    return E/(N);
+    return E / (N);
 }
 
 vector<double> Ising::E_correlation(int maxGdist, double E) {
@@ -272,15 +271,13 @@ vector<double> Ising::E_correlation(int maxGdist, double E) {
 
 }
 
-
-vector<double> mean_E_correlation(int maxGdist,double E){
+vector<double> mean_E_correlation(int maxGdist, double E) {
     /*
      * Panowie Kaczmarczyk i Jedraczka we wspolpracy z 
      * pania Chadrian z kolezanka.
      * 
      */
 }
-
 
 double Ising::CC() {
     /*
@@ -290,10 +287,10 @@ double Ising::CC() {
      * measurements. The value if acquired with frequency declared as measure_f
      * variable in main function.
      * this function needs E() to work properly.
-     */   
-    double meanE,meanEsq;
-    
-    meanE   = 0;
+     */
+    double meanE, meanEsq;
+
+    meanE = 0;
     meanEsq = 0;
     int n=0;
     for (int t = 0; t < 100000; t++) {        
@@ -304,14 +301,14 @@ double Ising::CC() {
             meanEsq+= ee*ee;
             n++;
     }
-    meanE/=n;
-    meanE*=meanE;
-    meanEsq/=n;
-    
-    return (meanEsq-meanE)/T/T/N; //per site
+    meanE /= n;
+    meanE *= meanE;
+    meanEsq /= n;
+
+    return (meanEsq - meanE) / T / T / N; //per site
 }
 
-double Ising::CC(string totalFname){
+double Ising::CC(string totalFname) {
     // Calculates the specific heat 
     // which is stored in file totalFname
     // parameter: totalFname - name of file    
@@ -326,87 +323,149 @@ double Ising::CC(vector<vector<short> > SS) {
      * C=bheta/T <E^2>-<E>^2
      * SS - is the raw data vector stored in memory
      * this function needs E() to work properly.
-     */   
-    double meanE,meanEsq;
-    int t_steps=SS.size();
-    
-    meanE   = 0;
-    meanEsq = 0;   
-    for(int j=0;j<t_steps;j++){
-        for(int i=0;i<N;i++){            
-            S[i]=SS[j][i];
+     */
+    double meanE, meanEsq;
+    int t_steps = SS.size();
+
+    meanE = 0;
+    meanEsq = 0;
+    for (int j = 0; j < t_steps; j++) {
+        for (int i = 0; i < N; i++) {
+            S[i] = SS[j][i];
         }
-        double ee = E();            
-        meanE    += ee;
-        meanEsq  += ee*ee;                
-    }    
-    
-    meanE  /= t_steps;
-    meanE  *= meanE;
-    meanEsq/= t_steps;
-    
-    return (meanEsq-meanE)/T/T/N; 
+        double ee = E();
+        meanE += ee;
+        meanEsq += ee*ee;
+    }
+
+    meanE /= t_steps;
+    meanE *= meanE;
+    meanEsq /= t_steps;
+
+    return (meanEsq - meanE) / T / T / N;
 }
 
+double Ising::aveE(string totalFname) {
+    // Calculates the average value of Energy over all simulation time
 
-double Ising::Chi(string totalFname) {
-    // Calculates the magnetic susceptibility of the system
-    // which is stored in file totalFname
-    //parameter: totalFname - name of file
-    
     //Raw simulation data flows from disk to vector container
     vector<vector<short> > SS = readDATAtoVectors(totalFname, N);
-
-    return Chi(SS);
-}
-
-double Ising::Chi( vector<vector<short> > SS ) {
- // Calculates the magnetic susceptibility of the system
-    // which is stored in vector SS
-    //parameter: SS - Raw simulation data
-    
     //number of time samples
-    int t_steps=SS.size();
-    //auxiliary variables
-    double M_temp, aM, aM2;
-    
-    aM=0.; aM2=0.;
-    for(int j=0;j<t_steps;j++){
-        M_temp=0.;
-        //calculation of magnetisation M
-        for(int i=0;i<N;i++){
-            M_temp+=SS[j][i];
-        }
-        //calculation of <M> and <M^2>
-        aM+=M_temp;
-        aM2+=M_temp*M_temp;
-    }
-    //normalization by number of measures and sites
-    aM=aM/t_steps/N; 
-    aM2=aM2/t_steps/N;
-    
-    return (aM2-aM*aM)/T; //Chi
-}
-
-double Ising::aveE(string totalFname) {    
-    // Calculates the average value of Energy over all simulation time
-    
-    //Raw simulation data flows from disk to vector container
-    vector<vector<short> > SS = readDATAtoVectors(totalFname, N);    
-    //number of time samples
-    int t_steps=SS.size();
+    int t_steps = SS.size();
     //auxiliary variables
     double mean_E = 0;
-    for(int j=0;j<t_steps;j++){
-        for(int i=0;i<N;i++){            
-            S[i]=SS[j][i];
+    for (int j = 0; j < t_steps; j++) {
+        for (int i = 0; i < N; i++) {
+            S[i] = SS[j][i];
         }
-        double ee = E();        
-        mean_E   += ee; 
+        double ee = E();
+        mean_E += ee;
     }
-    return mean_E/t_steps;         
+    return mean_E / t_steps;
 }
 
+cluster_stat Ising::cluster_freq1D(string totalFname) {
+    // Calculation of the cluster size distribution.
+    // Input: name of the file containing the time evolution of the system created by MC simulation.
+    // Output: cluster_stat structure     //parameter: totalFname - name of file.
+    // This function feed in data mean_cluster_freq1D and forward its result to output.
+
+    //Raw simulation data flows from disk to vector container SS
+    vector<vector<short> > SS = readDATAtoVectors(totalFname, N);
+
+    return mean_cluster_freq1D(SS);
+}
+
+cluster_stat Ising::mean_cluster_freq1D(vector<vector<short> > SS) {
+    // Calculation of the cluster size distribution
+    // Input: time evolution of the system created by MC simulation
+    // i.e. SS represents raw simulation data
+    // Output: cluster_stat structure 
+
+    cluster_stat instantClstat;
+    for (int j = 0; j < Ising::N + 1; j++)
+        Ising::CFD.CF.push_back(0);
+    Ising::CFD.cmax = 0;
+
+    //number of time samples
+    int t_steps = SS.size();
+
+    for (int j = 0; j < t_steps; j++) {
+        instantClstat = cluster_freq1D(SS[j]);
+        for (int i = 1; i < N + 1; i++)
+            CFD.CF[i] += instantClstat.CF[i];
+        if (instantClstat.cmax > CFD.cmax)
+            CFD.cmax = instantClstat.cmax;
+    }
+//normalization by number of measures and sites
+double temp = t_steps * N;
+for (int i = 1; i < N + 1; i++)
+    CFD.CF[i] /= temp;
+
+return CFD;
+}
+
+cluster_stat  Ising::cluster_freq1D(vector<short> SS) {
+    /*Domain : data analysis: calculation of the cluster size distribution
+     * For 1-dimensional system the T=0 corresponds to criticality
+     * When approaching critical state the system develops large clusters of 
+     * spins pointing in the same directions. Such clusters are named domains.
+     * When going closer and closer to critical temperature (T=0 in 1d case)
+     * clusters are not only growing in size but their distribution flatten
+     * meaning that domains of any size are present close to criticality.
+     * The function below is designed to check this behavior. It measures
+     * the distribution of domain for instant chain state. Function returns structure
+     * cluster_stat containing two members: 
+     * - vector CF: CF[L] contains the frequency of domain of size L
+     * - cmax : contains the size of the largest domain in the distribution
+     * This function returns the instantaneous cluster distribution
+     */
+    vector<float> tt(N + 1, 0); //tt is created to initialize the vector component
+    //of the cls instance of the cluster_stat structure below
+    cluster_stat cls = {tt, 1}; //container for results
+    int pos = 0; //initial current position on the chain
+    int sg = SS[pos]; //sign of the spin at current position (here of the spin at the beginning of the chain)
+    int cl_L = 0; //length of the current cluster (initialized to zero)
+
+    //If the first and the last spin of the chain point in the same direction
+    //they belong to the same cluster for the chain with periodic boundary conditions
+    //the block below and the last block treat such situations
+
+    int first_cl_L;
+    if (SS[0] == SS[N - 1]) { //Special case: cluster wrap around the border.
+        while (SS[pos] == sg) {
+            pos++;
+            cl_L++;
+        }
+        first_cl_L = cl_L;
+        sg = -sg;
+        if (cls.cmax < cl_L) cls.cmax = cl_L; //I am bigger then you, ... no!, I am bigger then you.
+    }
+
+    if (cls.cmax == N) //The special case occurs when the whole chain is in unique domain state.
+        cls.CF[N] = 1; //In this case the treatment is accomplished and we return result.
+    else { //Here the most common treatment is implemented. 
+        while (pos < N) { // We progress till the end of the chain,
+            cl_L = 0;
+            while (SS[pos] == sg) { //counting the size of one domain after another.
+                pos++;
+                cl_L++;
+            }
+            cls.CF[cl_L]++;
+            sg = -sg;
+            if (cls.cmax < cl_L) cls.cmax = cl_L;
+        }
+
+        int last_cl_L = cl_L; //However we keep in mind that the last domain 
+        if (SS[0] == SS[N - 1]) { //may glue to the first one due to the periodic boundary condition.
+            cls.CF[last_cl_L]--; //In this case the last domain should not be counted
+            cls.CF[first_cl_L + last_cl_L]++; // because the length of crossing boundary domain is the joint length
+            if (cls.cmax < first_cl_L + last_cl_L) //of the first and the last "domains".
+                cls.cmax = first_cl_L + last_cl_L;
+        }
+    }
+    return cls;
+}
 
 vector<double> Ising::t_correlation(int maxTime, string totalFname) {
     /*Domain: data analysis, calculation of MC characteristic
@@ -431,24 +490,24 @@ vector<double> Ising::t_correlation(int maxTime, string totalFname) {
      * 
      */
 
-     /*
+    /*
      * Pan Mateusz Dyndal 
      */
-     
-   //Raw simulation data flows from disk to vector container
+
+    //Raw simulation data flows from disk to vector container
     vector<vector<short> > SS = readDATAtoVectors(totalFname, N);
-    
+
     //Declaration of iterators
     vector<vector<short> >::iterator t;
     vector<short>::iterator pos;
-    
-    int i=0;
+
+    int i = 0;
 
     for (t = SS.begin(); t != SS.end(); t++) { //loop over time "t" (time unity in MC cycles = prod_t/measure_f)
         for (pos = t->begin(); pos != t->end(); pos++) { //loop over chain sites "pos" at fixed time
-            mt[i] += (double)(*pos);
+            mt[i] += (double) (*pos);
         }
-        mt[i] /= (double)N;
+        mt[i] /= (double) N;
         i++;
         //if(i==maxTimeseparation) break;
     }
@@ -463,96 +522,100 @@ vector<double> Ising::t_correlation(int maxTime, string totalFname) {
 
 
 
-    double meanm =0.;
+    double meanm = 0.;
     for (int j = 0; j < maxTime; j++)
         meanm += mt[j];
-    meanm/=(double)maxTime;
+    meanm /= (double) maxTime;
 
 
-/////////////////// MAIN LOOP ///////////////////////////////////
-    for (int j = 0; j < maxTimeseparation; j++){
-    
-      for (int k = 0; k < maxTime; k++){  
-       
-       int index = j + k;
-       if ((j + k) >= maxTime) index -= maxTime;
-       
-       Gt[j] += (mt[k]*mt[index] - meanm*meanm);
-       
-      }
-    
+    /////////////////// MAIN LOOP ///////////////////////////////////
+    for (int j = 0; j < maxTimeseparation; j++) {
+
+        for (int k = 0; k < maxTime; k++) {
+
+            int index = j + k;
+            if ((j + k) >= maxTime) index -= maxTime;
+
+            Gt[j] += (mt[k] * mt[index] - meanm * meanm);
+
+        }
+
     }
-/////////////////////////////////////////////////////////////////
-    
+    /////////////////////////////////////////////////////////////////
+
     double Gt_int = 0.;
     fstream DATA("Gt.dat", ios::out);
-    for (int j = 0; j < maxTimeseparation; j++){
+    for (int j = 0; j < maxTimeseparation; j++) {
         cout << "\nGt[" << j << "]=" << Gt[j];
         DATA << Gt[j] << "\n";
         Gt_int += Gt[j];
     }
     cout << "\n--------------------";
 
-    cout<<"i = "<<i<<endl;
-    cout<<"meanm = "<<meanm<<endl;
-    cout<<"Gt integral = "<<Gt_int<<endl;
-    Gt_int /=Gt[0];
-    cout<<"tau = "<<Gt_int<<endl;
-    Gt_int = 1./Gt_int;
-    cout<<"1/tau = "<<Gt_int<<endl;
-    
+    cout << "i = " << i << endl;
+    cout << "meanm = " << meanm << endl;
+    cout << "Gt integral = " << Gt_int << endl;
+    Gt_int /= Gt[0];
+    cout << "tau = " << Gt_int << endl;
+    Gt_int = 1. / Gt_int;
+    cout << "1/tau = " << Gt_int << endl;
+
     return Gt;
 
 }
 
 //function returning sigma for specific error_type (see enum file in *.h file)
+
 double Ising::ERROR(string totalFname, ISING_ERROR_TYPE error_type) {
-   /* BOOTSTRAP RECIPE OF ERROR CALCULATION
-    * Let n be a number of elements in dataSet.
-    * 1. Pick at random n elements (with returns).
-    * 2. Calculate an observable C using n elements
-    *    created in 1.
-    * 3. Repeat 1 and 2 m times. This gives a series
-    *    C1, C2, ..., Cm of estimations of C.
-    * 4. Use this series to calculate the standard
-    *    deviation sigma in the following way:
-    *    sigma= sqrt( <C^2> - <C>^2 )
-    */
-   
-   //Raw simulation data flows from disk to vector container
-   vector<vector<short> > SSdata = readDATAtoVectors(totalFname, N);
-   vector<vector<short> > SS = SSdata;
-   int n = SS.size();
-    
-   double observable ;
-   double sum2=0, sum1=0;
-   int m=100;
-   
-   for(int j=0;j<m;j++){
-      
+    /* BOOTSTRAP RECIPE OF ERROR CALCULATION
+     * Let n be a number of elements in dataSet.
+     * 1. Pick at random n elements (with returns).
+     * 2. Calculate an observable C using n elements
+     *    created in 1.
+     * 3. Repeat 1 and 2 m times. This gives a series
+     *    C1, C2, ..., Cm of estimations of C.
+     * 4. Use this series to calculate the standard
+     *    deviation sigma in the following way:
+     *    sigma= sqrt( <C^2> - <C>^2 )
+     */
+
+    //Raw simulation data flows from disk to vector container
+    vector<vector<short> > SSdata = readDATAtoVectors(totalFname, N);
+    vector<vector<short> > SS = SSdata;
+    int n = SS.size();
+
+    double observable;
+    double sum2 = 0, sum1 = 0;
+    int m = 100;
+
+    for (int j = 0; j < m; j++) {
+
         // we choose random set (with returns)
-        for( int i = 0 ; i < n ; i++ ){
-           int time_step = (int) ( n * RNG::drandom(seed2));
-           SS[i] =  SSdata[time_step];              
+        for (int i = 0; i < n; i++) {
+            int time_step = (int) (n * RNG::drandom(seed2));
+            SS[i] = SSdata[time_step];
         }
-        switch(error_type){ // choose of which observable error is calculated
+        switch (error_type) { // choose of which observable error is calculated
             case ERROR_CHI:
-                observable = Chi(SS);break;
-            case ERROR_CC :                   
-                observable = CC(SS);break;
-            case ERROR_OP :                   
-                observable = order_parameter(SS);break;
+                observable = Chi(SS);
+                break;
+            case ERROR_CC:
+                observable = CC(SS);
+                break;
+            case ERROR_OP:
+                observable = order_parameter(SS);
+                break;
         }
 
         sum2 += observable*observable;
         sum1 += observable;
-   }
-   sum2 /= m;
-   sum1 /= m;
-   
-   double sigma = sqrt( sum2 - sum1*sum1 );
-   
-   return sigma;
+    }
+    sum2 /= m;
+    sum1 /= m;
+
+    double sigma = sqrt(sum2 - sum1 * sum1);
+
+    return sigma;
 
 
 }
@@ -577,65 +640,65 @@ cluster_stat Ising::cluster_freq() {
     vector<float> tt(N, 0); //tt is created to initialize the vector component
     //of the cls instance of the cluster_stat structure below
     cluster_stat cls = {tt, 1}; //container for results
-    int pos=0; //initial current position in the chain
+    int pos = 0; //initial current position in the chain
     int sg = S[pos]; //initial sign of current position (i.e. spin orientation)
     int cl_L = 1; //initial length of the current cluster
-    int max=0;//temporary variable used in the for loop
-    int amax=0;//absolute maximum value of domain size
-    float mmax=0;//mean maximum value of domain size
-    int stat=1;//statistic of spin domain orientation in fixed temperature
-    for(int i=0;i<stat;i++){
-        pos=0;
-        bool nbound_c=1;
-        if(sg==S[N-1]) nbound_c=0;
-        int temp=0;//first domain check
-        int sg_size=0;//size of first domain
-        while(pos<N){
-            if(nbound_c){
-                if(pos!=(N-1)){
-                    if(S[pos]==S[++pos])cl_L++;
-                    else{
-                        tt[cl_L-1]+=1;
-                        if(max<cl_L) max=cl_L;
-                        cl_L=1;
-                    }  
-                }else{
-                    tt[cl_L-1]+=1;
-                    if(max<cl_L) max=cl_L;
-                    cl_L=1;
+    int max = 0; //temporary variable used in the for loop
+    int amax = 0; //absolute maximum value of domain size
+    float mmax = 0; //mean maximum value of domain size
+    int stat = 1; //statistic of spin domain orientation in fixed temperature
+    for (int i = 0; i < stat; i++) {
+        pos = 0;
+        bool nbound_c = 1;
+        if (sg == S[N - 1]) nbound_c = 0;
+        int temp = 0; //first domain check
+        int sg_size = 0; //size of first domain
+        while (pos < N) {
+            if (nbound_c) {
+                if (pos != (N - 1)) {
+                    if (S[pos] == S[++pos])cl_L++;
+                    else {
+                        tt[cl_L - 1] += 1;
+                        if (max < cl_L) max = cl_L;
+                        cl_L = 1;
+                    }
+                } else {
+                    tt[cl_L - 1] += 1;
+                    if (max < cl_L) max = cl_L;
+                    cl_L = 1;
                     pos++;
                 }
-            }else{
-                if(pos!=(N-1)){
-                    if(S[pos]==S[++pos])cl_L++;
-                    else{
+            } else {
+                if (pos != (N - 1)) {
+                    if (S[pos] == S[++pos])cl_L++;
+                    else {
                         temp++;
-                        if(temp==1) sg_size=cl_L;
-                        tt[cl_L-1]+=1;
-                        if(max<cl_L) max=cl_L;
-                        cl_L=1;
-                    }  
-                }else{
-                    if(cl_L!=N){
-                        cl_L+=sg_size;
-                        tt[sg_size-1]-=1;
+                        if (temp == 1) sg_size = cl_L;
+                        tt[cl_L - 1] += 1;
+                        if (max < cl_L) max = cl_L;
+                        cl_L = 1;
                     }
-                    tt[cl_L-1]+=1;
-                    if(max<cl_L) max=cl_L;
-                    cl_L=1;
+                } else {
+                    if (cl_L != N) {
+                        cl_L += sg_size;
+                        tt[sg_size - 1] -= 1;
+                    }
+                    tt[cl_L - 1] += 1;
+                    if (max < cl_L) max = cl_L;
+                    cl_L = 1;
                     pos++;
                 }
             }
         }
-        if(amax<max) amax=max;
-        mmax+=max;
-        max=0;
+        if (amax < max) amax = max;
+        mmax += max;
+        max = 0;
         //Metropolis_cycle();
     }
-    for(int i=0;i<N;i++) tt[i]/=stat;
-    cls.CF=tt;
-    cls.cmax=amax;
-    mmax/=stat;
+    for (int i = 0; i < N; i++) tt[i] /= stat;
+    cls.CF = tt;
+    cls.cmax = amax;
+    mmax /= stat;
 
     //If the first and the last spin of the chain point in the same direction
     //they belong to the same domain (we consider chains with periodic boundary conditions)
@@ -681,48 +744,45 @@ double Ising::order_parameter() {
     return OP /= N;
 }
 
-
 double Ising::order_parameter(string totalFname) {
     // Calculates the magnetization (order parameter) of the system
     // which is stored in file totalFname
     //parameter: totalFname - name of file
-    
+
     //Raw simulation data flows from disk to vector container
     vector<vector<short> > SS = readDATAtoVectors(totalFname, N);
 
     return order_parameter(SS);
-    
+
 }
 
-double Ising::order_parameter( vector<vector<short> > SS ) {
- // Calculates the magnetization (order parameter) of the system
+double Ising::order_parameter(vector<vector<short> > SS) {
+    // Calculates the magnetization (order parameter) of the system
     // which is stored in vector SS
     //parameter: SS - Raw simulation data
-    
+
     //number of time samples
-    int t_steps=SS.size();
+    int t_steps = SS.size();
     //auxiliary variables
     double M_temp, aM;
-    
-    aM=0.; 
-    for(int j=0;j<t_steps;j++){
-        M_temp=0.;
+
+    aM = 0.;
+    for (int j = 0; j < t_steps; j++) {
+        M_temp = 0.;
         //calculation of magnetisation M
-        for(int i=0;i<N;i++){
-            M_temp+=SS[j][i];
+        for (int i = 0; i < N; i++) {
+            M_temp += SS[j][i];
         }
         //calculation of <M>
-        aM+=M_temp;
+        aM += M_temp;
     }
     //normalization by number of measures and sites
-    aM=aM/t_steps/N; 
-    
+    aM = aM / t_steps / N;
+
     return aM; //M
 
-    
+
 }
-
-
 
 vector<double> Ising::S_correlation(int maxGdist, double OP) {
     /* Domain : calculation of physical quantities.
@@ -759,18 +819,18 @@ vector<double> Ising::mean_S_corrrelation(string totalFname) {
 
     //Raw simulation data flows from disk to vector container
     vector<vector<short> > SS = readDATAtoVectors(totalFname, N);
-    
+
     //Declaration of iterators
     vector<vector<short> >::iterator t;
     vector<short> s;
     vector<short>::iterator pos;
-    
+
     //Local container for instant correlation
     vector<double> S_corr(maxGdist, 0);
-    
-    cout<<"\n\n    MEASURE OF THE SPIN-SPIN CORRELATION FUNCTION"<<endl<<endl;
+
+    cout << "\n\n    MEASURE OF THE SPIN-SPIN CORRELATION FUNCTION" << endl << endl;
     cout << "\n Number of measures = " << SS.size() << endl; //Size of SS should be equal to number of measures (check)
-    
+
     int i;
 
     for (t = SS.begin(); t != SS.end(); t++) { //loop over time "t" (time unity in MC cycles = prod_t/measure_f)
@@ -782,7 +842,7 @@ vector<double> Ising::mean_S_corrrelation(string totalFname) {
         } //We are leaving the loop with an instantaneous state of the chain contained in the Ising class member vector S
 
         double mcycle = order_parameter();
-        S_corr = S_correlation(maxGdist, mcycle); 
+        S_corr = S_correlation(maxGdist, mcycle);
         for (int j = 0; j < maxGdist; j++)
             Gs[j] += S_corr[j]; //accumulation of instantaneous results (we are in time loop)
     }
@@ -802,13 +862,13 @@ vector<double> Ising::mean_S_corrrelation(string totalFname) {
     for (int j = 1; j < maxGdist; j++)
         if (Gs[j] > 0)
             cout << "\nT[" << j << "]=" << 1 / atanh(Gs[j] / Gs[j - 1]);
-    
+
     cout << "\n--------------------";
     cout << "\n(*) We use the fact that correlation is equal to [th(1/T)]^dist";
     cout << "\nwhere \"dist\" represents distance between spins)";
     cout << "\nValues above corresponds to 1/atanh(G[dist] / G[dist-1]), ";
     cout << "\nThis gives the measured value of the temperature T";
-    
+
     return Gs;
 }
 

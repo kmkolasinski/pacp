@@ -30,8 +30,9 @@ using namespace std;
 struct cluster_stat {
     vector<float> CF; //CF[x]=nb of occurences of the spin 
     //cluster of length x in a given state of the Ising chain 
-    int cmax; //maximal length of the cluster 
+    int cmax; //maximal length of the cluster in the distribution
 } ;
+
 // enum field used to choose kind of error calculated by ERROR function
 enum ISING_ERROR_TYPE{
     ERROR_CHI,// calculate error of magnetic susceptibility 
@@ -97,8 +98,11 @@ public:
     double aveE(string totalFname); // energy from 
     
     //CLUSTER (DOMAIN) STATISTICS
-    cluster_stat CFD;   //distribution CF of cluster length 
-    cluster_stat cluster_freq(); //measure CF
+    cluster_stat CFD;   //distribution of cluster length (CFD = Cluster Frequency Distribution)
+    cluster_stat cluster_freq1D(string totalFname); //measure CFD (read data,call mean_cluster_freq1D)
+    cluster_stat mean_cluster_freq1D( vector<vector<short> > SS ); //measure mean CFD (call cluster_freq1D)
+    cluster_stat cluster_freq1D( vector<short> SS ); //measure instant CFD
+    cluster_stat cluster_freq();
     
     //TIME CORRELATION OF MONTE CARLO CYCLES
     double tau; //characteristic time of exponential decay of time autocorrelation function of magnetization

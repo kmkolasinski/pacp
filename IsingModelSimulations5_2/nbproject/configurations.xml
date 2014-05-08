@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="94">
+<configurationDescriptor version="90">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
@@ -27,6 +27,7 @@
       <itemPath>Tests/IsingTest.h</itemPath>
       <itemPath>Tests/IsingTestCC2D.h</itemPath>
       <itemPath>Tests/IsingTestChi.h</itemPath>
+      <itemPath>Tests/IsingTestClusterStat.h</itemPath>
       <itemPath>Tests/IsingTestError.h</itemPath>
       <itemPath>Tests/IsingTestM2D.h</itemPath>
     </logicalFolder>
@@ -70,6 +71,8 @@
       <item path="Tests/IsingTestCC2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestChi.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestClusterStat.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestError.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -125,6 +128,8 @@
       <item path="Tests/IsingTestCC2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestChi.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestClusterStat.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestError.h" ex="false" tool="3" flavor2="0">
       </item>

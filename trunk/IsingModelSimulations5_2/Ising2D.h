@@ -28,7 +28,7 @@ public:
     void MC_simulation(int therm_t, int prod_t, int measure_f,ISING_METHOD_TYPE mt = METHOD_METROPOLIS);
 
 
-private:
+
     int nx; //size of box
 };
 

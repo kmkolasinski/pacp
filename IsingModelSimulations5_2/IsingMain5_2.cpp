@@ -29,6 +29,7 @@
 #include "Tests/IsingTestCC2D.h"
 #include "Tests/IsingTestError.h"
 #include "Tests/IsingTestM2D.h"
+#include "Tests/IsingTestExact2D.h"
 
 using namespace std;
 
@@ -46,12 +47,12 @@ int main(int argc, char** argv) {
 
     // 
     // ----------------------------------------------------------
-     IsingTestCC2D isingTestCC2D;   //  Ising2D test of CC in function of T for different lattices
+    // IsingTestCC2D isingTestCC2D;   //  Ising2D test of CC in function of T for different lattices
     // IsingTestM2D isingTestM2D;     //  Ising2D test of M in function of T for different lattices
     
      // 
      // ----------------------------------------------------------
-
+    IsingTestExact2D isingTestExact2D;
     
     cout << "\n\n     T H E   E N D " << endl;
     return 0;

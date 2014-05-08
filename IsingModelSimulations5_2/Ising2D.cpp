@@ -253,7 +253,15 @@ double Ising2D::E(){
     E=0;
     for(int i=0;i<nx;i++){
     for(int j=0;j<nx;j++){        
-        E+= -S[To2D(i,j)]*( S[To2D((i+1)%nx,j)] + S[To2D(i,(j+1)%nx)] ) + h*S[To2D(i,j)]; 
+        E+= -S[To2D(i,j)]*
+                ( S[To2D((i+1)%nx,j)] + S[To2D(i,(j+1)%nx)] ) + h*S[To2D(i,j)]; 
+                //( S[To2D((i+1),j)%N] + S[To2D(i,(j+1))%N] ) + h*S[To2D(i,j)]; 
     }}
+    
+    
+
+        //siteR = (To2D(site_i + 1,site_j)     ) % N; 
+
+        //siteU = (To2D(site_i ,site_j+1)      ) % N; 
     return E;
 }

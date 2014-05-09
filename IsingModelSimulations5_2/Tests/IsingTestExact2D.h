@@ -25,8 +25,8 @@ class IsingTestExact2D : public IsingTest , public Ising2D {
             
             info(); 
             run(); // run all calculations
-            //string cmd =string("cd ")+test_dir_output+string(";gnuplot IsingTestExact2D.plt");
-            //int info = system(cmd.c_str());
+            string cmd =string("cd ")+test_dir_output+string(";gnuplot IsingTestExact2D.plt");
+            int info = system(cmd.c_str());
         }   
         
         /**
@@ -35,7 +35,8 @@ class IsingTestExact2D : public IsingTest , public Ising2D {
         void run(){
          
         cout << " Running test..." << endl;    
-        nx = 4;
+        for(nx = 2; nx<6; nx++){
+            
         N  = nx*nx;
         h = 0;
         for (int i = 0; i < N; i++) {
@@ -58,15 +59,18 @@ class IsingTestExact2D : public IsingTest , public Ising2D {
         }    
         int z_sum = 0;
         for(it = NE.begin() ; it != NE.end() ; it++){
-            cout << it->first << "  = " << it->second << endl;            
+            //cout << it->first << "  = " << it->second << endl;            
             z_sum += it->second;            
         } 
         for(it = NE.begin() ; it != NE.end() ; it++){
             it->second = it->second / z_sum;
-            cout << it->first << "  = " << it->second << endl;            
+            //cout << it->first << "  = " << it->second << endl;            
              
         } 
-        string fileout = test_dir_output+"IsingTestExactSol4x4.txt";
+        
+        stringstream ss;
+        ss << nx;
+        string fileout = test_dir_output+"IsingTestExact2D"+ss.str()+"x"+ss.str()+".txt";
         ofstream data_out(fileout.c_str());
         for(T = 0.1 ; T < 10 ; T += 0.1){
             double dT = 0.01;
@@ -79,7 +83,7 @@ class IsingTestExact2D : public IsingTest , public Ising2D {
         
         data_out.close();
         
-        
+        }
         
         
         }// end of run()

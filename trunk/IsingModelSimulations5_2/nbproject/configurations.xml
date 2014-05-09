@@ -29,6 +29,7 @@
       <itemPath>Tests/IsingTestChi.h</itemPath>
       <itemPath>Tests/IsingTestClusterStat.h</itemPath>
       <itemPath>Tests/IsingTestError.h</itemPath>
+      <itemPath>Tests/IsingTestExact2D.h</itemPath>
       <itemPath>Tests/IsingTestM2D.h</itemPath>
       <itemPath>Tests/IsingTestRenormGroup1D.h</itemPath>
     </logicalFolder>

@@ -30,7 +30,7 @@ class IsingTestM2D : public IsingTest {
             int info = system(cmd.c_str());
         }   
         
-        /**
+        /***
          * Tests Chi in function of Temperature for 1D model
          */
         void run(){

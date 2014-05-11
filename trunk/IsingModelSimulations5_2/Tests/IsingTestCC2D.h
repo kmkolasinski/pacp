@@ -10,12 +10,14 @@ class IsingTestCC2D : public IsingTest {
 
     public:
         IsingTestCC2D():IsingTest(){
-            test_name = "Cv in function of T .";   
+            test_name = "Test of specific heat in function of T .";   
             test_info = string(" Run test to calculate the Cv value in function of  \n")+
                         string(" temperature T for the 2D Ising lattice. The test is performed \n")+
                         string(" for different lattice sizes: 2x2, 4x4, 8x8, 16x16. Critical \n")+
-                        string(" temperature is Tc=2.27.\n")+
-                        string(" The results are saved in proper files:")+  
+                        string(" temperature is Tc=2.27. From theoretical results we know that\n")+
+                        string(" Cv should obtain maximum value near the Tc value. For large and\n")+
+                        string(" very small values of T the Cv should tend to zero.\n")+
+                        string(" The results are saved in following files:")+  
                         string(" 'IsingTestCC2D.txt' and 'IsingTestCC2D.png' in 'tests_out' directory. \n")+
                         string(" See run() function for more details.");
             
@@ -37,14 +39,15 @@ class IsingTestCC2D : public IsingTest {
         double magneticField = 0.0;
         int therm_t          =  50;   //thermalization time
         int measure_f        = 1;     //measure frequency
-        int prod_t           =1000;  //productiontime
-        int maxGdist         = 10;     //domain of correlation function extends from 0 to maxGdist-1
+        int prod_t           =1000;   //productiontime
+        int maxGdist         = 10;    //domain of correlation function extends from 0 to maxGdist-1
         int maxTsep          = 2;
-        double initState     = 0.7;    //values between 0.5 and 1.0
+        double initState     = 0.7;   //values between 0.5 and 1.0
     
                 
         vector<vector<double> > dataNxN[4];
         vector<double> dataT;
+        // preparation of temperature array
         for(double T = 1.0 ; T < 5.0 ; T += 0.1 ){ 
             dataT.push_back(T);
         }

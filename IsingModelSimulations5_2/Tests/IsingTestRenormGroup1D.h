@@ -15,7 +15,7 @@ class IsingTestRenormGroup1D : public IsingTest {
 
    public:
        IsingTestRenormGroup1D():IsingTest(){
-           test_name = "Test of error (bootstrap method).";   
+           test_name = "Test of zly opis.";   
            test_info = string(" Run test to calculate the erro value in function of \n")+
                        string(" the production time.\n The results are saved in proper files:")+  
                        string(" 'IsingTestError.txt' and 'IsingTestError.png' in 'tests_out' directory. \n")+

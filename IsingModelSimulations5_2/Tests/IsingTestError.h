@@ -15,9 +15,15 @@ class IsingTestError : public IsingTest {
    public:
        IsingTestError():IsingTest(){
            test_name = "Test of error (bootstrap method).";   
-           test_info = string(" Run test to calculate the erro value in function of \n")+
-                       string(" the production time.\n The results are saved in proper files:")+  
+           test_info = string(" Run test to calculate the error value in function of \n")+
+                       string(" the production time using the bootstrap method. For more details see:\n ")+  
+                       string(" http://en.wikipedia.org/wiki/Bootstrapping_(statistics).\n ")+  
+                       string(" \nThe results are saved in following files:")+  
                        string(" 'IsingTestError.txt' and 'IsingTestError.png' in 'tests_out' directory. \n")+
+                       string(" This test shows that the error decreases with number of prod_t. We founded that \n")+
+                       string(" the asymptotic behavior of error(prod_t) behaves like 1/sqrt(prod_t) which. \n")+
+                       string(" agree with general result for error known in MC integration methods. For more \n")+
+                       string(" details see: http://en.wikipedia.org/wiki/Monte_Carlo_integration. \n")+
                        string(" See run() function for more details.");
            
            info(); 

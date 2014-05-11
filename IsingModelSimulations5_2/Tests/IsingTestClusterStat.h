@@ -17,7 +17,7 @@ public:
 
         info();
         run(); // run all calculations
-        string cmd = string("cd ") + test_dir_output + string(";gnuplot IsingTestChi1D.plt");
+        string cmd = string("cd ") + test_dir_output + string(";gnuplot IsingTestClusterStat1D.plt");
         int info = system(cmd.c_str());
     }
 
@@ -30,7 +30,7 @@ public:
 
         //SIMULATION INPUT DATA
         int chainLength = 5000;
-        double temperature = 0.9;
+        double temperature = 0.8;
         double magneticField = 0.0;
         int therm_t = 1000; //thermalization time
         int measure_f = 10; //measure frequency
@@ -38,7 +38,7 @@ public:
         int maxGdist = 10; //domain of correlation function extends from 0 to maxGdist-1
         int maxTsep = 2;
         double initState = 0.7; //values between 0.5 and 1.0
-        string fileout = test_dir_output + "IsingTestChi1D.txt";
+        string fileout = test_dir_output + "IsingTestClusterStat1D.txt";
         ofstream data_out(fileout.c_str());
 
         //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
@@ -48,7 +48,7 @@ public:
 
         cluster_stat clStat = chain.cluster_freq1D(gettotalFname().c_str());
 
-        for (int L = 0; L <= clStat.cmax; L++) {
+        for (int L = 1; L <= clStat.cmax; L++) {
             data_out << std::scientific << L << "\t" << clStat.CF[L] << endl;
         }
 

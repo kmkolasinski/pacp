@@ -39,9 +39,6 @@ class IsingTestExact2D : public IsingTest , public Ising2D {
             int info = system(cmd.c_str());
         }   
         
-        /**
-         * Tests Chi in function of Temperature for 1D model
-         */
         void run(){
          
         cout << " Running test..." << endl;    

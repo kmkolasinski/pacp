@@ -23,6 +23,9 @@ class IsingTestM2D : public IsingTest {
                         string(" The results are saved in proper files:")+  
                         string(" 'IsingTestM2D.txt' and 'IsingTestM2D.png' in 'tests_out' directory. \n")+
                         string(" See run() function for more details.");
+                        string(" We expect existence of a critical temperature at 2.27 J above which M=0");
+                        string(" ");
+                        string(" ");
             
             info(); 
             run(); // run all calculations
@@ -31,7 +34,7 @@ class IsingTestM2D : public IsingTest {
         }   
         
         /***
-         * Tests Chi in function of Temperature for 1D model
+         * Tests M in function of Temperature for 2D model
          */
         void run(){
          
@@ -65,9 +68,9 @@ class IsingTestM2D : public IsingTest {
                 cout << "T=" << T << "\t:";
                 Ising2D lattice2d(chainLength, T, magneticField, initState, maxGdist, maxTsep);        
                 lattice2d.MC_simulation(therm_t, prod_t, measure_f,METHOD_METROPOLIS);
-                double M = lattice2d.order_parameter(gettotalFname().c_str());
+                double M = lattice2d.order_parameter(gettotalFname().c_str()); //calculating mean magnetization 
                 dataNxN[i].push_back(M);
-            }// end of for            
+            }// end of for loop over temperatures      
         }
         
         // saving data to file

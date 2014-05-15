@@ -12,7 +12,10 @@ class IsingTestChi : public IsingTest {
             test_info = string(" Run test to calculate the Chi value in function of \n")+
                         string(" temperature T for the 1D Ising chain.\n The results are saved in proper files:")+  
                         string(" 'IsingTestChi1D.txt' and 'IsingTestChi1D.png' in 'tests_out' directory. \n")+
-                        string(" See run() function for more details.");
+                        string(" See run() function for more details.\n");
+                        string(" We plot the dependence of Chi on temperature. We expect that for low T");
+                        string(" Chi explodes. We find a good agreement between the numerical and ");
+                        string(" analytical solution (see IsingTestChi.png)");
             
             info(); 
             run(); // run all calculations
@@ -39,6 +42,7 @@ class IsingTestChi : public IsingTest {
         string fileout = test_dir_output+"IsingTestChi1D.txt";
         ofstream data_out(fileout.c_str());
         
+        // the range of the temperature : (0.3,2) 
         cout << " Start  T=" << 0.3 << endl;
         cout << " End    T=" << 2.0 << endl;
         cout << " Step  dT=" << 0.1 << endl;
@@ -55,7 +59,8 @@ class IsingTestChi : public IsingTest {
         double chi_anal = exp(2./temperature)/temperature;
         double error    = chain.ERROR(gettotalFname().c_str(), ERROR_CHI);
 
-        data_out << std::scientific <<  temperature  << "\t" // save to file
+        // saving data to file
+        data_out << std::scientific <<  temperature  << "\t" 
                                          << chi_anal << "\t"
                                          << chi      << "\t"
                                          << error    << "\t"

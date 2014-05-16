@@ -207,7 +207,7 @@ void Ising::MC_simulation(int therm_t, int prod_t, int measure_f,ISING_METHOD_TY
     //STORING MC DATA IN A FILE
     string path, fname, totalFname;
     //path: use the path to the project folder on your laptop
-    path = "/home/kamil/Pulpit/Physics of The Critical Point/trunk/IsingModelSimulations5_2/";
+    path = "";
     fname = "MCdata";
     totalFname = path + fname;
     fstream DATA(totalFname.c_str(), ios::out); //file is open for writing

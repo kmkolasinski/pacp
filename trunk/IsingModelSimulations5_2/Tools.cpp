@@ -12,7 +12,7 @@
 
 using namespace std;
 
-void Display(vector<int> S) {
+void Display(vector<short> S) {
     for (int i = 0; i < S.size(); i++) {
         (S[i] == 1) ? cout << " o" : cout << " x";
     }

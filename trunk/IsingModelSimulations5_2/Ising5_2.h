@@ -78,10 +78,11 @@ public:
     //CORRELATION FUNCTIONS
     vector<double> S_correlation(int maxGdist,double OP); //function measuring instant spin-spin correlation
     vector<double> Gs;   //measured macroscopic correlation function Gs(spin separation)  
-    vector<double> mean_S_corrrelation(string ); //macroscopic observable, returns Gs
+    vector<double> mean_S_correlation(string ); //macroscopic observable, returns Gs
+    vector<double> mean_S_correlation(vector <vector<short> > SS);
     vector<double> Ge;   //measured correlation function Ge(local energy separation)  
     vector<double> E_correlation(int maxGdist,double E);  //function measuring instant energy-energy correlation
-    vector<double> mean_E_correlation(int maxGdist,double E);  //function measuring macroscopic energy-energy correlation
+    vector<double> mean_E_correlation(vector <vector<short> > SS);  //function measuring macroscopic energy-energy correlation
 
     
     //ZERO FIELD SUSCEPTIBILITY
@@ -100,9 +101,11 @@ public:
     //CLUSTER (DOMAIN) STATISTICS
     cluster_stat CFD;   //distribution of cluster length (CFD = Cluster Frequency Distribution)
     cluster_stat cluster_freq1D(string totalFname); //measure CFD (read data,call mean_cluster_freq1D)
+    cluster_stat mean_cluster_freq1D(string totalFname); //measure mean CFD using MCdata file
     cluster_stat mean_cluster_freq1D( vector<vector<short> > SS ); //measure mean CFD (call cluster_freq1D)
     cluster_stat cluster_freq1D( vector<short> SS ); //measure instant CFD
     cluster_stat cluster_freq();
+    vector<short> Domain_snapshot();//making domain map
     
     //TIME CORRELATION OF MONTE CARLO CYCLES
     double tau; //characteristic time of exponential decay of time autocorrelation function of magnetization

@@ -16,7 +16,7 @@
 
 using namespace std;
 
-void Display(vector<int> S) ;
+void Display(vector<short> S) ;
 
 vector<short> readDATAtoVector(string totalFname) ;
 

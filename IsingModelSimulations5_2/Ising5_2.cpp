@@ -28,7 +28,7 @@
 
 
 #include "Ising5_2.h"
-//#include "Tools.h"
+#include "Tools.h"
 
 
 
@@ -207,7 +207,7 @@ void Ising::MC_simulation(int therm_t, int prod_t, int measure_f,ISING_METHOD_TY
     //STORING MC DATA IN A FILE
     string path, fname, totalFname;
     //path: use the path to the project folder on your laptop
-    path = "";
+    path = "/home/kamil/Pulpit/Physics of The Critical Point/trunk/IsingModelSimulations5_2/";
     fname = "MCdata";
     totalFname = path + fname;
     fstream DATA(totalFname.c_str(), ios::out); //file is open for writing
@@ -221,12 +221,13 @@ void Ising::MC_simulation(int therm_t, int prod_t, int measure_f,ISING_METHOD_TY
             s = cycle();
             for (int i = 0; i < N; i++)
                 DATA << s[i] << " ";
+            DATA << endl;
         } else
             cycle();
         /*
          Please make copy of this file (Ising5_2.cpp)
          */
-        DATA << endl;
+        
     }
     DATA.close();
 }
@@ -257,26 +258,54 @@ vector<double> Ising::E_correlation(int maxGdist, double E) {
      * Calculate instantaneous connected correlation function
      * E represents instantenous (i.e. lattice) mean value of energy. 
      *         Ge(x)= <E(0)E(x)> - <E>^2
-     *** PLEASE COMPLETE THIS COMMENT
      */
 
     double E2 = E*E;
-    vector<double> corr;
-    /*
-     * Panowie Kaczmarczyk i Jedraczka we wspolpracy z 
-     * pania Chadrian z kolezanka.
-     * 
-     */
+    vector<double> corr(maxGdist,0);
+    for (int dist = 0; dist < maxGdist; dist++) {
+        for (int pos = 0; pos < N; pos++) {
+            corr[dist] += S[pos] * S[(pos + dist) % N]-E2;
+        }
+        corr[dist] /= N;
+    }
     return corr;
 
 }
 
-vector<double> mean_E_correlation(int maxGdist, double E) {
+vector<double> Ising::mean_E_correlation(vector <vector<short> > SS) {
     /*
-     * Panowie Kaczmarczyk i Jedraczka we wspolpracy z 
-     * pania Chadrian z kolezanka.
+     * Function allows to measure energy correlation by calculating its
+     * time mean value.
      * 
      */
+     
+    //Declaration of iterators
+    vector<vector<short> >::iterator t;
+    vector<short> s;
+    vector<short>::iterator pos;
+
+    //TEMPORARY VARIABLE FOR E CORRELATION
+    vector<double> E_corr(maxGdist,0);
+
+    int i;
+
+    for (t = SS.begin(); t != SS.end(); t++) { //loop over time "t" (time unity in MC cycles = prod_t/measure_f)
+
+        i = 0;
+        for (pos = t->begin(); pos != t->end(); pos++) { //loop over chain sites "pos" at fixed time
+            S[i] = *pos;
+            i++;
+        } //We are leaving the loop with an instantaneous state of the chain contained in the Ising class member vector S
+
+        double E_tot =E();
+        E_corr = E_correlation(maxGdist, E_tot);
+        for (int j = 0; j < maxGdist; j++)
+            Ge[j] += E_corr[j]; //accumulation of instantaneous results (we are in time loop)
+    }
+    for (int j = 0; j < maxGdist; j++)
+        Ge[j] /= SS.size(); //normalization by number of measures
+
+    return Ge;
 }
 
 double Ising::CC() {
@@ -294,7 +323,7 @@ double Ising::CC() {
     meanEsq = 0;
     int n=0;
     for (int t = 0; t < 100000; t++) {        
-        
+     
             cycle();
             double ee = E();            
             meanE  += ee;
@@ -416,21 +445,27 @@ cluster_stat Ising::cluster_freq1D(string totalFname) {
 
     return mean_cluster_freq1D(SS);
 }
+cluster_stat Ising::mean_cluster_freq1D(string totalFname) {
+    // Calculation of the cluster size distribution
+    // Input: time evolution of the system created by MC simulation
+    // i.e. SS represents raw simulation data
+    // Output: cluster_stat structure 
+    vector<vector<short> > SS = readDATAtoVectors(totalFname, N);
+    return mean_cluster_freq1D(SS);
+}
 
 cluster_stat Ising::mean_cluster_freq1D(vector<vector<short> > SS) {
     // Calculation of the cluster size distribution
     // Input: time evolution of the system created by MC simulation
     // i.e. SS represents raw simulation data
     // Output: cluster_stat structure 
-
+ 
     cluster_stat instantClstat;
-    for (int j = 0; j < Ising::N + 1; j++)
-        Ising::CFD.CF.push_back(0);
-    Ising::CFD.cmax = 0;
+    for (int j = 0; j < N + 1; j++) CFD.CF.push_back(0);
+    CFD.cmax = 0;
 
     //number of time samples
     int t_steps = SS.size();
-
     for (int j = 0; j < t_steps; j++) {
         instantClstat = cluster_freq1D(SS[j]);
         for (int i = 1; i < N + 1; i++)
@@ -438,10 +473,12 @@ cluster_stat Ising::mean_cluster_freq1D(vector<vector<short> > SS) {
         if (instantClstat.cmax > CFD.cmax)
             CFD.cmax = instantClstat.cmax;
     }
-//normalization by number of measures and sites
+    //normalization by number of measures and sites
+    //additional multiplying by factor i - size of each normalized cluster number
+    //gives us vector structure of probabilities of observing clusters of given size
 double temp = t_steps * N;
-for (int i = 1; i < N + 1; i++)
-    CFD.CF[i] /= temp;
+for (int i = 1; i < N + 1 ; i++)
+    CFD.CF[i] *= i/temp;
 
 return CFD;
 }
@@ -685,83 +722,52 @@ cluster_stat Ising::cluster_freq() {
     int sg = S[pos]; //initial sign of current position (i.e. spin orientation)
     int cl_L = 1; //initial length of the current cluster
     int max = 0; //temporary variable used in the for loop
-    int amax = 0; //absolute maximum value of domain size
-    float mmax = 0; //mean maximum value of domain size
-    int stat = 1; //statistic of spin domain orientation in fixed temperature
-    for (int i = 0; i < stat; i++) {
-        pos = 0;
-        bool nbound_c = 1;
-        if (sg == S[N - 1]) nbound_c = 0;
-        int temp = 0; //first domain check
-        int sg_size = 0; //size of first domain
-        while (pos < N) {
-            if (nbound_c) {
-                if (pos != (N - 1)) {
-                    if (S[pos] == S[++pos])cl_L++;
-                    else {
-                        tt[cl_L - 1] += 1;
-                        if (max < cl_L) max = cl_L;
-                        cl_L = 1;
-                    }
-                } else {
+    pos = 0;
+    bool nbound_c = 1;
+    if (sg == S[N - 1]) nbound_c = 0;
+    int temp = 0; //first domain check
+    int sg_size = 0; //size of first domain
+    while (pos < N) {
+        if (nbound_c) {
+            if (pos != (N - 1)) {
+                if (S[pos] == S[++pos])cl_L++;
+                else {
                     tt[cl_L - 1] += 1;
                     if (max < cl_L) max = cl_L;
                     cl_L = 1;
-                    pos++;
                 }
             } else {
-                if (pos != (N - 1)) {
-                    if (S[pos] == S[++pos])cl_L++;
-                    else {
-                        temp++;
-                        if (temp == 1) sg_size = cl_L;
-                        tt[cl_L - 1] += 1;
-                        if (max < cl_L) max = cl_L;
-                        cl_L = 1;
-                    }
-                } else {
-                    if (cl_L != N) {
-                        cl_L += sg_size;
-                        tt[sg_size - 1] -= 1;
-                    }
+                tt[cl_L - 1] += 1;
+                if (max < cl_L) max = cl_L;
+                cl_L = 1;
+                pos++;
+            }
+        } else {
+            if (pos != (N - 1)) {
+                if (S[pos] == S[++pos])cl_L++;
+                else {
+                    temp++;
+                    if (temp == 1) sg_size = cl_L;
                     tt[cl_L - 1] += 1;
                     if (max < cl_L) max = cl_L;
                     cl_L = 1;
-                    pos++;
                 }
+            } else {
+                if (cl_L != N) {
+                    cl_L += sg_size;
+                    tt[sg_size - 1] -= 1;
+                }
+                tt[cl_L - 1] += 1;
+                if (max < cl_L) max = cl_L;
+                cl_L = 1;
+                pos++;
             }
         }
-        if (amax < max) amax = max;
-        mmax += max;
-        max = 0;
-        //Metropolis_cycle();
     }
-    for (int i = 0; i < N; i++) tt[i] /= stat;
     cls.CF = tt;
-    cls.cmax = amax;
-    mmax /= stat;
-
-    //If the first and the last spin of the chain point in the same direction
-    //they belong to the same domain (we consider chains with periodic boundary conditions)
-
-    /*
-     * 
-     Panowie Kaczmarczyk i Jedraczka
-     * 
-     */
+    cls.cmax = max;
 
     return cls;
-
-    //TESTS        
-    //        Display(S);
-    //        for (int i = 0; i <= cls.cmax; i++) {
-    //           if (cls.CF[i]) cout<<"\n nb of blocks of length "<<i<<" = "<< cls.CF[i];
-    //        }
-    //        int sum=0;
-    //        for (int i = 0; i <= cls.cmax; i++) {
-    //           sum+=i*cls.CF[i];
-    //        }
-    //        cout<<"\n test of blocks statistic: sum = "<<sum;
 }
 
 
@@ -850,9 +856,7 @@ vector<double> Ising::S_correlation(int maxGdist, double OP) {
 
 }
 
-// vector<vector<short> > readDATAtoVectors(string totalFname, int N); //moved to beginning of the file
-
-vector<double> Ising::mean_S_corrrelation(string totalFname) {
+vector<double> Ising::mean_S_correlation(string totalFname) {
     /* Domain : calculation of physical quantities.
      * Calculate macroscopic connected spin-spin correlation function obtained
      *  by taking time mean value of instantaneous correlations.
@@ -912,4 +916,85 @@ vector<double> Ising::mean_S_corrrelation(string totalFname) {
 
     return Gs;
 }
+
+vector<double> Ising::mean_S_correlation(vector <vector<short> > SS) {
+    /* Domain : calculation of physical quantities.
+     * Calculate macroscopic connected spin-spin correlation function obtained
+     *  by taking time mean value of instantaneous correlations.
+     */
+
+    //Declaration of iterators
+    vector<vector<short> >::iterator t;
+    vector<short> s;
+    vector<short>::iterator pos;
+;
+
+    //Local container for instant correlation
+    vector<double> S_corr(maxGdist, 0);
+
+    cout << "\n\n    MEASURE OF THE SPIN-SPIN CORRELATION FUNCTION" << endl << endl;
+    cout << "\n Number of measures = " << SS.size() << endl; //Size of SS should be equal to number of measures (check)
+
+    int i;
+
+    for (t = SS.begin(); t != SS.end(); t++) { //loop over time "t" (time unity in MC cycles = prod_t/measure_f)
+
+        i = 0;
+        for (pos = t->begin(); pos != t->end(); pos++) { //loop over chain sites "pos" at fixed time
+            S[i] = *pos;
+            i++;
+        } //We are leaving the loop with an instantaneous state of the chain contained in the Ising class member vector S
+
+        double mcycle = order_parameter();
+        S_corr = S_correlation(maxGdist, mcycle);
+        for (int j = 0; j < maxGdist; j++)
+            Gs[j] += S_corr[j]; //accumulation of instantaneous results (we are in time loop)
+    }
+
+    for (int j = 0; j < maxGdist; j++)
+        Gs[j] /= SS.size(); //normalization by number of measures
+
+    /*
+    //DISPLAY SECTION (from here to the end of the function)
+    cout << "\nFinal order parameter <S> = " << order_parameter();
+    cout << "\n\nSpin-spin correlation function";
+    for (int j = 0; j < maxGdist; j++)
+        if (Gs[j] > 0)
+            cout << "\nG[" << j << "]=" << Gs[j];
+
+    cout << "\n\nTemperature calculated from simulations (*)";
+
+    for (int j = 1; j < maxGdist; j++)
+        if (Gs[j] > 0)
+            cout << "\nT[" << j << "]=" << 1 / atanh(Gs[j] / Gs[j - 1]);
+
+    cout << "\n--------------------";
+    cout << "\n(*) We use the fact that correlation is equal to [th(1/T)]^dist";
+    cout << "\nwhere \"dist\" represents distance between spins)";
+    cout << "\nValues above corresponds to 1/atanh(G[dist] / G[dist-1]), ";
+    cout << "\nThis gives the measured value of the temperature T";
+    */
+    return Gs;
+}
+
+vector<short> Ising::Domain_snapshot(){
+    vector<short> domains(S);
+    int oldspin;
+    double padd = 1; //probability of adding a site to border hehe
+    int site=0;
+    int esd,osd;//even and odd size of domain
+    esd=2;//corresponds to +1 spins
+    osd=3;//corresponds to -1 spins        
+    for (int i = 0; i < N; i++) {
+        oldspin = domains[site];
+        for(int j = 0; j < N; j++){
+            if(domains[i]==oldspin){
+                oldspin==1? domains[i]=esd : domains[i]=osd;
+            }else{
+                
+            }
+        }
+    }
+    return S; 
+};
 

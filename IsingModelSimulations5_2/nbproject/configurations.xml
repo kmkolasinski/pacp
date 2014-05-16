@@ -28,9 +28,12 @@
       <itemPath>Tests/IsingTestCC2D.h</itemPath>
       <itemPath>Tests/IsingTestChi.h</itemPath>
       <itemPath>Tests/IsingTestClusterStat.h</itemPath>
+      <itemPath>Tests/IsingTestCorrelationLength.h</itemPath>
       <itemPath>Tests/IsingTestError.h</itemPath>
       <itemPath>Tests/IsingTestExact2D.h</itemPath>
       <itemPath>Tests/IsingTestM2D.h</itemPath>
+      <itemPath>Tests/IsingTestMeanClusterFreq1D.h</itemPath>
+      <itemPath>Tests/IsingTestMeanECorrelation.h</itemPath>
       <itemPath>Tests/IsingTestRenormGroup1D.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -76,11 +79,17 @@
       </item>
       <item path="Tests/IsingTestClusterStat.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Tests/IsingTestCorrelationLength.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Tests/IsingTestError.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestExact2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestM2D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestMeanClusterFreq1D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestMeanECorrelation.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestRenormGroup1D.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -137,11 +146,17 @@
       </item>
       <item path="Tests/IsingTestClusterStat.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Tests/IsingTestCorrelationLength.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Tests/IsingTestError.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestExact2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestM2D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestMeanClusterFreq1D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestMeanECorrelation.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestRenormGroup1D.h" ex="false" tool="3" flavor2="0">
       </item>

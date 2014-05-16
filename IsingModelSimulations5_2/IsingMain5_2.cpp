@@ -32,6 +32,9 @@
 #include "Tests/IsingTestExact2D.h"
 #include "Tests/IsingTestRenormGroup1D.h"
 #include "Tests/IsingTestTCorr.h"
+#include "Tests/IsingTestMeanClusterFreq1D.h"
+#include "Tests/IsingTestCorrelationLength.h"
+#include "Tests/IsingTestMeanECorrelation.h"
 
 using namespace std;
 
@@ -41,17 +44,18 @@ int main(int argc, char** argv) {
     // Comment or uncomment following tests:
     // ----------------------------------------------------------
 
-     IsingTestChi isingTestChi;     //  Ising1D test of Chi in function of T
+    //IsingTestChi isingTestChi;     //  Ising1D test of Chi in function of T
     // IsingTestError isingTestError; //  Ising1D test of ERROR funtion for Chi for different prod_
-    // IsingTestClusterStat isingTestClusterStat;  //Ising1D test of cluster distribution
+    //IsingTestClusterStat isingTestClusterStat;  //Ising1D test of cluster distribution
     // IsingTestTCorr isingTestTCorr; // 
     // IsingTestCC2D isingTestCC2D;   //  Ising2D test of CC in function of T for different lattices
-     IsingTestM2D isingTestM2D;     //  Ising2D test of M in function of T for different lattices        
-     IsingTestExact2D isingTestExact2D; // Ising2D test which calculates the exacts values of Cv for  small lattices
+    //IsingTestM2D isingTestM2D;     //  Ising2D test of M in function of T for different lattices        
+    //IsingTestExact2D isingTestExact2D; // Ising2D test which calculates the exacts values of Cv for  small lattices
     // IsingTestRenormGroup1D  isingTestRenormGroup1D; // Ising1D test for renormalization group
-
+    //IsingTestMeanClusterFreq1D isingTestMeanClusterFreq1D; //Ising1D test for mean cluster size distribution
+    // IsingTestCorrelationLength isingTestCorrelationLength;
+     IsingTestMeanECorrelation isingTestMeanECorrelation;
     
     cout << "\n\n     T H E   E N D " << endl;
     return 0;
 }
-

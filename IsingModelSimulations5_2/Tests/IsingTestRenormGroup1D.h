@@ -48,7 +48,7 @@ class IsingTestRenormGroup1D : public IsingTest {
          
         Ising chain3(chainLength*3,temp,magneticField,initState,maxGdist,maxTsep);   
         chain3.MC_simulation(therm_t,prod_t,measure_f);
-        chain3.mean_S_corrrelation(gettotalFname());        
+        chain3.mean_S_correlation(gettotalFname());        
 //      
         vector<vector<short> > SS3 = readDATAtoVectors(gettotalFname(), chainLength*3);
 
@@ -73,7 +73,7 @@ class IsingTestRenormGroup1D : public IsingTest {
         }
         DATA.close();
         Ising chain1(chainLength,temp,magneticField,initState,maxGdist,maxTsep);   
-        chain1.mean_S_corrrelation(gettotalFname());            
+        chain1.mean_S_correlation(gettotalFname());            
                               
        }// end of run()
 

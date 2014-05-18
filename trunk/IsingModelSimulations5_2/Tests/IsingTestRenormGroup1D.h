@@ -54,17 +54,17 @@ class IsingTestRenormGroup1D : public IsingTest {
 
         vector<vector<short> >::iterator t;
         vector<short>::iterator pos;
-        int i = 0 ;
+        
         fstream DATA(gettotalFname().c_str(), ios::out);
         DATA.setf(ios::showpos);
         
-        for (int i =  0; i < SS3.size() ; i++) { 
+        for (unsigned int i =  0; i < SS3.size() ; i++) { 
 //            for (int k =  0; k < SS3[0].size() ; k+=3 ) { //loop over chain sites "pos" at fixed time
 //                DATA <<  (( SS3[i][k] + SS3[i][k+1] + SS3[i][k+2]  ) >0?1:-1) << " ";
 //                //cout << i << ":" << SS3[i][k]  <<  "  " <<  SS3[i][k+1] << "  " <<  SS3[i][k+2] ;
 //                //cout << (( SS3[i][k] + SS3[i][k+1] + SS3[i][k+2]  ) >0?1:-1) << endl;
 //            } 
-            for (int k =  0; k < SS3[0].size() ; k+=3 ) { 
+            for (unsigned int k =  0; k < SS3[0].size() ; k+=3 ) { 
                 DATA << SS3[i][k] << " ";
 //                DATA << SS3[i][k] << " ";
 //                DATA << SS3[i][k] << " ";

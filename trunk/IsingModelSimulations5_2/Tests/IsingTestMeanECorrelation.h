@@ -62,7 +62,7 @@ public:
         cout << "Spin chains initialization complete." << endl;
         vector<double> mean_E_corr;
         mean_E_corr=chain.mean_E_correlation(SS);
-        for(int i=0 ; i<mean_E_corr.size() ; i++) data_out << i << "\t" << mean_E_corr[i] << endl;
+        for(unsigned int i=0 ; i<mean_E_corr.size() ; i++) data_out << i << "\t" << mean_E_corr[i] << endl;
         data_out.close();
     }// end of run()
 

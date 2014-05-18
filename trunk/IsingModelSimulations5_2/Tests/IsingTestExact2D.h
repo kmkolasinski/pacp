@@ -21,12 +21,13 @@ class IsingTestExact2D : public IsingTest , public Ising2D {
             test_info = string(" Run test to calculate the exact value of specific heat Cv for 2D lattice. \n")+
                         string(" The results are saved in proper files:")+  
                         string(" 'IsingTestExact2D.txt' and 'IsingTestExact2D.png' in 'tests_out' directory. \n")+
-                        string(" We also put a chapert of book ('IsingTestExact2D.pdf') in which you can find the explanation of the \n")+
-                        string(" method we used to computed exat value of Cv. In brief, we run loop over all possible \n")+
-                        string(" configurations for given N by N lattice using the gray code method. We calculate\n")+
-                        string(" the density of states N(E) - number of confs. with the same energy value. Then we use \n")+
+                        string(" We also put a chapter of book ('IsingTestExact2D.pdf') in which you can find the explanation of the \n")+
+                        string(" method we used to computed exat value of Cv. Short explanation of code is located in 'IsingTestExact2DComments.pdf' file. \n")+
+                        string(" In brief, we run loop over all possible \n")+
+                        string(" configurations for given N by N lattice using the Gray code enumeration method. We calculate\n")+
+                        string(" the density of states N(E) - number of confs. with the same energy E. Then we use \n")+
                         string(" N(E) to calculate partition function Z = Sum_E N(E) exp(-beta*E), from which we calculate\n")+
-                        string(" Cv from definition.\n")+
+                        string(" Cv from definition using standard numerical differentiation.\n")+
                         string(" This method allows us to get exact solution for 2D lattice. But is limited to very small lattices,\n")+
                         string(" up to 5x5.\n")+
                         string(" You may compare result obtained from this method with IsingTestCC2D.png file.\n")+
@@ -46,7 +47,8 @@ class IsingTestExact2D : public IsingTest , public Ising2D {
         for(nx = 2; nx<6; nx++){
         cout << "Calculating exact heat capacity for lattice: " << nx << "x" << nx << endl;    
         N  = nx*nx;
-        h = 0;
+        h  =   0.0; 
+        S.clear();
         // We create initial state
         for (int i = 0; i < N; i++) {
             S.push_back(-1);
@@ -77,16 +79,16 @@ class IsingTestExact2D : public IsingTest , public Ising2D {
         ofstream data_out(fileout.c_str());
         for(T = 0.1 ; T < 10 ; T += 0.1){ // temperature dependence loop
             double dT = 0.01;
-            double C1 = log(partition_function(T+dT,NE));
-            double C2 = log(partition_function(T-dT,NE));
-            double C3 = log(partition_function(T,NE));
+            double C1 = log(Z(T+dT,NE));
+            double C2 = log(Z(T-dT,NE));
+            double C3 = log(Z(T,NE));
             double Cv = 2*T*( C1 - C2 )/2/dT + T*T*( C1 + C2 - 2*C3 )/dT/dT;
             // here we calculate Cv using numerical derivative, but we choose small
             // value of dT which should gives us still accurate results
-            data_out << T << "\t" << Cv/N << endl; // save to file
+            data_out << T << "\t" << Cv/N << endl; // Cv per spin
         }        
         data_out.close();        
-        }// end of T loop                
+        }// end of nx loop              
         }// end of run()
         
         
@@ -110,7 +112,7 @@ class IsingTestExact2D : public IsingTest , public Ising2D {
          * Caluculates the partition function from definition. Compare this 
          * with section 5.1.2 of tests_out/IsingTestExact2D.pdf 
          */ 
-        double partition_function(double T,map<int,double>& NE){
+        double Z(double T,map<int,double>& NE){
             double Z = 0;
             map<int,double>::iterator it;
             for(it = NE.begin() ; it != NE.end() ; it++){

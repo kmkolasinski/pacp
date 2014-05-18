@@ -980,7 +980,6 @@ vector<double> Ising::mean_S_correlation(vector <vector<short> > SS) {
 vector<short> Ising::Domain_snapshot(){
     vector<short> domains(S);
     int oldspin;
-    double padd = 1; //probability of adding a site to border hehe
     int site=0;
     int esd,osd;//even and odd size of domain
     esd=2;//corresponds to +1 spins

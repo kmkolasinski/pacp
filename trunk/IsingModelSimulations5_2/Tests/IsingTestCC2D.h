@@ -28,21 +28,22 @@ class IsingTestCC2D : public IsingTest {
         }   
         
         /**
-         * Tests Chi in function of Temperature for 1D model
+         * Tests Cv in function of T for different lattice sizes NxN for 2D Ising model
          */
         void run(){
          
         cout << " Running test..." << endl;                
         cout << " It may take some time..." << endl;
+        
         //SIMULATION INPUT DATA
-        int chainLength      = 2;        
+        int chainLength      =   2;    //initial lattice size
         double magneticField = 0.0;
-        int therm_t          =  50;   //thermalization time
-        int measure_f        = 1;     //measure frequency
-        int prod_t           =1000;   //productiontime
-        int maxGdist         = 10;    //domain of correlation function extends from 0 to maxGdist-1
-        int maxTsep          = 2;
-        double initState     = 0.7;   //values between 0.5 and 1.0
+        int therm_t          =  50;    //thermalization time
+        int measure_f        =   1;    //measure frequency
+        int prod_t           =1000;    //productiontime
+        int maxGdist         =  10;    //domain of correlation function extends from 0 to maxGdist-1
+        int maxTsep          =   2;
+        double initState     = 0.7;    //values between 0.5 and 1.0
     
                 
         vector<vector<double> > dataNxN[4];
@@ -58,23 +59,24 @@ class IsingTestCC2D : public IsingTest {
             chainLength  = pow(2,i+1); // choosing proper lattice size
             cout << "Starting simulation for lattice "<<chainLength << "x" <<  chainLength << "...\n";  
             
-            for(int t = 0 ; t < dataT.size() ; t++ ){ 
+            for(unsigned int t = 0 ; t < dataT.size() ; t++ ){ 
                 double T = dataT[t];
                 cout << "T=" << T << "\t:";
                 Ising2D lattice2d(chainLength, T, magneticField, initState, maxGdist, maxTsep);        
                 lattice2d.MC_simulation(therm_t, prod_t, measure_f,METHOD_WOLFF);
+                
                 double error = lattice2d.ERROR(gettotalFname().c_str(), ERROR_CHI);
                 double cc    = lattice2d.CC(gettotalFname().c_str());                
                 vector<double> data;
                 data.push_back(cc); data.push_back(error); dataNxN[i].push_back(data);
             }// end of for            
-        }
+        } // end of for over lattice sizes
         
         // saving data to file
         string fileout = test_dir_output+"IsingTestCC2D.txt";
         ofstream data_out(fileout.c_str());     
         
-        for(int t = 0 ; t < dataT.size() ; t++ ){
+        for(unsigned int t = 0 ; t < dataT.size() ; t++ ){
              data_out << std::scientific << dataT[t] << "\t";   
              for(int i = 0; i < 4 ; i++){
                  data_out << dataNxN[i][t][0] << "\t";
@@ -82,8 +84,7 @@ class IsingTestCC2D : public IsingTest {
              }
              data_out << endl;
         }
-        
-        
+                
         }// end of run()
 
 };

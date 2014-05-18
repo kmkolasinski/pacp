@@ -79,7 +79,7 @@ public:
             }   
             mean_cs_size=0;
             CS=chain.mean_cluster_freq1D(SS);
-            for(int j=0; j< CS.CF.size(); j++){
+            for(unsigned int j=0; j< CS.CF.size(); j++){
                 mean_cs_size+=CS.CF[j]*j;
             }
             data_out << std::scientific << mean_cs_size << endl;
@@ -91,9 +91,9 @@ public:
             for(int k=0;k<therm_t;k++) chain.cycle();
         }
         data_out.close();
-        for(int i=0 ; i<GS[0].size() ; i++){
+        for(unsigned int i=0 ; i<GS[0].size() ; i++){
             data_out_cl << i;
-            for(int j=0 ; j<GS.size() ; j++){
+            for(unsigned int j=0 ; j<GS.size() ; j++){
                 data_out_cl << "\t" << GS[j][i];
             }
             data_out_cl << endl;

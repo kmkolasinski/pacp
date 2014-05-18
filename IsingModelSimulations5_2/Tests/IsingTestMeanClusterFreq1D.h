@@ -66,7 +66,7 @@ public:
             //MEASUREMENT OF MEAN CLUSTER SIZE FOR GIVEN TEMPERATURE
             mean_cs_size=0;
             CS=chain.mean_cluster_freq1D(SS);
-            for(int j=0; j< CS.CF.size(); j++){
+            for(unsigned int j=0; j< CS.CF.size(); j++){
                 mean_cs_size+=CS.CF[j]*j;
             }
             data_out << std::scientific << chain.T << "\t" << mean_cs_size << endl;

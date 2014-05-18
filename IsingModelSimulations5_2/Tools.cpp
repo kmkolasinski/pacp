@@ -13,7 +13,7 @@
 using namespace std;
 
 void Display(vector<short> S) {
-    for (int i = 0; i < S.size(); i++) {
+    for (unsigned int i = 0; i < S.size(); i++) {
         (S[i] == 1) ? cout << " o" : cout << " x";
     }
 }
@@ -39,7 +39,7 @@ vector<vector<short> > readDATAtoVectors(string totalFname, int N) {
     //The size of the vector S is equal to number of measures.
     //The elements of S are states of system ordered chronologically
     fstream DATA(totalFname.c_str(), ios::in);
-    int i = 0, j = 0, x;
+    int i = 0, x;
     vector<vector<short> > SS;
     vector<short> s;
     while (DATA >> x) {

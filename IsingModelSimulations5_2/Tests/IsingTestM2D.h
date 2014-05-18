@@ -63,7 +63,7 @@ class IsingTestM2D : public IsingTest {
             chainLength  = pow(2,i+1); // choosing proper lattice size
             cout << "Starting simulation for lattice "<<chainLength << "x" <<  chainLength << "...\n";  
             
-            for(int t = 0 ; t < dataT.size() ; t++ ){ 
+            for(unsigned int t = 0 ; t < dataT.size() ; t++ ){ 
                 double T = dataT[t];
                 cout << "T=" << T << "\t:";
                 Ising2D lattice2d(chainLength, T, magneticField, initState, maxGdist, maxTsep);        
@@ -77,7 +77,7 @@ class IsingTestM2D : public IsingTest {
         string fileout = test_dir_output+"IsingTestM2D.txt";
         ofstream data_out(fileout.c_str());     
         
-        for(int t = 0 ; t < dataT.size() ; t++ ){
+        for(unsigned int t = 0 ; t < dataT.size() ; t++ ){
              data_out << std::scientific << dataT[t] << "\t";   
              for(int i = 0; i < 4 ; i++){
                  data_out << fabs(dataNxN[i][t]) << "\t";

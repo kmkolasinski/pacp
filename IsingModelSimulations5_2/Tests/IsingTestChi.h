@@ -15,7 +15,7 @@ class IsingTestChi : public IsingTest {
                         string(" See run() function for more details.\n");
                         string(" We plot the dependence of Chi on temperature. We expect that for low T");
                         string(" Chi explodes. We find a good agreement between the numerical and ");
-                        string(" analytical solution (see IsingTestChi.png)");
+                        string(" analytical solution (see IsingTestChi1D.png)");
             
             info(); 
             run(); // run all calculations
@@ -47,8 +47,11 @@ class IsingTestChi : public IsingTest {
         cout << " End    T=" << 2.0 << endl;
         cout << " Step  dT=" << 0.1 << endl;
         cout << " It may take some time..." << endl;
+        
         cout << " T           " << " Chi(numerical) " << " Chi(analytical)" << "    Std. dev" << endl;
         cout << "----------------------------------------------------" << endl;
+        
+        
         for( double temperature = 0.3 ; temperature < 2.0 ; temperature += 0.1  ){         
         //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
         Ising chain(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);

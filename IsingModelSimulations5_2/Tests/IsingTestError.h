@@ -21,8 +21,8 @@ class IsingTestError : public IsingTest {
                        string(" \nThe results are saved in following files:")+  
                        string(" 'IsingTestError.txt' and 'IsingTestError.png' in 'tests_out' directory. \n")+
                        string(" This test shows that the error decreases with number of prod_t. We founded that \n")+
-                       string(" the asymptotic behavior of error(prod_t) behaves like 1/sqrt(prod_t) which. \n")+
-                       string(" agree with general result for error known in MC integration methods. For more \n")+
+                       string(" the asymptotic behavior of error(prod_t) behaves like 1/sqrt(prod_t) which \n")+
+                       string(" agrees with the general result for error known in MC integration methods. For more \n")+
                        string(" details see: http://en.wikipedia.org/wiki/Monte_Carlo_integration. \n")+
                        string(" See run() function for more details.");
            
@@ -33,7 +33,7 @@ class IsingTestError : public IsingTest {
        }   
        
        /**
-        * Tests Chi in function of Temperature for 1D model
+        * Tests Error for 1D chain
         */
        void run(){
         
@@ -51,11 +51,11 @@ class IsingTestError : public IsingTest {
        string fileout = test_dir_output+"IsingTestError.txt";
        ofstream data_out(fileout.c_str());
        
-       cout << " Start prod_t=" << 1000 << endl;
-       cout << " End   prod_t=" << 100000 << endl;
-       cout << " Mult  prod_t=" << 2 << endl;
+       cout << " Start prod_t=" << 1000    << endl;
+       cout << " End   prod_t=" << 100000  << endl;
+       cout << " Mult  prod_t=" << 2       << endl;
        cout << " It may take some time..." << endl;
-       cout << " prod_t   " << " Error " << endl;
+       cout << " prod_t   " << " Error "   << endl;
        cout << "----------------------------------------------------" << endl;
        
        double temperature = 1.0;

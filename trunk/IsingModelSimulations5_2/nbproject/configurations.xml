@@ -35,6 +35,7 @@
       <itemPath>Tests/IsingTestMeanClusterFreq1D.h</itemPath>
       <itemPath>Tests/IsingTestMeanECorrelation.h</itemPath>
       <itemPath>Tests/IsingTestRenormGroup1D.h</itemPath>
+      <itemPath>Tests/IsingTestTCorr.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -92,6 +93,8 @@
       <item path="Tests/IsingTestMeanECorrelation.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestRenormGroup1D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestTCorr.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tools.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -159,6 +162,8 @@
       <item path="Tests/IsingTestMeanECorrelation.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestRenormGroup1D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestTCorr.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tools.cpp" ex="false" tool="1" flavor2="0">
       </item>

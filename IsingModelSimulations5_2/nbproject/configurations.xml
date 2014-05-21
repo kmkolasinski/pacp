@@ -31,6 +31,7 @@
       <itemPath>Tests/IsingTestCorrelationLength.h</itemPath>
       <itemPath>Tests/IsingTestE1D.h</itemPath>
       <itemPath>Tests/IsingTestError.h</itemPath>
+      <itemPath>Tests/IsingTestExact1D.h</itemPath>
       <itemPath>Tests/IsingTestExact2D.h</itemPath>
       <itemPath>Tests/IsingTestM2D.h</itemPath>
       <itemPath>Tests/IsingTestMeanClusterFreq1D.h</itemPath>
@@ -67,8 +68,6 @@
       </item>
       <item path="IsingMain5_2.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="IsingModelSimulations_HISTORY" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="RNG.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="RNG.h" ex="false" tool="3" flavor2="0">
@@ -86,6 +85,8 @@
       <item path="Tests/IsingTestE1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestError.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestExact1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestExact2D.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -138,8 +139,6 @@
       </item>
       <item path="IsingMain5_2.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="IsingModelSimulations_HISTORY" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="RNG.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="RNG.h" ex="false" tool="3" flavor2="0">
@@ -157,6 +156,8 @@
       <item path="Tests/IsingTestE1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestError.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestExact1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestExact2D.h" ex="false" tool="3" flavor2="0">
       </item>

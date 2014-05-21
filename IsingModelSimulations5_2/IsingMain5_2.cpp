@@ -35,6 +35,7 @@
 #include "Tests/IsingTestMeanClusterFreq1D.h"
 #include "Tests/IsingTestCorrelationLength.h"
 #include "Tests/IsingTestMeanECorrelation.h"
+#include "Tests/IsingTestE1D.h"
 
 using namespace std;
 
@@ -57,7 +58,7 @@ int main(int argc, char** argv) {
     // IsingTestError isingTestError; //  Ising1D test of ERROR funtion for Chi for different prod_
     // IsingTestClusterStat isingTestClusterStat;  //Ising1D test of cluster distribution
     // IsingTestCorrelationLength isingTestCorrelationLength;
-    // IsingTestMeanECorrelation isingTestMeanECorrelation;
+     IsingTestMeanECorrelation isingTestMeanECorrelation;
     // IsingTestTCorr isingTestTCorr; // 
     // IsingTestMeanClusterFreq1D isingTestMeanClusterFreq1D; // Ising1D test for mean cluster size distribution
     // IsingTestRenormGroup1D  isingTestRenormGroup1D; // Ising1D test for renormalization group
@@ -66,6 +67,7 @@ int main(int argc, char** argv) {
     // IsingTestCC2D isingTestCC2D;   //  Ising2D test of CC in function of T for different lattices
     // IsingTestM2D isingTestM2D;     //  Ising2D test of M in function of T for different lattices        
     // IsingTestExact2D isingTestExact2D; // Ising2D test which calculates the exacts values of Cv for  small lattices
+    // IsingTestE1D isingTestE1D;
 
 //TOOLS
     // TestError TestError; //  Generic test of ERROR funtion for some input data 

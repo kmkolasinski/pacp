@@ -31,7 +31,7 @@ public:
 
         //SIMULATION INPUT DATA
         int chainLength = 500;
-        double temperature = 0.8;
+        double temperature = 0.7;
         double magneticField = 0.0;
         int therm_t = 10; //thermalization time
         int measure_f = 10; //measure frequency
@@ -46,12 +46,12 @@ public:
         Ising chain(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
         //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
         chain.MC_simulation(therm_t, prod_t, measure_f,METHOD_WOLFF);
-
+    
         vector<vector<short> > SS;
         //INITIALIZATION OF SPINS CHAINS
-        for(int i=0 ; i<100 ; i++){    
+        for(int j=0 ; j<100 ; j++ ){    
             SS.clear();
-            for (int t = 0; t < prod_t; t++){
+            for (int t=0; t<prod_t ; t++ ){
                 if (!(t % measure_f)) {
                     SS.push_back(chain.S); 
                     chain.cycle();
@@ -60,9 +60,12 @@ public:
             }
         }
         cout << "Spin chains initialization complete." << endl;
-        vector<double> mean_E_corr;
-        mean_E_corr=chain.mean_E_correlation(SS);
-        for(unsigned int i=0 ; i<mean_E_corr.size() ; i++) data_out << i << "\t" << mean_E_corr[i] << endl;
+        vector<double> mEc;
+        mEc=chain.mean_E_correlation(SS);
+        
+        for(int i=0 ; i<mEc.size() ; i++){
+            data_out<< i << "\t" << mEc[i] << endl; 
+        }
         data_out.close();
     }// end of run()
 

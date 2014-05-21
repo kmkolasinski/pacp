@@ -6,13 +6,6 @@
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/tomek/NetBeansProjects/IsingModelSimulations5_2/Ising5_2.h</file>
-            <file>file:/home/tomek/NetBeansProjects/IsingModelSimulations5_2/Ising5_2.cpp</file>
-            <file>file:/home/tomek/NetBeansProjects/IsingModelSimulations5_2/IsingMain5_2.cpp</file>
-            <file>file:/home/tomek/NetBeansProjects/IsingModelSimulations5_2/Tools.cpp</file>
-            <file>file:/home/tomek/NetBeansProjects/IsingModelSimulations5_2/Tools.h</file>
-        </group>
         <group name="Pacp">
             <file>file:/media/DANE/STUDIA/Doktorat/ZAJECIA/PhysicsAtCP/IsingModelSimulations5_2/Ising2D.cpp</file>
             <file>file:/media/DANE/STUDIA/Doktorat/ZAJECIA/PhysicsAtCP/IsingModelSimulations5_2/Tests/IsingTestCC2D.h</file>
@@ -22,11 +15,20 @@
             <file>file:/media/DANE/STUDIA/Doktorat/ZAJECIA/PhysicsAtCP/IsingModelSimulations5_2/Ising5_2.cpp</file>
         </group>
         <group name="PatCP">
-            <file>file:/home/mkk/DANE/Doktorat/WYKLADY/PhysicsAtCP/trunk/IsingModelSimulations5_2/IsingMain5_2.cpp</file>
-            <file>file:/home/mkk/DANE/Doktorat/WYKLADY/PhysicsAtCP/trunk/IsingModelSimulations5_2/Ising5_2.h</file>
-            <file>file:/home/mkk/DANE/Doktorat/WYKLADY/PhysicsAtCP/trunk/IsingModelSimulations5_2/Ising5_2.cpp</file>
-            <file>file:/home/mkk/DANE/Doktorat/WYKLADY/PhysicsAtCP/trunk/IsingModelSimulations5_2/Tests/IsingTest.h</file>
-            <file>file:/home/mkk/DANE/Doktorat/WYKLADY/PhysicsAtCP/trunk/IsingModelSimulations5_2/Tests/IsingTestRenormGroup1D.h</file>
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/IsingMain5_2.cpp</file>
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Ising5_2.cpp</file>
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Ising5_2.h</file>
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Ising2D.cpp</file>
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Ising2D.h</file>
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Tests/IsingTestCC2D.h</file>
+        </group>
+        <group>
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Ising2D.cpp</file>
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Ising2D.h</file>
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Tests/IsingTestExact2D.h</file>
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Tests/IsingTestCC2D.h</file>
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Ising5_2.h</file>
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/IsingMain5_2.cpp</file>
         </group>
     </open-files>
 </project-private>

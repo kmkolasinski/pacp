@@ -49,25 +49,53 @@ class IsingTestError1D : public IsingTest {
        int maxTsep          = 2;
        double initState     = 0.7;    //values between 0.5 and 1.0
        string fileout = test_dir_output+"IsingTestError1D.txt";
+       string fileout2 = test_dir_output+"IsingTestError1D_T.txt";
        ofstream data_out(fileout.c_str());
        
-       cout << " Start prod_t=" << 1000    << endl;
-       cout << " End   prod_t=" << 100000  << endl;
-       cout << " Mult  prod_t=" << 2       << endl;
+       cout << " Start prod_t=" << 2000    << endl;
+       cout << " End   prod_t=" << 500000  << endl;
+       cout << " Mult  prod_t=" << 1.2       << endl;
        cout << " It may take some time..." << endl;
        cout << " prod_t   " << " Error "   << endl;
        cout << "----------------------------------------------------" << endl;
        
        double temperature = 1.0;
        Ising chain(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
-       for ( int prod_t = 1000 ; prod_t < 100000 ; prod_t *= 2  ){
+       for ( int prod_t = 2000 ; prod_t < 50000 ; prod_t *= 1.2  ){
            chain.MC_simulation(therm_t, prod_t, measure_f);
            double error=chain.ERROR(gettotalFname().c_str(), ERROR_CHI);
-           data_out << std::scientific <<  prod_t << "\t" << error  << "\n";
-           cout     << std::scientific <<  prod_t << "\t" << error  << "\n";
+           double chi=chain.Chi(gettotalFname().c_str());
+           data_out << std::scientific <<  prod_t << "\t" << error <<  "\t" << chi << "\n";
+           cout     << std::scientific <<  prod_t << "\t" << error <<  "\t" << chi << "\n";
        }// end of for(prod_t)
        
-       data_out.close();                                    
+       data_out.close();  
+       
+       
+       ofstream data_out2(fileout2.c_str());
+       int prod_t = 5000;
+       for ( double temperature2 = 0.5 ; temperature2 < 3.05 ; temperature2 += 0.1  ){
+           Ising chain(chainLength, temperature2, magneticField, initState, maxGdist, maxTsep);
+           chain.MC_simulation(therm_t, prod_t, measure_f);
+           double error=chain.ERROR(gettotalFname().c_str(), ERROR_CHI);
+           double chi=chain.Chi(gettotalFname().c_str());
+           double chi_a=exp(2./temperature2)/temperature2/chain.N;
+           data_out2 << std::scientific <<  temperature2 << "\t" << error <<  "\t" << chi <<  "\t" << chi_a << "\n";
+           cout     << std::scientific <<  temperature2 << "\t" << error <<  "\t" << chi <<  "\t" << chi_a << "\n";
+       }// end of for(prod_t)
+       
+       data_out2.close();  
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
        }// end of run()
 
 };

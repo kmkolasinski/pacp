@@ -59,7 +59,7 @@ class IsingTestChi : public IsingTest {
         chain.MC_simulation(therm_t, prod_t, measure_f);
                 
         double chi      = chain.Chi(gettotalFname().c_str());
-        double chi_anal = exp(2./temperature)/temperature;
+        double chi_anal = exp(2./temperature)/temperature/chain.N;
         double error    = chain.ERROR(gettotalFname().c_str(), ERROR_CHI);
 
         // saving data to file

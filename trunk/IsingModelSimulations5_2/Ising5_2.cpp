@@ -402,14 +402,14 @@ double Ising::Chi( vector<vector<short> > SS ) {
         //calculation of magnetisation M
         for(int i=0;i<N;i++){
             M_temp+=SS[j][i];
-        }
+        }        
         //calculation of <M> and <M^2>
         aM+=M_temp;
         aM2+=M_temp*M_temp;
     }
     //normalization by number of measures and sites
     aM=aM/t_steps/N; 
-    aM2=aM2/t_steps/N;
+    aM2=aM2/t_steps/N/N;
     
     return (aM2-aM*aM)/T; //Chi
 }

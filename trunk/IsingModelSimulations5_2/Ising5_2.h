@@ -86,8 +86,8 @@ public:
 
     
     //ZERO FIELD SUSCEPTIBILITY
-    double Chi(string totalFname);         //magnetic susceptibility calculated using order parameter fluctuation method
-    double Chi( vector<vector<short> > SS );
+    virtual double Chi(string totalFname);         //magnetic susceptibility calculated using order parameter fluctuation method
+    virtual double Chi( vector<vector<short> > SS );
     
     //SPECIFIC HEAT
     double CC();          //specific heat measured using energy fluctuation method calclutated from simulation

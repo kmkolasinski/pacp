@@ -70,7 +70,7 @@ int main(int argc, char** argv) {
      IsingTestChi2D isingTestChi2D; 
     //IsingTestError2D isingTestError2D;
     // IsingTestCC2D isingTestCC2D;   //  Ising2D test of CC in function of T for different lattices
-    // IsingTestM2D isingTestM2D;     //  Ising2D test of M in function of T for different lattices        
+     IsingTestM2D isingTestM2D;     //  Ising2D test of M in function of T for different lattices        
     //  IsingTestExact2D isingTestExact2D; // Ising2D test which calculates the exacts values of Cv for  small lattices
 
     // IsingTestE1D isingTestE1D;

@@ -80,7 +80,7 @@ class IsingTestM2D : public IsingTest {
         for(unsigned int t = 0 ; t < dataT.size() ; t++ ){
              data_out << std::scientific << dataT[t] << "\t";   
              for(int i = 0; i < 4 ; i++){
-                 data_out << fabs(dataNxN[i][t]) << "\t";
+                 data_out << fabs(dataNxN[i][t]) << "\t" ;
              }
              data_out << endl;
         }

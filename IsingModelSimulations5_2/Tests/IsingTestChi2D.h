@@ -38,11 +38,11 @@ class IsingTestChi2D : public IsingTest {
         cout << " Running test..." << endl;    
             
         //SIMULATION INPUT DATA
-        int chainLength      = 5;        
+        int chainLength      = 10;        
         double magneticField = 0.0;
-        int therm_t          = 100;   //thermalization time
-        int measure_f        = 1;     //measure frequency
-        int prod_t           = 1000;  //productiontime
+        int therm_t          = 1000;   //thermalization time
+        int measure_f        = 10;     //measure frequency
+        int prod_t           = 10000;  //productiontime
         int maxGdist         = 10;     //domain of correlation function extends from 0 to maxGdist-1
         int maxTsep          = 2;
         double initState     = 0.7;    //values between 0.5 and 1.0
@@ -60,7 +60,7 @@ class IsingTestChi2D : public IsingTest {
         cout << "----------------------------------------------------" << endl;
         
         
-        for( double temperature = 0.3 ; temperature < 2.0 ; temperature += 0.1  ){         
+        for( double temperature = 0.3 ; temperature < 3.5 ; temperature += 0.1  ){         
         //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
         Ising2D chain2D(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
         //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
@@ -91,6 +91,7 @@ class IsingTestChi2D : public IsingTest {
         Ising2D chain2D(n, temperature, magneticField, initState, maxGdist, maxTsep);
         //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
         chain2D.MC_simulation(therm_t, prod_t, measure_f, METHOD_METROPOLIS);
+        
                 
         double chi      = chain2D.Chi(gettotalFname().c_str());
         //double chi_anal = exp(2./temperature)/temperature;

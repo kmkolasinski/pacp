@@ -40,7 +40,7 @@ class IsingTestChi2D : public IsingTest {
         cout << " Running test..." << endl;    
             
         //SIMULATION INPUT DATA
-        int chainLength      = 10;        
+        int chainLength      = 20;        
         double magneticField = 0.0;
         int therm_t          = 1000;   //thermalization time
         int measure_f        = 10;     //measure frequency

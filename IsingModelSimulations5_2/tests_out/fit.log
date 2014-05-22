@@ -7954,3 +7954,397 @@ FIT:    data read from "IsingTestE.txt"
 function used for fitting: a*xtanh(x)+b
 fitted parameters initialized with current variable values
 
+
+
+*******************************************************************************
+Wed May 21 14:24:03 2014
+
+
+FIT:    data read from "IsingTestE1D.txt"
+        format = z
+        #datapoints = 150
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*tanh(1/x)
+fitted parameters initialized with current variable values
+
+BREAK:          Undefined value during function evaluation
+
+
+
+*******************************************************************************
+Wed May 21 14:24:10 2014
+
+
+FIT:    data read from "IsingTestE1D.txt"
+        format = z
+        #datapoints = 150
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*tanh(1/x)+b
+fitted parameters initialized with current variable values
+
+
+
+*******************************************************************************
+Wed May 21 14:24:20 2014
+
+
+FIT:    data read from "IsingTestE1D.txt"
+        format = z
+        #datapoints = 150
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*tanh(1/x)+b
+fitted parameters initialized with current variable values
+
+BREAK:          Undefined value during function evaluation
+
+
+
+*******************************************************************************
+Wed May 21 14:24:28 2014
+
+
+FIT:    data read from "IsingTestE1D.txt"
+        format = z
+        #datapoints = 150
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*tanh(c/x)+b
+fitted parameters initialized with current variable values
+
+BREAK:          Undefined value during function evaluation
+
+
+
+*******************************************************************************
+Wed May 21 14:29:40 2014
+
+
+FIT:    data read from "./IsingTestE1D.txt" u 1:2
+        format = x:z
+        #datapoints = 150
+        residuals are weighted equally (unit weight)
+
+function used for fitting: -tanh(1/x)
+
+
+*******************************************************************************
+Wed May 21 14:30:30 2014
+
+
+FIT:    data read from "./IsingTestE1D.txt" u 1:2
+        format = x:z
+        #datapoints = 150
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*tanh(1/x)
+
+
+*******************************************************************************
+Wed May 21 14:30:33 2014
+
+
+FIT:    data read from "./IsingTestE1D.txt" u 1:2
+        format = x:z
+        #datapoints = 150
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*tanh(1/x)
+fitted parameters initialized with current variable values
+
+BREAK:          Undefined value during function evaluation
+
+
+
+*******************************************************************************
+Wed May 21 14:30:51 2014
+
+
+FIT:    data read from "./IsingTestE1D.txt" u 1:2
+        format = x:z
+        #datapoints = 150
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*tanh(b*x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 278.135           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.641172
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+
+After 7 iterations the fit converged.
+final sum of squares of residuals : 11.2674
+rel. change during last iteration : -4.86436e-06
+
+degrees of freedom    (FIT_NDF)                        : 148
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.275919
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0761311
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = -0.51055         +/- 0.02268      (4.442%)
+b               = 388.376          +/- 6.029e+10    (1.552e+10%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      
+a               1.000 
+b               0.082  1.000 
+
+
+*******************************************************************************
+Wed May 21 21:18:51 2014
+
+
+FIT:    data read from "IsingTestMeanECorrelation.txt" using 1:2
+        format = x:z
+        #datapoints = 20
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*exp(-x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 5.06638           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.24047
+
+initial set of free parameter values
+
+a               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 4.32278
+rel. change during last iteration : -9.74201e-11
+
+degrees of freedom    (FIT_NDF)                        : 19
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.476985
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.227514
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.198145         +/- 0.4435       (223.8%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed May 21 21:19:37 2014
+
+
+FIT:    data read from "IsingTestMeanECorrelation.txt" using 1:2
+        format = x:z
+        #datapoints = 20
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*exp(-x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 4.32278           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.24047
+
+initial set of free parameter values
+
+a               = 0.198145
+
+After 1 iterations the fit converged.
+final sum of squares of residuals : 4.32278
+rel. change during last iteration : 0
+
+degrees of freedom    (FIT_NDF)                        : 19
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.476985
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.227514
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.198145         +/- 0.4435       (223.8%)
+
+
+correlation matrix of the fit parameters:
+
+               a      
+a               1.000 
+
+
+*******************************************************************************
+Wed May 21 21:21:00 2014
+
+
+FIT:    data read from "IsingTestMeanECorrelation.txt" using 1:2
+        format = x:z
+        #datapoints = 20
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*exp(-x)+b
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 40.2911           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.727264
+
+initial set of free parameter values
+
+a               = 0.198145
+b               = 1
+
+After 3 iterations the fit converged.
+final sum of squares of residuals : 0.748713
+rel. change during last iteration : -2.23465e-06
+
+degrees of freedom    (FIT_NDF)                        : 18
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.203949
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0415952
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 0.810466         +/- 0.2008       (24.78%)
+b               = -0.447643        +/- 0.04829      (10.79%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      
+a               1.000 
+b              -0.329  1.000 
+
+
+*******************************************************************************
+Wed May 21 21:24:11 2014
+
+
+FIT:    data read from "IsingTestMeanECorrelation.txt" using 1:2
+        format = x:z
+        #datapoints = 20
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*tanh(1/x)+b
+fitted parameters initialized with current variable values
+
+BREAK:          Undefined value during function evaluation
+
+
+
+*******************************************************************************
+Wed May 21 21:24:36 2014
+
+
+FIT:    data read from "IsingTestMeanECorrelation.txt" using 1:2
+        format = x:z
+        #datapoints = 20
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*tanh(c*x)+b
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 12.876            delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 0.802364
+
+initial set of free parameter values
+
+a               = 0.810466
+b               = -0.447643
+c               = 1
+
+After 28 iterations the fit converged.
+final sum of squares of residuals : 0.00211732
+rel. change during last iteration : -2.97277e-06
+
+degrees of freedom    (FIT_NDF)                        : 17
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0111601
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.000124548
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = -0.910971        +/- 0.009527     (1.046%)
+b               = 0.178769         +/- 0.007308     (4.088%)
+c               = 0.093368         +/- 0.002354     (2.522%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      c      
+a               1.000 
+b              -0.373  1.000 
+c               0.448  0.605  1.000 
+
+
+*******************************************************************************
+Wed May 21 21:31:24 2014
+
+
+FIT:    data read from "IsingTestMeanECorrelation.txt" using 1:2
+        format = x:z
+        #datapoints = 20
+        residuals are weighted equally (unit weight)
+
+function used for fitting: a*exp(c*x)+b
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 103.162           delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 25.3822
+
+initial set of free parameter values
+
+a               = -0.910971
+b               = 0.178769
+c               = 0.093368
+
+After 911 iterations the fit converged.
+final sum of squares of residuals : 0.100897
+rel. change during last iteration : -9.9405e-06
+
+degrees of freedom    (FIT_NDF)                        : 17
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0770396
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00593511
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = -127.102         +/- 9485         (7462%)
+b               = 127.142          +/- 9485         (7460%)
+c               = 0.000349977      +/- 0.02603      (7437%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      c      
+a               1.000 
+b              -1.000  1.000 
+c               1.000 -1.000  1.000 

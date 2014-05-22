@@ -265,3 +265,104 @@ double Ising2D::E(){
         //siteU = (To2D(site_i ,site_j+1)      ) % N; 
     return E;
 }
+
+cluster_stat_2D Ising2D::cluster_freq2D() {
+    
+    vector<float> tt(N, 0); 
+    //vector<short> ss(N, 0);
+    cluster_stat_2D cls = {tt, S, 1}; //container for results
+    
+    //Since N is the square of the n - side of the lattice square n x n, we need
+    //to extract it from N parameter.
+    int n=sqrt(N);
+    
+    //Primary spin lattice does not change by using its copy.
+    //vector <short> SS(S);
+    int* border = new int[N];
+    int bindex = 0;
+    int oldspin, newspin;
+    int test=0;
+    int site, siteL, siteR, siteU, siteD,site_i,site_j;
+    int up=1,down=-1;
+    int max_cl=1;
+    for(int i=0; i<n; i++){           
+        for (int j = 0; j < n; j++) {
+            site_i = i;
+            site_j = j;
+            site  = To2D(site_i,site_j);
+            if(cls.SS[site]!=1&cls.SS[site]!=(-1)) {
+                continue;
+            }
+            else if(cls.SS[site]==1){
+                up++;
+            }else{
+                down--;
+            }
+            // periodic representation
+            siteL = To2D((site_i - 1 + nx)%nx,site_j); 
+            siteR = To2D((site_i + 1     )%nx,site_j); 
+            siteD = To2D(site_i,(site_j- 1 + nx)%nx); 
+            siteU = To2D(site_i,(site_j+1      )%nx);         
+
+            bindex = 0;
+            border[bindex] = site;        
+            oldspin =  cls.SS[site];
+            newspin =  cls.SS[site]==1 ? up : down;
+            cls.SS[site] = newspin;
+
+            int counter=1;
+            while (bindex >= 0) {
+                site = border[bindex--];
+                site_i = Xfrom2D(site);
+                site_j = Yfrom2D(site);
+
+                siteL = To2D((site_i - 1 + nx)%nx,site_j); 
+                if (cls.SS[siteL] == oldspin){ 
+                    counter++;
+                    border[++bindex] = siteL;
+                    cls.SS[siteL] = newspin;
+                }
+
+                siteR = To2D((site_i + 1     )%nx,site_j); 
+                if (cls.SS[siteR] == oldspin){
+                    counter++;
+                    border[++bindex] = siteR;
+                    cls.SS[siteR] = newspin;
+                }
+
+                siteD = To2D(site_i,(site_j- 1 + nx)%nx);
+                if (cls.SS[siteD] == oldspin){
+                    counter++;
+                    border[++bindex] = siteD;                    
+                    cls.SS[siteD] = newspin;
+                }
+
+                siteU = To2D(site_i,(site_j+1      )%nx);        
+                if (cls.SS[siteU] == oldspin){
+                    counter++;
+                    border[++bindex] = siteU;
+                    cls.SS[siteU] = newspin;
+                }
+            }
+            cls.CF[counter]+=1;
+            if(max_cl<counter) max_cl=counter;
+        }
+    }
+    //cls.SS=SS;
+    string fileout = "tests_out/IsingTestClusters2D.txt";
+    ofstream data_out(fileout.c_str()); 
+    
+    for(int i=0 ; i<n ; i++){
+        for(int j=0; j< n; j++){
+            data_out << cls.SS[j+n*i] << "\t";
+        }
+        data_out << "\n";
+    }
+    cout << "----------" << endl;
+    for(int i=0; i<cls.CF.size() ; i++){
+        if(cls.CF[i]!=0) cout << i << "\t:\t" << cls.CF[i] << endl;
+    }
+    
+    cls.cmax=max_cl;
+    return cls;
+}

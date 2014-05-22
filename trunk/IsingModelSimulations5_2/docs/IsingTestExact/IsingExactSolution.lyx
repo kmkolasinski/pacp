@@ -1,0 +1,534 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Exact computation for Ising model for 2D and 1D
+\end_layout
+
+\begin_layout Standard
+This is short theoretical explanation of the test: 
+\series bold
+IsingTestExact1D.h
+\series default
+ and 
+\series bold
+IsingTestExact2D.h
+\series default
+.
+\end_layout
+
+\begin_layout Section
+Combinatorial approach
+\end_layout
+
+\begin_layout Standard
+We calculate exact solution of specific heat by finding the exact value
+ of the partition function 
+\begin_inset Formula 
+\begin{eqnarray*}
+Z(\beta) & = & \sum_{\{\mathrm{all\, configurations\,\sigma_{i}}\}}e^{-\beta E\left(\sigma_{1},\sigma_{2},...,\sigma_{n}\right)}.
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To do that we have to evaluate all possible configurations of spins.
+ For given number 
+\begin_inset Formula $n$
+\end_inset
+
+ of spins on the lattice we have 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+ configurations.
+ For example for two spins chain we have
+\begin_inset Formula 
+\begin{eqnarray*}
+\mbox{} & \left\{ \uparrow\uparrow,\downarrow\uparrow,\uparrow\downarrow,\downarrow\downarrow\right\}  & .
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that some of those configurations may have the same energy 
+\begin_inset Formula $E$
+\end_inset
+
+, thus 
+\begin_inset Formula $Z$
+\end_inset
+
+ function can be written in a bit different way
+\begin_inset Formula 
+\begin{equation}
+Z(\beta)=\sum_{E_{i}}N(E_{i})e^{-\beta E_{i}},\label{eq:z}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the sum runs over all possible energies 
+\begin_inset Formula $E_{i}$
+\end_inset
+
+, and 
+\begin_inset Formula $N(E_{i})$
+\end_inset
+
+ is density of states: number of states with the same energy 
+\begin_inset Formula $E_{i}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+To generate 
+\begin_inset Formula $N(E)$
+\end_inset
+
+ we have to calculate 
+\begin_inset Formula $E$
+\end_inset
+
+ for all configurations of spins.
+ In order to do that we use Gray code enumeration of spins (the description
+ of the algorithm can be found e.g.
+ in textbook: 
+\emph on
+Statistical Mechanics Algorithms and Computations
+\emph default
+, Werner Krauth).
+ The pseudo-code of the algorithm is following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename GrayCode.png
+	width 20page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gray code for spins 
+\begin_inset Formula $\{1,....,N\}$
+\end_inset
+
+.
+ The procedure returns 
+\begin_inset Formula $k$
+\end_inset
+
+ which is the index of next spin to flip.
+ 
+\begin_inset Formula $\tau$
+\end_inset
+
+ is an auxiliary vector used by the procedure.
+ The initial value of 
+\begin_inset Formula $\tau_{i}=i$
+\end_inset
+
+.
+ Look in the code to see how to use it in practice.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Having the 
+\begin_inset Formula $N(E)$
+\end_inset
+
+ allows us to calculate all properties of the system from 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:z"
+
+\end_inset
+
+.
+ As an example we calculated plots of specific heat 
+\begin_inset Formula $C_{V}$
+\end_inset
+
+ in function of temperature 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ The specific heat is given by expression 
+\begin_inset Formula 
+\[
+C_{V}=\frac{\partial\left\langle E\right\rangle }{\partial T},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\left\langle E\right\rangle =-\frac{\partial\log(Z)}{\partial\beta}=T^{2}\frac{\partial\log(Z)}{\partial T}$
+\end_inset
+
+.
+ Thus we have
+\begin_inset Formula 
+\[
+C_{V}=2T\frac{\partial\log(Z)}{\partial T}+T^{2}\frac{\partial^{2}\log(Z)}{\partial T^{2}}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For simplicity we calculate 
+\begin_inset Formula $C_{V}$
+\end_inset
+
+ using numerical differentiation using the finite difference method, which
+ leads to following approximation 
+\begin_inset Formula 
+\begin{eqnarray*}
+C_{V} & \left(T\right)\approx & 2T\left(\frac{\log\left(Z(T+\Delta T)\right)-\log\left(Z(T-\Delta T)\right)}{2\Delta T}\right)\\
+ & + & T^{2}\left(\frac{\log\left(Z(T+\Delta T)\right)+\log\left(Z(T-\Delta T)\right)-2\log\left(Z(T)\right)}{\Delta T^{2}}\right).
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We choose small value of 
+\begin_inset Formula $\Delta T=0.01$
+\end_inset
+
+ which should give us accurate approximation of 
+\begin_inset Formula $C_{V}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Note that this approach gives us exact solution to 2D Ising model, but it
+ is limited to very small lattice sizes.
+ The bottleneck of the algorithm is the part where we calculate 
+\begin_inset Formula $N(E)$
+\end_inset
+
+ using Gray code.
+ This is because we have to run over 
+\begin_inset Formula $2^{n}$
+\end_inset
+
+ states which for lattice of size 
+\begin_inset Formula $6\times6$
+\end_inset
+
+ gives 
+\begin_inset Formula $2^{36}=68719476736$
+\end_inset
+
+ number of possible configurations.
+ 
+\end_layout
+
+\begin_layout Section
+Results for 1D chain
+\end_layout
+
+\begin_layout Standard
+The appropriate test class has name: IsingTestExact1D.
+\end_layout
+
+\begin_layout Standard
+We calculate specific heat for three different chain lengths: N=
+\series bold
+2,7
+\series default
+ and 
+\series bold
+22
+\series default
+.
+ We also compared this with analytical one.
+ For 1D the partition function is given by following equation
+\begin_inset Formula 
+\[
+Z\left(T\right)=\left(2\cosh(\beta J)\right)^{N}\cdot\left(1+\tanh(\beta J)^{N}\right),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+from this we can calculate Cv per spin
+\begin_inset Formula 
+\begin{equation}
+C_{V}^{\mathrm{spin}}(T)=\frac{T}{N}\frac{\partial^{2}T\log\left(Z\left(T\right)\right)}{\partial T^{2}}.\label{eq:analitycal}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The numerical approximation of derivative above can be found in function
+ 
+\series bold
+exacCv()
+\series default
+.
+\end_layout
+
+\begin_layout Standard
+The results for exact solution (Combinatorial approach) and analytical solution
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:analitycal"
+
+\end_inset
+
+ are shown in the picture below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/tests_out/IsingTestExact1D.png
+	width 40page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Specific heat for 1D Ising chain for N=2, 7 and 22.
+ The plot is generated by IsingTestExact1D class.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From the picture above we see that for large temperatures (
+\begin_inset Formula $T\rightarrow+\infty$
+\end_inset
+
+) 
+\begin_inset Formula $C_{V}$
+\end_inset
+
+ tends to zero.
+ We have the same behavior for 
+\begin_inset Formula $T\rightarrow0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Results for 2D chain
+\end_layout
+
+\begin_layout Standard
+The appropriate test class has name: IsingTestExact2D.
+\end_layout
+
+\begin_layout Standard
+The analytical solution for 2D lattice exist but is more complicated thus
+ we plot only the results from the combinatorial method.
+ This method allowed us to calculate lattices up to 5x5.
+ The results are presented below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/tests_out/IsingTestExact2D.png
+	width 40page%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Specific heat for 2D Ising lattice for four different lattices size.
+ The plot is generated by IsingTestExact2D class.
+ Vertical line shows the exact value of critical temperature 
+\begin_inset Formula $T_{C}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From figure above we see that the phase transition for small lattices occurs
+ near the critical temperature 
+\begin_inset Formula $T_{C}$
+\end_inset
+
+ obtained from exact Onsager calculations.
+ For 2D lattice we have the same asymptotic behavior (
+\begin_inset Formula $T\rightarrow0$
+\end_inset
+
+ and 
+\begin_inset Formula $T\rightarrow+\infty$
+\end_inset
+
+) like it was in case of 1D chain.
+\end_layout
+
+\end_body
+\end_document

@@ -19,10 +19,10 @@ class IsingTestExact1D : public IsingTest , public Ising {
         IsingTestExact1D():IsingTest(){
             test_name = "Exact solution for Ising model in 1D: exact specific heat";   
             test_info = string(" Run test to calculate the exact value of specific heat Cv for 1D chain. \n")+
-                        string(" The results are saved in proper files:")+  
+                        string(" The results are saved in proper files:\n")+  
                         string(" 'IsingTestExact1DN=x.txt' (where x denotes chain lenght) and 'IsingTestExact1D.png' in 'tests_out' directory. \n")+
-                        string(" We also put a chapter of book ('IsingTestExact2D.pdf') in which you can find the explanation of the \n")+
-                        string(" method we used to computed exat value of Cv. Short explanation of code is located in 'IsingTestExactComments.pdf' file. \n")+
+                        string(" In docs folder you can find: 1) a chapter of book ('IsingTestExactBook.pdf') in which you can find the explanation of the \n")+
+                        string(" method we used to computed exat value of Cv, and 2) the short theoretical explanation is provided in 'IsingExactSolution.pdf' file. \n")+
                         string(" In brief, we run loop over all possible \n")+
                         string(" configurations for given chain length N using the Gray code enumeration method. We calculate\n")+
                         string(" the density of states N(E) - number of confs. with the same energy E. Then we use \n")+
@@ -128,9 +128,9 @@ class IsingTestExact1D : public IsingTest , public Ising {
             
             double dT = 0.001;
             // Here we perform numerical derivation:
-            double Z  = 4*pow(cosh(1/T),N)*(pow(tanh(1/T),N)+1);
-            double Zp = 4*pow(cosh(1/(T+dT)),N)*(pow(tanh(1/(T+dT)),N)+1);
-            double Zm = 4*pow(cosh(1/(T-dT)),N)*(pow(tanh(1/(T-dT)),N)+1);
+            double Z  = pow(2*cosh(1/T),N)*(pow(tanh(1/T),N)+1);
+            double Zp = pow(2*cosh(1/(T+dT)),N)*(pow(tanh(1/(T+dT)),N)+1);
+            double Zm = pow(2*cosh(1/(T-dT)),N)*(pow(tanh(1/(T-dT)),N)+1);
             
             return T*( (T+dT)*log(Zp) + (T-dT)*log(Zm) - 2*(T)*log(Z) )/dT/dT/N;
         }

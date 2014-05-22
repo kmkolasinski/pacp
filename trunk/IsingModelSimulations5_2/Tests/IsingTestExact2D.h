@@ -19,10 +19,10 @@ class IsingTestExact2D : public IsingTest , public Ising2D {
         IsingTestExact2D():IsingTest(){
             test_name = "Exact solution for Ising model: exact specific heat";   
             test_info = string(" Run test to calculate the exact value of specific heat Cv for 2D lattice. \n")+
-                        string(" The results are saved in proper files:")+  
+                        string(" The results are saved in proper files:\n")+  
                         string(" 'IsingTestExact2D.txt' and 'IsingTestExact2D.png' in 'tests_out' directory. \n")+
-                        string(" We also put a chapter of book ('IsingTestExact2D.pdf') in which you can find the explanation of the \n")+
-                        string(" method we used to computed exat value of Cv. Short explanation of code is located in 'IsingTestExact2DComments.pdf' file. \n")+
+                        string(" In docs folder you can find: 1) a chapter of book ('IsingTestExactBook.pdf') in which you can find the explanation of the \n")+
+                        string(" method we used to computed exat value of Cv, and 2) the short theoretical explanation is provided in 'IsingExactSolution.pdf' file. \n")+
                         string(" In brief, we run loop over all possible \n")+
                         string(" configurations for given N by N lattice using the Gray code enumeration method. We calculate\n")+
                         string(" the density of states N(E) - number of confs. with the same energy E. Then we use \n")+
@@ -120,15 +120,7 @@ class IsingTestExact2D : public IsingTest , public Ising2D {
             }          
             return Z;
         }
-
 };
-
-
-
-
-
-
-
 
 #endif	/* ISINGTESTEXACT2D_H */
 

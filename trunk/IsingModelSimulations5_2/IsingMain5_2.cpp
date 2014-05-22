@@ -25,9 +25,11 @@
 #include "Ising5_2.h"
 #include "Ising2D.h"
 #include "Tests/IsingTestChi.h"
+#include "Tests/IsingTestChi2D.h"
 #include "Tests/IsingTestClusterStat.h"
 #include "Tests/IsingTestCC2D.h"
 #include "Tests/IsingTestError.h"
+#include "Tests/IsingTestError2D.h"
 #include "Tests/IsingTestM2D.h"
 #include "Tests/IsingTestExact2D.h"
 #include "Tests/IsingTestRenormGroup1D.h"
@@ -54,7 +56,7 @@ int main(int argc, char** argv) {
     // ----------------------------------------------------------
    
 //1D ISING CHAIN WITH PERIODIC BOUNDARY CONDITIONS 
-    // IsingTestChi isingTestChi;     //  Ising1D test of Chi in function of T
+     IsingTestChi isingTestChi;     //  Ising1D test of Chi in function of T
     // IsingTestError isingTestError; //  Ising1D test of ERROR funtion for Chi for different prod_
     // IsingTestClusterStat isingTestClusterStat;  //Ising1D test of cluster distribution
     // IsingTestCorrelationLength isingTestCorrelationLength;
@@ -64,6 +66,8 @@ int main(int argc, char** argv) {
     // IsingTestRenormGroup1D  isingTestRenormGroup1D; // Ising1D test for renormalization group
     
 //2D ISING MODEL ON SQUARE LATTICE WITH PERIODIC BOUNDARY CONDITIONS 
+     IsingTestChi2D isingTestChi2D; 
+    //IsingTestError2D isingTestError2D;
     // IsingTestCC2D isingTestCC2D;   //  Ising2D test of CC in function of T for different lattices
     // IsingTestM2D isingTestM2D;     //  Ising2D test of M in function of T for different lattices        
     // IsingTestExact2D isingTestExact2D; // Ising2D test which calculates the exacts values of Cv for  small lattices

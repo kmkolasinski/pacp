@@ -1,0 +1,178 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Test of error calculations for Ising model in 1D and 2D
+\end_layout
+
+\begin_layout Standard
+This is short theoretical explanation of the test: 
+\series bold
+IsingTestError1D.h
+\series default
+ and 
+\series bold
+IsingTestError2D.h
+\series default
+.
+\end_layout
+
+\begin_layout Section
+Standard deviation
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In files IsingTestError1D.h and IsingTestError2D.h we test function
+\begin_inset Newline linebreak
+\end_inset
+
+
+\shape italic
+Ising::ERROR(string totalFname, ISING_ERROR_TYPE error_type) 
+\shape default
+which calculates standard daviation of choosen variable 
+\begin_inset Formula $X$
+\end_inset
+
+ using bootstrap algorithm.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Standard deviation of variable 
+\begin_inset Formula $X$
+\end_inset
+
+ can be expressed by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sigma(X)=\sqrt{\langle(X-\langle X\rangle)^{2}\rangle}=\sqrt{\langle X^{2}\rangle-\langle X\rangle^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and it tells as how far a set of numbers is spread out.
+ Low standard deviation indicates that the data points tend to be near the
+ mean value of the set, high - the opposite.
+ Apart fom showing dispersion of a data set, standard deviation is usually
+ used as a measure of confidence in statistical conclusions.
+ 
+\end_layout
+
+\begin_layout Standard
+The standard deviation of some data set is a square root of its variance
+ 
+\begin_inset Formula $V(X)=\langle X^{2}\rangle-\langle X\rangle^{2}$
+\end_inset
+
+ .
+ A useful property of the standard deviation is that, unlike the variance,
+ it is expressed in the same units as the data.
+\end_layout
+
+\begin_layout Section
+Bootstrap method
+\end_layout
+
+\begin_layout Standard
+If the sample size is insufficient to calculate the standard deviation from
+ definition, we can use for this purpose bootstrap method.
+ Bootstraping uses approximate distribution to estimate properties of an
+ estimator (like standard deviation).
+ To achieve it we can take set of observed data and (assuming independence
+ of observation) construct a number of resamples.
+ Such resamples have to be of equal size to the observed dataset and be
+ obtained by random sampling with replacement from the original dataset.
+ From a number of resamples we can create approximate distribution of variable
+ and obtain estimator - in our case standard deviation.
+\end_layout
+
+\begin_layout Standard
+The general bootstrap algorithm is as follows:
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\end_body
+\end_document

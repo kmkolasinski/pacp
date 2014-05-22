@@ -5,21 +5,21 @@
 * Created on 4 maj 2014, 18:11
 */
 
-#ifndef ISINGTESTERROR_H
-#define	ISINGTESTERROR_H
+#ifndef ISINGTESTERROR1D_H
+#define	ISINGTESTERROR1D_H
 
 #include "IsingTest.h"
 
-class IsingTestError : public IsingTest {
+class IsingTestError1D : public IsingTest {
 
    public:
-       IsingTestError():IsingTest(){
+       IsingTestError1D():IsingTest(){
            test_name = "Test of error (bootstrap method).";   
            test_info = string(" Run test to calculate the error value in function of \n")+
                        string(" the production time using the bootstrap method. For more details see:\n ")+  
                        string(" http://en.wikipedia.org/wiki/Bootstrapping_(statistics).\n ")+  
                        string(" \nThe results are saved in following files:")+  
-                       string(" 'IsingTestError.txt' and 'IsingTestError.png' in 'tests_out' directory. \n")+
+                       string(" 'IsingTestError.txt' and 'IsingTestError1D.png' in 'tests_out' directory. \n")+
                        string(" This test shows that the error decreases with number of prod_t. We founded that \n")+
                        string(" the asymptotic behavior of error(prod_t) behaves like 1/sqrt(prod_t) which \n")+
                        string(" agrees with the general result for error known in MC integration methods. For more \n")+
@@ -28,7 +28,7 @@ class IsingTestError : public IsingTest {
            
            info(); 
            run(); // run all calculations
-           string cmd =string("cd ")+test_dir_output+string(";gnuplot IsingTestError.plt");
+           string cmd =string("cd ")+test_dir_output+string(";gnuplot IsingTestError1D.plt");
            int info = system(cmd.c_str());
        }   
        
@@ -48,7 +48,7 @@ class IsingTestError : public IsingTest {
        int maxGdist         = 10;     //domain of correlation function extends from 0 to maxGdist-1
        int maxTsep          = 2;
        double initState     = 0.7;    //values between 0.5 and 1.0
-       string fileout = test_dir_output+"IsingTestError.txt";
+       string fileout = test_dir_output+"IsingTestError1D.txt";
        ofstream data_out(fileout.c_str());
        
        cout << " Start prod_t=" << 1000    << endl;
@@ -73,4 +73,4 @@ class IsingTestError : public IsingTest {
 };
 
 
-#endif	/* ISINGTESTERROR_H */
+#endif	/* ISINGTESTERROR1D_H */

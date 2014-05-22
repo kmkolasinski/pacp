@@ -20,9 +20,11 @@ class IsingTestChi2D : public IsingTest {
                         string(" temperature T for the 2D Ising matrix.\n The results are saved in proper files:")+  
                         string(" 'IsingTestChi2D.txt' and 'IsingTestChi2D.png' in 'tests_out' directory. \n")+
                         string(" See run() function for more details.\n");
-                        string(" We plot the dependence of Chi on temperature. We expect that for low T");
-                        string(" Chi explodes. We find a good agreement between the numerical and ");
-                        string(" analytical solution (see IsingTestChi2D.png)");
+                        string(" We plot the dependence of Chi on temperature. We expect that we will find");
+                        string(" maximum Chi at critical temperature near 2.27 K. We find a good agreement between the numerical and ");
+                        string(" analytical solution (see IsingTestChi2D.png).");
+                        string(" Additionaly we calculate dependence of Chi on length of chain of spins (see IsingTestChi2D_N.png). ");
+              
             
             info(); 
             run(); // run all calculations
@@ -47,6 +49,7 @@ class IsingTestChi2D : public IsingTest {
         int maxTsep          = 2;
         double initState     = 0.7;    //values between 0.5 and 1.0
         string fileout = test_dir_output+"IsingTestChi2D.txt";
+        //string fileout_w = test_dir_output+"IsingTestChi2D_w.txt";
         string fileout2 = test_dir_output+"IsingTestChi2D_2.txt";
         ofstream data_out(fileout.c_str());
         
@@ -60,6 +63,7 @@ class IsingTestChi2D : public IsingTest {
         cout << "----------------------------------------------------" << endl;
         
         
+
         for( double temperature = 0.3 ; temperature < 3.5 ; temperature += 0.1  ){         
         //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
         Ising2D chain2D(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
@@ -81,12 +85,39 @@ class IsingTestChi2D : public IsingTest {
         cout << std::scientific <<  temperature  << "\t" << chi << "\t" /*<< chi_anal */<< "\t" <<  error << endl;
 
         }// end of for(temp)
-        data_out.close();     
+        data_out.close();    
         
+        
+        
+       /*ofstream data_out_w(fileout_w.c_str());
+        for( double temperature = 1.0 ; temperature < 3.0 ; temperature += 0.1  ){         
+        //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
+        Ising2D chain2D(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
+        //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
+        chain2D.MC_simulation(therm_t, prod_t, measure_f, METHOD_WOLFF);
+                
+        double chi      = chain2D.Chi(gettotalFname().c_str());
+        //double chi_anal = exp(2./temperature)/temperature;
+        double error    = chain2D.ERROR(gettotalFname().c_str(), ERROR_CHI);
+
+        // saving data to file
+        data_out_w << std::scientific <<  temperature  << "\t" 
+                                         //<< chi_anal << "\t"
+                                         << chi      << "\t"
+                                         << error    << "\t"
+                                         << chi-error << "\t"
+                                         << chi+error << endl;
+
+        cout << std::scientific <<  temperature  << "\t" << chi << "\t" << chi_anal << "\t" <<  error << endl;
+                                                                                          
+                                                                                          
+        }// end of for(temp)
+        data_out_w.close();  
+        */
         
         ofstream data_out2(fileout2.c_str());
         double temperature=1.;
-        for( int n=2 ; n < 21 ; n += 1  ){         
+        for( int n=6 ; n < 21 ; n += 2  ){         
         //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
         Ising2D chain2D(n, temperature, magneticField, initState, maxGdist, maxTsep);
         //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION

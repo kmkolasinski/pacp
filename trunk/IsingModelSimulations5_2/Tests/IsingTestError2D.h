@@ -59,7 +59,7 @@ class IsingTestError2D : public IsingTest {
        cout << "----------------------------------------------------" << endl;
        
        double temperature = 1.0;
-       Ising2D chain2D(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
+       Ising2D chain2D(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);       
        for ( int prod_t = 1000 ; prod_t < 100000 ; prod_t *= 2  ){
            chain2D.MC_simulation(therm_t, prod_t, measure_f, METHOD_METROPOLIS);
            double error=chain2D.ERROR(gettotalFname().c_str(), ERROR_CHI);

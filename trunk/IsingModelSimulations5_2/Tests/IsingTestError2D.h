@@ -51,16 +51,16 @@ class IsingTestError2D : public IsingTest {
        string fileout = test_dir_output+"IsingTestError2D.txt";
        ofstream data_out(fileout.c_str());
        
-       cout << " Start prod_t=" << 1000    << endl;
-       cout << " End   prod_t=" << 100000  << endl;
-       cout << " Mult  prod_t=" << 2       << endl;
+       cout << " Start prod_t=" << 2000    << endl;
+       cout << " End   prod_t=" << 50000  << endl;
+       cout << " Mult  prod_t=" << 1.2       << endl;
        cout << " It may take some time..." << endl;
        cout << " prod_t   " << " Error "   << endl;
        cout << "----------------------------------------------------" << endl;
        
        double temperature = 1.0;
        Ising2D chain2D(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);       
-       for ( int prod_t = 1000 ; prod_t < 100000 ; prod_t *= 2  ){
+       for ( int prod_t = 2000 ; prod_t < 50000 ; prod_t *= 1.2  ){
            chain2D.MC_simulation(therm_t, prod_t, measure_f, METHOD_METROPOLIS);
            double error=chain2D.ERROR(gettotalFname().c_str(), ERROR_CHI);
            double chi=chain2D.Chi(gettotalFname().c_str());

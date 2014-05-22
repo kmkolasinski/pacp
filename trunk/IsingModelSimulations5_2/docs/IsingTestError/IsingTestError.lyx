@@ -154,6 +154,13 @@ Bootstrap method
 \end_layout
 
 \begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 If the sample size is insufficient to calculate the standard deviation from
  definition, we can use for this purpose bootstrap method.
  Bootstraping uses approximate distribution to estimate properties of an
@@ -167,10 +174,364 @@ If the sample size is insufficient to calculate the standard deviation from
 \end_layout
 
 \begin_layout Standard
-The general bootstrap algorithm is as follows:
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
+The general bootstrap algorithm is as follows:
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $n$
+\end_inset
+
+ be a number of elements in dataset.
+ Pick at random 
+\begin_inset Formula $n$
+\end_inset
+
+ elements (with returns).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Calculate an observable 
+\begin_inset Formula $X$
+\end_inset
+
+ using 
+\begin_inset Formula $n$
+\end_inset
+
+ elements created in 1.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Repeat 1.
+ and 2.
+ 
+\begin_inset Formula $m$
+\end_inset
+
+ times.
+ This gives a series 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $X_{2}$
+\end_inset
+
+, ..., 
+\begin_inset Formula $X_{m}$
+\end_inset
+
+ of estimations of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Use this series to calculate the standard deviation 
+\begin_inset Formula $\sigma=\sqrt{\langle X^{2}\rangle-\langle X\rangle^{2}}$
+\end_inset
+
+ .
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We specifically want to use this algorithm for calculation of standard deviation
+ of such physical quantities as specific heat 
+\begin_inset Formula $C$
+\end_inset
+
+, magnetic susceptibility 
+\begin_inset Formula $\chi$
+\end_inset
+
+ etc.
+ However, as our Monte Carlo simulations are time- and memory-consuming,
+ it's difficult to obtain suffiecient set of such quantities for calculating
+ standard deviation.
+ Instead we use data from one Monte Carlo simulation to construct set of
+ resamples, from each we calculate the necessary quantity and find standard
+ deviation of obtained distribution.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At this stage of project calculation of standard deviation of 3 quantities
+ are implemented: 
+\end_layout
+
+\begin_layout Itemize
+specific heat 
+\begin_inset Formula $C$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+magnetic susceptibility 
+\begin_inset Formula $\chi$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+magnetisation 
+\begin_inset Formula $M$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+You can choose proper quantity by choosing argument
+\shape italic
+ error_type 
+\shape default
+in function 
+\shape italic
+Ising::ERROR
+\shape default
+ as ERROR_CHI, ERROR_CC or ERROR_OP.
+\end_layout
+
+\begin_layout Section
+Tests
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the tests IsingTestError1D.h and IsingTestError2D.h we calculate error
+ (standard deviation) of magnetic susceptibility in function of production
+ time.
+ We use bootstrap method implemented in function 
+\shape italic
+Ising::ERROR
+\shape default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+General result for error known in MC integration methods is inversely proportion
+ate to square root of number of samples 
+\begin_inset Formula $n$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+error\propto1/\sqrt{n}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, we expect our error would diminish with increase of production
+ time like 
+\begin_inset Formula $1/\sqrt{prod\_t}$
+\end_inset
+
+.
+ Results agree with our predictions.
+ On figures below you can see calculated error in function of production
+ time as well as fits proportionate to 
+\begin_inset Formula $1/\sqrt{prod\_t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename IsingTestError1D.png
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Error (standard deviation) of magnetic susceptibility in function of production
+ time for 1D Ising lattice.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename IsingTestError2D.png
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Error (standard deviation) of magnetic susceptibility in function of production
+ time for 2D Ising lattice.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Additionally we calculate error of magnetic susceptibility in function of
+ temperature and compare it with difference between analytical and numerical
+ solution for 
+\begin_inset Formula $\chi$
+\end_inset
+
+.
+ We do it only for 1D case because we do not now exact formula for 
+\begin_inset Formula $\chi$
+\end_inset
+
+ in 2D.
+ We can see both error and shown difference decrease with temperature and
+ are of the same order of magnitude.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename IsingTestError1D_T.png
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Comparison of error (standard deviation) and difference of analytical and
+ numerical magnetic susceptibility in function of temperature.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 

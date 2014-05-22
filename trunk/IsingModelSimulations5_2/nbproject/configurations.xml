@@ -28,6 +28,7 @@
       <itemPath>Tests/IsingTestCC2D.h</itemPath>
       <itemPath>Tests/IsingTestChi1D.h</itemPath>
       <itemPath>Tests/IsingTestChi2D.h</itemPath>
+      <itemPath>Tests/IsingTestClusterFreq2D.h</itemPath>
       <itemPath>Tests/IsingTestClusterStat.h</itemPath>
       <itemPath>Tests/IsingTestCorrelationLength.h</itemPath>
       <itemPath>Tests/IsingTestE1D.h</itemPath>
@@ -35,6 +36,7 @@
       <itemPath>Tests/IsingTestError2D.h</itemPath>
       <itemPath>Tests/IsingTestExact1D.h</itemPath>
       <itemPath>Tests/IsingTestExact2D.h</itemPath>
+      <itemPath>Tests/IsingTestLatticeEvolution.h</itemPath>
       <itemPath>Tests/IsingTestM2D.h</itemPath>
       <itemPath>Tests/IsingTestMeanClusterFreq1D.h</itemPath>
       <itemPath>Tests/IsingTestMeanECorrelation.h</itemPath>
@@ -83,6 +85,8 @@
       </item>
       <item path="Tests/IsingTestChi2D.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Tests/IsingTestClusterFreq2D.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Tests/IsingTestClusterStat.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestCorrelationLength.h" ex="false" tool="3" flavor2="0">
@@ -96,6 +100,8 @@
       <item path="Tests/IsingTestExact1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestExact2D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestLatticeEvolution.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestM2D.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -160,6 +166,8 @@
       </item>
       <item path="Tests/IsingTestChi2D.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Tests/IsingTestClusterFreq2D.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Tests/IsingTestClusterStat.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestCorrelationLength.h" ex="false" tool="3" flavor2="0">
@@ -173,6 +181,8 @@
       <item path="Tests/IsingTestExact1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestExact2D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestLatticeEvolution.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestM2D.h" ex="false" tool="3" flavor2="0">
       </item>

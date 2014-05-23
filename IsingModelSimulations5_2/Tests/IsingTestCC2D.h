@@ -24,7 +24,7 @@ class IsingTestCC2D : public IsingTest {
             info(); 
             run(); // run all calculations
             string cmd =string("cd ")+test_dir_output+string(";gnuplot IsingTestCC2D.plt");
-            int info = system(cmd.c_str());
+            //int info = system(cmd.c_str());
         }   
         
         /**
@@ -40,23 +40,23 @@ class IsingTestCC2D : public IsingTest {
         double magneticField = 0.0;
         int therm_t          =  50;    //thermalization time
         int measure_f        =   1;    //measure frequency
-        int prod_t           =1000;    //productiontime
+        int prod_t           =5000;    //productiontime
         int maxGdist         =  10;    //domain of correlation function extends from 0 to maxGdist-1
         int maxTsep          =   2;
         double initState     = 0.7;    //values between 0.5 and 1.0
     
                 
-        vector<vector<double> > dataNxN[4];
+        vector<vector<double> > dataNxN[5];
         vector<double> dataT;
         // preparation of temperature array
-        for(double T = 1.0 ; T < 5.0 ; T += 0.1 ){ 
+        for(double T = 1.0 ; T < 10.0 ; T += 0.1 ){ 
             dataT.push_back(T);
         }
         // ---------------------------------------------------------
         // Calculation for NxN lattice.
         // ---------------------------------------------------------
-        for(int i=0 ; i < 4 ; i++){                    
-            chainLength  = pow(2,i+1); // choosing proper lattice size
+        for(int i=2 ; i < 6 ; i++){                    
+            chainLength  = i ;// pow(2,i+1); // choosing proper lattice size
             cout << "Starting simulation for lattice "<<chainLength << "x" <<  chainLength << "...\n";  
             
             for(unsigned int t = 0 ; t < dataT.size() ; t++ ){ 
@@ -68,17 +68,19 @@ class IsingTestCC2D : public IsingTest {
                 double error = lattice2d.ERROR(gettotalFname().c_str(), ERROR_CHI);
                 double cc    = lattice2d.CC(gettotalFname().c_str());                
                 vector<double> data;
-                data.push_back(cc); data.push_back(error); dataNxN[i].push_back(data);
+                data.push_back(cc); 
+                data.push_back(error); 
+                dataNxN[i-2].push_back(data);
             }// end of for            
         } // end of for over lattice sizes
         
-        // saving data to file
-        string fileout = test_dir_output+"IsingTestCC2D.txt";
+        // saving data to file       
+        string fileout = test_dir_output+"IsingTestCC2DForExact.txt";
         ofstream data_out(fileout.c_str());     
         
         for(unsigned int t = 0 ; t < dataT.size() ; t++ ){
              data_out << std::scientific << dataT[t] << "\t";   
-             for(int i = 0; i < 4 ; i++){
+             for(int i = 0; i < 5 ; i++){
                  data_out << dataNxN[i][t][0] << "\t";
                  data_out << dataNxN[i][t][1] << "\t";
              }

@@ -63,7 +63,7 @@ class IsingTestExact2D : public IsingTest , public Ising2D {
         map<int,double>::iterator it;
         
         // calculation of N(E) - loop over all possible states
-        for(int i=0; i < pow(2,N);i++){
+        for(int i=0; i < pow(2,N)-1;i++){
             int k = gray_flip(t);
             NE[E()] += 1;
             S[k] *= -1;

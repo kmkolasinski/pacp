@@ -169,9 +169,6 @@ Statistical Mechanics Algorithms and Computations
 \emph default
 , Werner Krauth).
  The pseudo-code of the algorithm is following: 
-\series bold
-\color red
-wyjasnienie kodu graya
 \end_layout
 
 \begin_layout Standard
@@ -201,10 +198,10 @@ status open
 
 \begin_layout Plain Layout
 Gray code for spins 
-\begin_inset Formula $\{1,....,N\}$
+\begin_inset Formula $\{0,....,N-1\}$
 \end_inset
 
-.
+ (which means that the first spin has index 0).
  The procedure returns 
 \begin_inset Formula $k$
 \end_inset
@@ -219,8 +216,14 @@ Gray code for spins
 \begin_inset Formula $\tau_{i}=i$
 \end_inset
 
+ , where 
+\begin_inset Formula $i=(0,1,....,N)$
+\end_inset
+
 .
- Look in the code to see how to use it in practice.
+ Look in the code of IsingTestExact class to see how to use it in practice.
+ Many execution of the method will create following sequence of spins to
+ change: (0,1,0,2,0,1,0,3,0,1,0,2,0,1,0,4,....)
 \end_layout
 
 \end_inset
@@ -234,6 +237,85 @@ Gray code for spins
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+ We will use binary representation of spin on lattice (i.e.
+ 0 - negative spin and 1 positive spin).
+ The algorithm will flip one spin (bit), thus we can calculate the change
+ of energy and the use again gray-flip method to flip to another configuration.
+ 
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The algorithm that perform such enumerations are called Gray codes - in
+ which each configuration differs from its predecessor by one spin only.
+\end_layout
+
+\end_inset
+
+ For example let us consider three spins system (
+\begin_inset Formula $\sigma_{0},\,\sigma_{1},\,\sigma_{2}$
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Enumerate
+We initialize the 
+\begin_inset Formula $\tau$
+\end_inset
+
+ array with values: 
+\begin_inset Formula $\tau=(0,1,2,3)$
+\end_inset
+
+, and set the initial configuration of spins to 
+\begin_inset Formula $(-1,-1,-1)$
+\end_inset
+
+ which in binary representation is 
+\begin_inset Formula $(0,0,0)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Below we present the table of spins which we have to flip after each execution
+ of the gray-flip method:
+\begin_inset Formula 
+\begin{eqnarray*}
+\mathrm{number\, of\, execution} & \mathrm{spin\, to\, change} & \mathrm{configuration}\\
+1 & 1 & (1,0,0)\\
+2 & 2 & (1,1,0)\\
+3 & 1 & (0,1,0)\\
+4 & 3 & (0,1,1)\\
+5 & 1 & (1,1,1)\\
+6 & 2 & (1,0,1)\\
+7 & 1 & (0,0,1)
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+For each configuration we have to calculate energy 
+\begin_inset Formula $E$
+\end_inset
+
+ and 
+\begin_inset Formula $N(E)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 Having the 
 \begin_inset Formula $N(E)$
 \end_inset
@@ -413,6 +495,9 @@ reference "eq:analitycal"
 \end_inset
 
  are shown in the picture below.
+ From this we see that both methods lead to the same values which is not
+ a surprise.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -490,6 +575,8 @@ The analytical solution for 2D lattice exist but is more complicated thus
  we plot only the results from the combinatorial method.
  This method allowed us to calculate lattices up to 5x5.
  The results are presented below.
+ In this case we compare our exact calculation with MC data obtained from
+ our program.
 \end_layout
 
 \begin_layout Standard

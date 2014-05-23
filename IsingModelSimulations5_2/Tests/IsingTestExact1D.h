@@ -60,8 +60,8 @@ class IsingTestExact1D : public IsingTest , public Ising {
         map<int,double>::iterator it;
         
         // calculation of N(E) - loop over all possible states
-        for(int i=0; i < pow(2,N);i++){
-            int k = gray_flip(t);
+        for(int i=0; i < pow(2,N)-1;i++){
+            int k = gray_flip(t);            
             int iE = E()*N;
             NE[iE]  +=  1;            
             S[k]    *= -1;

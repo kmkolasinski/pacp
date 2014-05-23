@@ -150,7 +150,7 @@ For the system of spins
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\hat{H}=J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}+h\sum_{i}s_{i},
+\hat{H}=-J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}-h\sum_{i}s_{i},
 \]
 
 \end_inset
@@ -205,7 +205,7 @@ Here the value of magnetization is averaged over the configurations
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\left\langle M\right\rangle =\frac{1}{Z}\sum_{\{s\}}M\exp(-\beta J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}-\beta h\sum_{i}s_{i}),\label{eq:meanM}
+\left\langle M\right\rangle =\frac{1}{Z}\sum_{\{s\}}M\exp(\beta J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}+\beta h\sum_{i}s_{i}),\label{eq:meanM}
 \end{equation}
 
 \end_inset
@@ -217,7 +217,7 @@ Here the value of magnetization is averaged over the configurations
 where 
 \begin_inset Formula 
 \[
-Z=\sum_{\{s\}}\exp(-\beta J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}-\beta h\sum_{i}s_{i}).
+Z=\sum_{\{s\}}\exp(\beta J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}+\beta h\sum_{i}s_{i}).
 \]
 
 \end_inset
@@ -248,7 +248,7 @@ reference "eq:meanM"
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{\partial\left\langle M\right\rangle }{\partial h}=\frac{\beta}{Z}\sum_{\{s\}}M^{2}\exp(-\beta\hat{H})-\frac{\beta}{Z^{2}}\left[\sum_{\{s\}}M\exp(-\beta\hat{H})\right]^{2}=\beta\left(\left\langle M^{2}\right\rangle -\left\langle M\right\rangle ^{2}\right).
+\frac{\partial\left\langle M\right\rangle }{\partial h}=\frac{\beta}{Z}\sum_{\{s\}}M^{2}\exp(-\beta\hat{H})+\frac{\beta}{Z^{2}}\left[\sum_{\{s\}}M\exp(-\beta\hat{H})\right]^{2}=\beta\left(\left\langle M^{2}\right\rangle -\left\langle M\right\rangle ^{2}\right).
 \]
 
 \end_inset
@@ -352,12 +352,12 @@ T_{c}=2.269,\:\gamma=7/4.
 
 It means that for the critical temperature the magnetic susceptibility diverges
  at 
-\begin_inset Formula $t$
+\begin_inset Formula $T=T_{c}$
 \end_inset
 
 .
- For finite lattice the critical temperature is slightly different.
- The susceptibility 
+ For finite lattice the critical temperature is slightly different and the
+ susceptibility is finite.
 \end_layout
 
 \begin_layout Section
@@ -377,7 +377,11 @@ versus the temperature for a chain of
 \begin_inset Formula $N=500$
 \end_inset
 
- spins.
+ spins with production time 10000 for each 
+\begin_inset Formula $T$
+\end_inset
+
+.
  We compared the results with the analytical solution.
  The dependence is shown in the figure 
 \begin_inset CommandInset ref

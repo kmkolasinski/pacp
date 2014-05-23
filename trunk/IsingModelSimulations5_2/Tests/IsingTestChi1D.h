@@ -55,9 +55,11 @@ class IsingTestChi1D : public IsingTest {
         cout << "----------------------------------------------------" << endl;
         
         
-        for( double temperature = 0.3 ; temperature < 2.0 ; temperature += 0.1  ){         
+        for( double temperature = 0.3 ; temperature < 2.0 ; temperature += 0.01  ){         
         //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
+        
         Ising chain(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
+        chain.ising_method_type=METHOD_WOLFF;
         //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
         chain.MC_simulation(therm_t, prod_t, measure_f);
                 

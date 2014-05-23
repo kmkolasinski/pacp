@@ -23,15 +23,14 @@
             <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Tests/IsingTestCC2D.h</file>
         </group>
         <group>
-            <file>file:/home/edyta/NetBeansProjects/trunk/IsingModelSimulations5_2/Ising2D.h</file>
-            <file>file:/home/edyta/NetBeansProjects/trunk/IsingModelSimulations5_2/Tests/IsingTestError2D.h</file>
+            <file>file:/home/edyta/NetBeansProjects/trunk/IsingModelSimulations5_2/tests_out/IsingTestRenormGroup1D.png</file>
+            <file>file:/home/edyta/NetBeansProjects/trunk/IsingModelSimulations5_2/tests_out/IsingTestRenormGroup1D.plt</file>
             <file>file:/home/edyta/NetBeansProjects/trunk/IsingModelSimulations5_2/Ising2D.cpp</file>
             <file>file:/home/edyta/NetBeansProjects/trunk/IsingModelSimulations5_2/Tests/IsingTestChi2D.h</file>
-            <file>file:/home/edyta/NetBeansProjects/trunk/IsingModelSimulations5_2/Tests/IsingTestRenormGroup2D.h</file>
+            <file>file:/home/edyta/NetBeansProjects/trunk/IsingModelSimulations5_2/tests_out/IsingTestError1D.plt</file>
             <file>file:/home/edyta/NetBeansProjects/trunk/IsingModelSimulations5_2/IsingMain5_2.cpp</file>
-            <file>file:/home/edyta/NetBeansProjects/trunk/IsingModelSimulations5_2/Tests/IsingTestError.h</file>
             <file>file:/home/edyta/NetBeansProjects/trunk/IsingModelSimulations5_2/Tests/IsingTestRenormGroup1D.h</file>
-            <file>file:/home/edyta/NetBeansProjects/trunk/IsingModelSimulations5_2/Tests/IsingTestChi.h</file>
+            <file>file:/home/edyta/NetBeansProjects/trunk/IsingModelSimulations5_2/Ising5_2.cpp</file>
         </group>
     </open-files>
 </project-private>

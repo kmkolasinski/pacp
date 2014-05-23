@@ -64,14 +64,14 @@ int main(int argc, char** argv) {
     // IsingTestMeanECorrelation isingTestMeanECorrelation;
     // IsingTestTCorr isingTestTCorr; // 
     // IsingTestMeanClusterFreq1D isingTestMeanClusterFreq1D; // Ising1D test for mean cluster size distribution
-     IsingTestRenormGroup1D  isingTestRenormGroup1D; // Ising1D test for renormalization group
+    // IsingTestRenormGroup1D  isingTestRenormGroup1D; // Ising1D test for renormalization group
     // IsingTestE1D isingTestE1D; //Ising1D test for energy behavior of the system.
     // IsingTestExact1D isingTestExact1D; // Ising1D calulation of extact values of Cv for 1D chain
     
 //2D ISING MODEL ON SQUARE LATTICE WITH PERIODIC BOUNDARY CONDITIONS 
     // IsingTestChi2D isingTestChi2D;  //  Ising2D test of Chi in function of T
     // IsingTestError2D isingTestError2D;   //  Ising2D test of ERROR funtion for Chi for different prod_time
-    // IsingTestCC2D isingTestCC2D;   //  Ising2D test of CC in function of T for different lattices
+     IsingTestCC2D isingTestCC2D;   //  Ising2D test of CC in function of T for different lattices
     // IsingTestM2D isingTestM2D;     //  Ising2D test of M in function of T for different lattices        
     // IsingTestExact2D isingTestExact2D; // Ising2D test which calculates the exacts values of Cv for  small lattices
     // IsingTestClusterFreq2D isingTestClusterFreq2D;

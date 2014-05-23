@@ -15,18 +15,19 @@ class IsingTestRenormGroup1D : public IsingTest {
 
    public:
        IsingTestRenormGroup1D():IsingTest(){
-           test_name = "Test of zly opis.";   
-           test_info = string(" Run test to calculate the erro value in function of \n")+
-                       string(" the production time.\n The results are saved in proper files:")+  
-                       string(" 'IsingTestError.txt' and 'IsingTestError.png' in 'tests_out' directory. \n")+
+           test_name = "Test of renormalisation group with majority rule.";   
+           test_info = string(" Run test to calculate \n")+
+                       string(" We use majority rule to assign a spin for each block of 3 spins.\n")+
+                       string(" \n The results are saved in proper files:")+  
+                       string(" 'IsingTestRenormGroup1D.txt' and 'IsingTestRenormGroup.png' in 'tests_out' directory. \n")+
                        string(" See run() function for more details.");
            
            
            
            info(); 
            run(); // run all calculations
-          // string cmd =string("cd ")+test_dir_output+string(";gnuplot IsingTestError.plt");
-          // int info = system(cmd.c_str());
+           string cmd =string("cd ")+test_dir_output+string(";gnuplot IsingTestRenormGroup1D.plt");
+           int info = system(cmd.c_str());
        }   
        
        /**
@@ -36,7 +37,7 @@ class IsingTestRenormGroup1D : public IsingTest {
         
          cout << " Running test..." << endl;    
          
-         int chainLength      = 500;        
+         int chainLength      = 100;        
          double magneticField = 0.0;
          int therm_t          = 100;   //thermalization time
          int measure_f        = 1;     //measure frequency
@@ -44,13 +45,28 @@ class IsingTestRenormGroup1D : public IsingTest {
          int maxGdist         = 20;     //domain of correlation function extends from 0 to maxGdist-1
          int maxTsep          = 2;
          double initState     = 0.7;    //values between 0.5 and 1.0    
-         double temp          = 1.4;
+         double temp          = 1.0;
          
-        Ising chain3(chainLength*3,temp,magneticField,initState,maxGdist,maxTsep);   
+         string fileout = test_dir_output+"IsingTestRenormGroup1D.txt";
+         ofstream data_out(fileout.c_str());
+         
+         int coeff=81;
+        
+         cout << "\n \n chainLength = " << chainLength*coeff << endl;
+         
+        Ising chain3(chainLength*coeff,temp,magneticField,initState,maxGdist,maxTsep);   
         chain3.MC_simulation(therm_t,prod_t,measure_f);
-        chain3.mean_S_correlation(gettotalFname());        
-//      
-        vector<vector<short> > SS3 = readDATAtoVectors(gettotalFname(), chainLength*3);
+        chain3.mean_S_correlation(gettotalFname());
+        
+                data_out << std::scientific <<  chainLength*coeff  << "\t" 
+                                 << chain3.Gs[1] << "\t" 
+                                 << (1.0 / atanh(chain3.Gs[1] / chain3.Gs[0])) << endl;
+
+      
+         
+        for(coeff=81;coeff>1;){ 
+        
+        vector<vector<short> > SS3 = readDATAtoVectors(gettotalFname(), chainLength*coeff);
 
         vector<vector<short> >::iterator t;
         vector<short>::iterator pos;
@@ -59,22 +75,33 @@ class IsingTestRenormGroup1D : public IsingTest {
         DATA.setf(ios::showpos);
         
         for (unsigned int i =  0; i < SS3.size() ; i++) { 
-//            for (int k =  0; k < SS3[0].size() ; k+=3 ) { //loop over chain sites "pos" at fixed time
-//                DATA <<  (( SS3[i][k] + SS3[i][k+1] + SS3[i][k+2]  ) >0?1:-1) << " ";
-//                //cout << i << ":" << SS3[i][k]  <<  "  " <<  SS3[i][k+1] << "  " <<  SS3[i][k+2] ;
-//                //cout << (( SS3[i][k] + SS3[i][k+1] + SS3[i][k+2]  ) >0?1:-1) << endl;
-//            } 
-            for (unsigned int k =  0; k < SS3[0].size() ; k+=3 ) { 
-                DATA << SS3[i][k] << " ";
-//                DATA << SS3[i][k] << " ";
-//                DATA << SS3[i][k] << " ";
+            for (int k =  0; k < SS3[0].size() ; k+=3 ) { //loop over chain sites "pos" at fixed time
+                DATA <<  (( SS3[i][k] + SS3[i][k+1] + SS3[i][k+2]  ) >0?1:-1) << " ";
+                //cout << i << ":" << SS3[i][k]  <<  "  " <<  SS3[i][k+1] << "  " <<  SS3[i][k+2] ;
+                //cout << (( SS3[i][k] + SS3[i][k+1] + SS3[i][k+2]  ) >0?1:-1) << endl;
             } 
+//            for (unsigned int k =  0; k < SS3[0].size() ; k+=3 ) { 
+//                DATA << SS3[i][k] << " ";
+//                DATA << SS3[i][k] << " ";
+//                DATA << SS3[i][k] << " ";
+//            } 
             DATA << endl;
         }
         DATA.close();
-        Ising chain1(chainLength,temp,magneticField,initState,maxGdist,maxTsep);   
-        chain1.mean_S_correlation(gettotalFname());            
-                              
+        coeff/=3;
+        cout << "\n \n chainLength = " << chainLength*coeff << endl;
+        Ising chain1(chainLength*coeff,temp,magneticField,initState,maxGdist,maxTsep);   
+        chain1.mean_S_correlation(gettotalFname()); 
+        
+                data_out << std::scientific <<  chainLength*coeff  << "\t" 
+                                         << chain1.Gs[1] << "\t" 
+                                         << (1.0 / atanh(chain1.Gs[1] / chain1.Gs[0])) << endl;
+
+        
+        }
+        
+        data_out.close();
+                                      
        }// end of run()
 
 };

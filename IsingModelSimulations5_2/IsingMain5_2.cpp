@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
     // IsingTestExact1D isingTestExact1D; // Ising1D calulation of extact values of Cv for 1D chain
     
 //2D ISING MODEL ON SQUARE LATTICE WITH PERIODIC BOUNDARY CONDITIONS 
-    // IsingTestChi2D isingTestChi2D;  //  Ising2D test of Chi in function of T
+     IsingTestChi2D isingTestChi2D;  //  Ising2D test of Chi in function of T
     // IsingTestError2D isingTestError2D;   //  Ising2D test of ERROR funtion for Chi for different prod_time
     // IsingTestCC2D isingTestCC2D;   //  Ising2D test of CC in function of T for different lattices
     // IsingTestM2D isingTestM2D;     //  Ising2D test of M in function of T for different lattices        

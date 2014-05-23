@@ -67,7 +67,8 @@ class IsingTestM2D : public IsingTest {
                 double T = dataT[t];
                 cout << "T=" << T << "\t:";
                 Ising2D lattice2d(chainLength, T, magneticField, initState, maxGdist, maxTsep);        
-                lattice2d.MC_simulation(therm_t, prod_t, measure_f,METHOD_METROPOLIS);
+                //lattice2d.MC_simulation(therm_t, prod_t, measure_f,METHOD_METROPOLIS);
+                lattice2d.MC_simulation(therm_t, prod_t, measure_f,METHOD_WOLFF);
                 double M = lattice2d.order_parameter(gettotalFname().c_str()); //calculating mean magnetization 
                 dataNxN[i].push_back(M);
             }// end of for loop over temperatures      

@@ -43,7 +43,7 @@ For the system of spins $s_{i}$ in external magnetic field $h$,
 the Hamiltonian is:
 
 \[
-\hat{H}=J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}+h\sum_{i}s_{i},
+\hat{H}=-J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}-h\sum_{i}s_{i},
 \]
 
 
@@ -62,13 +62,13 @@ Here the value of magnetization is averaged over the configurations
 $\{s\}$ of spins:
 
 \begin{equation}
-\left\langle M\right\rangle =\frac{1}{Z}\sum_{\{s\}}M\exp(-\beta J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}-\beta h\sum_{i}s_{i}),\label{eq:meanM}
+\left\langle M\right\rangle =\frac{1}{Z}\sum_{\{s\}}M\exp(\beta J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}+\beta h\sum_{i}s_{i}),\label{eq:meanM}
 \end{equation}
 
 
 where 
 \[
-Z=\sum_{\{s\}}\exp(-\beta J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}-\beta h\sum_{i}s_{i}).
+Z=\sum_{\{s\}}\exp(\beta J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}+\beta h\sum_{i}s_{i}).
 \]
 
 
@@ -77,7 +77,7 @@ let us take the derivative of the (\ref{eq:meanM}) with respect to
 $h$. 
 
 \[
-\frac{\partial\left\langle M\right\rangle }{\partial h}=\frac{\beta}{Z}\sum_{\{s\}}M^{2}\exp(-\beta\hat{H})-\frac{\beta}{Z^{2}}\left[\sum_{\{s\}}M\exp(-\beta\hat{H})\right]^{2}=\beta\left(\left\langle M^{2}\right\rangle -\left\langle M\right\rangle ^{2}\right).
+\frac{\partial\left\langle M\right\rangle }{\partial h}=\frac{\beta}{Z}\sum_{\{s\}}M^{2}\exp(-\beta\hat{H})+\frac{\beta}{Z^{2}}\left[\sum_{\{s\}}M\exp(-\beta\hat{H})\right]^{2}=\beta\left(\left\langle M^{2}\right\rangle -\left\langle M\right\rangle ^{2}\right).
 \]
 
 
@@ -117,8 +117,8 @@ their values are:
 T_{c}=2.269,\:\gamma=7/4.
 \]
 It means that for the critical temperature the magnetic susceptibility
-diverges at $t$. For finite lattice the critical temperature is slightly
-different. The susceptibility 
+diverges at $T=T_{c}$. For finite lattice the critical temperature
+is slightly different and the susceptibility is finite.
 
 
 \section{Results for 1D chain}
@@ -126,13 +126,14 @@ different. The susceptibility
 The appropriate test class has name: IsingTestChi1D.
 
 We performed the calculations of $\chi_{0}$versus the temperature
-for a chain of $N=500$ spins. We compared the results with the analytical
-solution. The dependence is shown in the figure (\ref{chi_T}). For
-high temperatures we find a good agreement with the analytical solution.
-However, for low temperatures there is a significant difference between
-the numerical and analytical results. We attribute this behavior to
-the low acceptance ratio of Metropolis algorithm, which lowers the
-number of configurations used in the averaging. 
+for a chain of $N=500$ spins with production time 10000 for each
+$T$. We compared the results with the analytical solution. The dependence
+is shown in the figure (\ref{chi_T}). For high temperatures we find
+a good agreement with the analytical solution. However, for low temperatures
+there is a significant difference between the numerical and analytical
+results. We attribute this behavior to the low acceptance ratio of
+Metropolis algorithm, which lowers the number of configurations used
+in the averaging. 
 
 \begin{figure}[H]
 \includegraphics[width=0.6\paperwidth]{IsingTestChi1D}\label{chi_T}

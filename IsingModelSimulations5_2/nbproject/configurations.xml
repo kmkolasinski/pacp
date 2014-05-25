@@ -6,8 +6,6 @@
                    projectFiles="true">
       <itemPath>Ising2D.h</itemPath>
       <itemPath>Ising5_2.h</itemPath>
-      <itemPath>Tests/IsingTestError2D.h</itemPath>
-      <itemPath>Tests/IsingTestRenormGroup2D.h</itemPath>
       <itemPath>RNG.h</itemPath>
       <itemPath>Tools.h</itemPath>
     </logicalFolder>
@@ -28,18 +26,23 @@
     <logicalFolder name="Tests" displayName="Tests" projectFiles="true">
       <itemPath>Tests/IsingTest.h</itemPath>
       <itemPath>Tests/IsingTestCC2D.h</itemPath>
-      <itemPath>Tests/IsingTestChi.h</itemPath>
+      <itemPath>Tests/IsingTestChi1D.h</itemPath>
       <itemPath>Tests/IsingTestChi2D.h</itemPath>
+      <itemPath>Tests/IsingTestClusterFreq2D.h</itemPath>
       <itemPath>Tests/IsingTestClusterStat.h</itemPath>
       <itemPath>Tests/IsingTestCorrelationLength.h</itemPath>
       <itemPath>Tests/IsingTestE1D.h</itemPath>
-      <itemPath>Tests/IsingTestError.h</itemPath>
+      <itemPath>Tests/IsingTestError1D.h</itemPath>
+      <itemPath>Tests/IsingTestError2D.h</itemPath>
       <itemPath>Tests/IsingTestExact1D.h</itemPath>
       <itemPath>Tests/IsingTestExact2D.h</itemPath>
+      <itemPath>Tests/IsingTestLatticeEvolution.h</itemPath>
       <itemPath>Tests/IsingTestM2D.h</itemPath>
       <itemPath>Tests/IsingTestMeanClusterFreq1D.h</itemPath>
+      <itemPath>Tests/IsingTestMeanClusterFreq2D.h</itemPath>
       <itemPath>Tests/IsingTestMeanECorrelation.h</itemPath>
       <itemPath>Tests/IsingTestRenormGroup1D.h</itemPath>
+      <itemPath>Tests/IsingTestRenormGroup2D.h</itemPath>
       <itemPath>Tests/IsingTestTCorr.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -47,7 +50,6 @@
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
-    <itemPath>tests_out/IsingTestRenormGroup1D.plt</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>Tests</Elem>
@@ -80,9 +82,11 @@
       </item>
       <item path="Tests/IsingTestCC2D.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Tests/IsingTestChi.h" ex="false" tool="3" flavor2="0">
+      <item path="Tests/IsingTestChi1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestChi2D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestClusterFreq2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestClusterStat.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -90,7 +94,7 @@
       </item>
       <item path="Tests/IsingTestE1D.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Tests/IsingTestError.h" ex="false" tool="3" flavor2="0">
+      <item path="Tests/IsingTestError1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestError2D.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -98,9 +102,13 @@
       </item>
       <item path="Tests/IsingTestExact2D.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Tests/IsingTestLatticeEvolution.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Tests/IsingTestM2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestMeanClusterFreq1D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestMeanClusterFreq2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestMeanECorrelation.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -113,11 +121,6 @@
       <item path="Tools.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Tools.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="tests_out/IsingTestRenormGroup1D.plt"
-            ex="false"
-            tool="3"
-            flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -162,9 +165,11 @@
       </item>
       <item path="Tests/IsingTestCC2D.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Tests/IsingTestChi.h" ex="false" tool="3" flavor2="0">
+      <item path="Tests/IsingTestChi1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestChi2D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestClusterFreq2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestClusterStat.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -172,7 +177,7 @@
       </item>
       <item path="Tests/IsingTestE1D.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Tests/IsingTestError.h" ex="false" tool="3" flavor2="0">
+      <item path="Tests/IsingTestError1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestError2D.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -180,9 +185,13 @@
       </item>
       <item path="Tests/IsingTestExact2D.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Tests/IsingTestLatticeEvolution.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Tests/IsingTestM2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestMeanClusterFreq1D.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestMeanClusterFreq2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestMeanECorrelation.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -195,11 +204,6 @@
       <item path="Tools.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Tools.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="tests_out/IsingTestRenormGroup1D.plt"
-            ex="false"
-            tool="3"
-            flavor2="0">
       </item>
     </conf>
   </confs>

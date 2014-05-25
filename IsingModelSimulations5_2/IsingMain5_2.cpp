@@ -42,6 +42,8 @@
 #include "Tests/IsingTestE1D.h"
 #include "Tests/IsingTestClusterFreq2D.h"
 
+#include "Tests/IsingTestMeanClusterFreq2D.h"
+
 using namespace std;
 
 int main(int argc, char** argv) {
@@ -62,7 +64,7 @@ int main(int argc, char** argv) {
     // IsingTestChi1D isingTestChi;     //  Ising1D test of Chi in function of T
     // IsingTestError1D isingTestError; //  Ising1D test of ERROR funtion for Chi for different prod_
     // IsingTestClusterStat isingTestClusterStat;  //Ising1D test of cluster distribution
-    // IsingTestCorrelationLength isingTestCorrelationLength;
+     IsingTestCorrelationLength isingTestCorrelationLength;
     // IsingTestMeanECorrelation isingTestMeanECorrelation;
     // IsingTestTCorr isingTestTCorr; // 
     // IsingTestMeanClusterFreq1D isingTestMeanClusterFreq1D; // Ising1D test for mean cluster size distribution
@@ -71,14 +73,15 @@ int main(int argc, char** argv) {
     // IsingTestExact1D isingTestExact1D; // Ising1D calulation of extact values of Cv for 1D chain
     
 //2D ISING MODEL ON SQUARE LATTICE WITH PERIODIC BOUNDARY CONDITIONS 
-     IsingTestChi2D isingTestChi2D;  //  Ising2D test of Chi in function of T
+    // IsingTestChi2D isingTestChi2D;  //  Ising2D test of Chi in function of T
     // IsingTestError2D isingTestError2D;   //  Ising2D test of ERROR funtion for Chi for different prod_time
     // IsingTestCC2D isingTestCC2D;   //  Ising2D test of CC in function of T for different lattices
     // IsingTestM2D isingTestM2D;     //  Ising2D test of M in function of T for different lattices        
     // IsingTestExact2D isingTestExact2D; // Ising2D test which calculates the exacts values of Cv for  small lattices
     // IsingTestClusterFreq2D isingTestClusterFreq2D;
-    
+    // IsingTestMeanClusterFreq2D isingTestMeanClusterFreq2D;
     //  IsingTestExact2D isingTestExact2D; // Ising2D test which calculates the exacts values of Cv for  small lattices
+    
     
 //TOOLS
     // TestError TestError; //  Generic test of ERROR funtion for some input data 

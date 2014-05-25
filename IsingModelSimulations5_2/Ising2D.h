@@ -29,7 +29,12 @@ public:
     Ising2D(int NN,double TT, double hh, double p, int maxGd, int maxTsep); //Constructor of the class
     virtual ~Ising2D();   
     double E(); 
+
+    //CLUSTER FREQUENCY FUNCTIONS
+    cluster_stat_2D CFD;
     cluster_stat_2D cluster_freq2D();
+    cluster_stat_2D cluster_freq2D(vector<short> SS);
+    cluster_stat_2D mean_cluster_freq2D(vector<vector<short> > SS);
 //*** MONTE CARLO ENGINS, MC WRAPPER, SOME MC PARAMETERS     
     vector<short> Metropolis_cycle();
     vector<short> Wolff_cycle();

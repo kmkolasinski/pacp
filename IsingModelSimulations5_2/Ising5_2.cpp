@@ -252,6 +252,20 @@ double Ising::E() {
     }
     return E / (N);
 }
+double Ising::E(vector<short> SS) {
+    double E;
+    E = 0;
+    int n=SS.size();
+    for (int i = 0; i < n; i++) {
+        E+=-SS[i]*SS[(i+1)%n];
+        /*if (i == (SS.size() - 1)) {
+            E += -SS[i] * SS[0];
+        } else {
+            E += -SS[i] * SS[i + 1];
+        }*/
+    }
+    return E / SS.size();
+}
 
 vector<double> Ising::E_correlation(int maxGdist, double E) {
     /*Domain: data analysis, calculation of physical quantities
@@ -262,22 +276,44 @@ vector<double> Ising::E_correlation(int maxGdist, double E) {
 
     double E2 = E*E;
     vector<double> corr(maxGdist,0);
-    for (int dist = 0; dist < maxGdist; dist++) {
+    for (int dist = 0; dist<maxGdist; dist++) {
         for (int pos = 0; pos < N; pos++) {
-            corr[dist] += S[pos] * S[(pos + dist) % N]-E2;
+            corr[dist] += S[pos]*S[(pos+1) % N] * S[(pos + dist) % N]*S[(pos + 1+ dist) % N]-E2;
         }
         corr[dist] /= N;
     }
     return corr;
 
 }
+vector<double> Ising::E_correlation(int maxGdist, double E, vector<short> SS) {
+    /*Domain: data analysis, calculation of physical quantities
+     * Calculate instantaneous connected correlation function
+     * E represents instantenous (i.e. lattice) mean value of energy. 
+     *         Ge(x)= <E(0)E(x)> - <E>^2
+     */
 
-vector<double> Ising::mean_E_correlation(vector <vector<short> > SS) {
+    double E2 = E*E;
+    int n=SS.size();
+    vector<double> corr(maxGdist,0);
+    for (int dist = 0; dist<maxGdist; dist++) {
+        for (int pos = 0; pos < n; pos++) {
+            float e_pos=-SS[pos]*SS[(pos+1)%n];
+            float e_dist_p=-SS[(pos+dist)%n]*SS[(pos+dist+1)%n];
+            float e_dist_l=-SS[(pos+n-dist)%n]*SS[(pos+n-dist+1)%n];
+            corr[dist] += e_pos*(e_dist_p+e_dist_l)-E2;
+        }
+        corr[dist] /= n;
+    }
+    return corr;
+
+}
+
+/*vector<double> Ising::mean_E_correlation(vector <vector<short> > SS) {
     /*
      * Function allows to measure energy correlation by calculating its
      * time mean value.
      * 
-     */
+     
      
     //Declaration of iterators
     vector<vector<short> >::iterator t;
@@ -304,6 +340,26 @@ vector<double> Ising::mean_E_correlation(vector <vector<short> > SS) {
     }
     for (int j = 0; j < maxGdist; j++)
         Ge[j] /= SS.size(); //normalization by number of measures
+
+    return Ge;
+}
+ */
+vector<double> Ising::mean_E_correlation(vector <vector<short> > SS) {
+    /*
+     * Function allows to measure energy correlation by calculating its
+     * time mean value.
+     */
+
+    //TEMPORARY VARIABLE FOR E CORRELATION
+    vector<double> E_corr(maxGdist,0);
+    int n=SS.size();
+    double energy=0;
+    for(int i=0 ; i<n ; i++){
+        energy=E(SS[i]);
+        E_corr=E_correlation(maxGdist, energy, SS[i]);
+        for(int j=0; j<maxGdist ; j++) Ge[j]+=E_corr[j];
+    }
+    for (int j = 0; j < maxGdist; j++) Ge[j] /=n;
 
     return Ge;
 }

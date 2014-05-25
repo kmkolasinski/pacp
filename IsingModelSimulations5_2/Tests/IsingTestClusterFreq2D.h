@@ -16,7 +16,7 @@ class IsingTestClusterFreq2D : public IsingTest {
             info(); 
             run(); // run all calculations
             string cmd =string("cd ")+test_dir_output+string(";gnuplot IsingTestClusterFreq2D.plt");
-           // int info = system(cmd.c_str());
+            int info = system(cmd.c_str());
         }   
         
         /**
@@ -28,9 +28,9 @@ class IsingTestClusterFreq2D : public IsingTest {
         cout << " God, shave the Queen..." << endl;
         
         //SIMULATION INPUT DATA
-        int chainLength      = 50;    //initial lattice size
+        int chainLength      = 10;    //initial lattice size
         double magneticField = 0.0;
-        double T             = 10.0;
+        double T             = 1.4;
         int therm_t          =  50;    //thermalization time
         int measure_f        =   1;    //measure frequency
         int prod_t           =1000;    //productiontime
@@ -44,17 +44,17 @@ class IsingTestClusterFreq2D : public IsingTest {
         Ising2D lattice(chainLength, T, magneticField, initState, maxGdist, maxTsep);        
         lattice.MC_simulation(therm_t, prod_t, measure_f,METHOD_WOLFF);
         
-        /*for(int i=0 ; i<chainLength ; i++){
+        for(int i=0 ; i<chainLength ; i++){
             for(int j=0; j< chainLength; j++){
                 data_out << lattice.S[j+chainLength*i] << "\t";
             }
             data_out << "\n";
-        }*/
+        }
         vector <short> cf(lattice.cluster_freq2D().SS);        
-        for(int i=0 ; i<chainLength ; i++){
+        /*for(int i=0 ; i<chainLength ; i++){
             for(int j=0; j< chainLength; j++) data_out << cf[j+chainLength*i] << "\t";
             data_out << "\n";
-        }
+        }*/
         
         
         data_out.close();

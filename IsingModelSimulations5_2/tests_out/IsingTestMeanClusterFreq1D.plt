@@ -4,4 +4,4 @@ set o  "IsingTestMeanClusterFreq1D.png"
 set yl "Cluster size"
 set xl "Temperature"
 set title "Mean cluster size versus temperature for N=1000"
-plot "IsingTestMeanClusterFreq1D.txt" u 1:2 w lp  pt 6 lw 3 notitle
+plot "IsingTestMeanClusterFreq1D.txt" u 1:2 w lp  pt 6 lw 3 t "Wolf", "" u 1:3 w lp pt 6 lw 3 t "Metropolis";

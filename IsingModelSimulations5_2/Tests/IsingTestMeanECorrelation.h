@@ -30,12 +30,12 @@ public:
         cout << " Running test..." << endl;
 
         //SIMULATION INPUT DATA
-        int chainLength = 500;
-        double temperature = 0.7;
+        int chainLength = 1000;
+        double temperature = 1.0;
         double magneticField = 0.0;
-        int therm_t = 10; //thermalization time
-        int measure_f = 10; //measure frequency
-        int prod_t = 1000; //productiontime
+        int therm_t = 100; //thermalization time
+        int measure_f = 100; //measure frequency
+        int prod_t = 10000; //productiontime
         int maxGdist = 20; //domain of correlation function extends from 0 to maxGdist-1
         int maxTsep = 2;
         double initState = 0.7; //values between 0.5 and 1.0
@@ -45,18 +45,15 @@ public:
         //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
         Ising chain(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
         //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
-        chain.MC_simulation(therm_t, prod_t, measure_f,METHOD_WOLFF);
+        chain.MC_simulation(therm_t, prod_t, measure_f);
     
         vector<vector<short> > SS;
         //INITIALIZATION OF SPINS CHAINS
-        for(int j=0 ; j<100 ; j++ ){    
+        for(int j=0 ; j<10 ; j++ ){    
             SS.clear();
             for (int t=0; t<prod_t ; t++ ){
-                if (!(t % measure_f)) {
-                    SS.push_back(chain.S); 
-                    chain.cycle();
-                }else
-                    chain.cycle();
+                if (!(t % measure_f)) SS.push_back(chain.S); 
+                chain.cycle();
             }
         }
         cout << "Spin chains initialization complete." << endl;

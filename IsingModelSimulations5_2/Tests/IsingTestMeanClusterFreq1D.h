@@ -48,11 +48,15 @@ public:
         //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
         //WOLF AND METROPOLIS CHAINS THAT ALLOWS TO COMPARE TWO ALGORITHMES
         chain.MC_simulation(therm_t, prod_t, measure_f,METHOD_WOLFF);
+        chain2.MC_simulation(therm_t*10, prod_t*10, measure_f,METHOD_METROPOLIS);
         vector<vector<short> > SS;
         cluster_stat CS;
-        float mean_cs_size;
+        float mean_cs_size,mean_cs_size2;
         for(int i=0 ; i<100 ; i++){
-            
+            if(i==99){
+                chain.T=0;
+                chain2.T=0;
+            }
             //INITIALIZATION OF SPINS CHAINS
             SS.clear();
             for (int t = 0; t < prod_t; t++){
@@ -69,11 +73,34 @@ public:
             for(unsigned int j=0; j< CS.CF.size(); j++){
                 mean_cs_size+=CS.CF[j]*j;
             }
-            data_out << std::scientific << chain.T << "\t" << mean_cs_size << endl;
+            //data_out << std::scientific << chain.T << "\t" << mean_cs_size << endl;
             chain.T-=0.02;
             
             //TERMALIZATION AFTER TEMPERATURE STEP
             for(int k=0;k<therm_t;k++) chain.cycle();
+            
+            //Part for metropolis chain
+            //INITIALIZATION OF SPINS CHAINS
+            SS.clear();
+            for (int t = 0; t < prod_t*10; t++){
+                if (!(t % measure_f*10)) {
+                    SS.push_back(chain2.S); 
+                    chain2.cycle();
+                }else
+                    chain2.cycle();
+            }
+            
+            //MEASUREMENT OF MEAN CLUSTER SIZE FOR GIVEN TEMPERATURE
+            mean_cs_size2=0;
+            CS=chain2.mean_cluster_freq1D(SS);
+            for(unsigned int j=0; j< CS.CF.size(); j++){
+                mean_cs_size+=CS.CF[j]*j;
+            }
+            data_out << std::scientific << chain.T << "\t" << mean_cs_size << "\t" << mean_cs_size2 << endl;
+            chain2.T-=0.02;
+            
+            //TERMALIZATION AFTER TEMPERATURE STEP
+            for(int k=0;k<therm_t*10;k++) chain2.cycle();
         }
         data_out.close();
     }// end of run()

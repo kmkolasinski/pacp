@@ -26,8 +26,9 @@ public:
         //ADDITIONAL OPERATIONS ON PLOT AND DATA FILES
         cmd = string("cd ") + test_dir_output + string(";paste -d ' ' cl.txt IsingTestCorrelationLengthMCS.txt > IsingTestCLvsMCS.txt");
         info=system(cmd.c_str());
-        cmd = string("cd ") + test_dir_output + string(";rm cl.txt fit.log;gnuplot IsingTestCorrelationLengthB.plt;clear");
+        cmd = string("cd ") + test_dir_output + string(";gnuplot IsingTestCorrelationLengthB.plt;clear");
         info=system(cmd.c_str());
+        //;rm cl.txt fit.log
     }
 
     /**

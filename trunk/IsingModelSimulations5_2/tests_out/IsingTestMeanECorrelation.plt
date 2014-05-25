@@ -5,5 +5,5 @@ set o  "IsingTestMeanECorrelation.png"
 set yl "Mean energy correlation"
 set xl "Correlation distance"
 
-set title "Mean Energy Correlation versus distance in temperature T=0.8x"
+set title "Mean Energy Correlation versus distance in temperature T=0.5"
 plot "IsingTestMeanECorrelation.txt" u 1:2 w lp  pt 6 lw 2 notitle

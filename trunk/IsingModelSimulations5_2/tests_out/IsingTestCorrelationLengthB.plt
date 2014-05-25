@@ -1,7 +1,7 @@
 #gnuplot
 set terminal png;
 set output "IsingTestCLvsMCS.png";
-set title "Correlation Length in function of mean cluster size for T[0.5;1.5]. N=1000";
+set title "Correlation Length in function of mean cluster size for T[0.6;1.5], N=1000";
 set ylabel "Mean Cluster Size";
 set xlabel "Correlation length";
 fit a*x+b  "IsingTestCLvsMCS.txt" via a,b;

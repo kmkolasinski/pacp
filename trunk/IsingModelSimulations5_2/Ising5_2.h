@@ -82,6 +82,7 @@ public:
     vector<double> mean_S_correlation(vector <vector<short> > SS);
     vector<double> Ge;   //measured correlation function Ge(local energy separation)  
     vector<double> E_correlation(int maxGdist,double E);  //function measuring instant energy-energy correlation
+    vector<double> E_correlation(int maxGdist,double E, vector<short> SS);  //function measuring instant energy-energy correlation
     vector<double> mean_E_correlation(vector <vector<short> > SS);  //function measuring macroscopic energy-energy correlation
 
     
@@ -96,6 +97,7 @@ public:
     
     //ENERGY
     virtual double E(); //measure energy per spin of a given spin configuration (lattice mean or instantaneous value) 
+    double E(vector<short> SS);//measure energy from spin chain not an object
     double aveE(string totalFname); // energy from 
     
     //CLUSTER (DOMAIN) STATISTICS

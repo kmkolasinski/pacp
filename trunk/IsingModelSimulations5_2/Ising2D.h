@@ -30,8 +30,13 @@ public:
     virtual ~Ising2D();   
     double E(); 
 
+    double Chi(string totalFname);         //magnetic susceptibility calculated using order parameter fluctuation method
+    double Chi( vector<vector<short> > SS );
+
+
     //CLUSTER FREQUENCY FUNCTIONS
     cluster_stat_2D CFD;
+
     cluster_stat_2D cluster_freq2D();
     cluster_stat_2D cluster_freq2D(vector<short> SS);
     cluster_stat_2D mean_cluster_freq2D(vector<vector<short> > SS);

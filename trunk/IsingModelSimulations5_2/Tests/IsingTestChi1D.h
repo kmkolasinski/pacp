@@ -60,6 +60,7 @@ class IsingTestChi1D : public IsingTest {
         
         Ising chain(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
         chain.ising_method_type=METHOD_WOLFF;
+        //chain.ising_method_type=METHOD_METROPOLIS;
         //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
         chain.MC_simulation(therm_t, prod_t, measure_f);
                 

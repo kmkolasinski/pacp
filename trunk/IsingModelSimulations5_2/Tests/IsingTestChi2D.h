@@ -49,7 +49,7 @@ class IsingTestChi2D : public IsingTest {
         int maxTsep          = 2;
         double initState     = 0.7;    //values between 0.5 and 1.0
         string fileout = test_dir_output+"IsingTestChi2D.txt";
-        //string fileout_w = test_dir_output+"IsingTestChi2D_w.txt";
+        string fileout_w = test_dir_output+"IsingTestChi2D_w.txt";
         string fileout2 = test_dir_output+"IsingTestChi2D_2.txt";
         ofstream data_out(fileout.c_str());
         
@@ -64,7 +64,7 @@ class IsingTestChi2D : public IsingTest {
         
         
 
-        for( double temperature = 0.3 ; temperature < 3.5 ; temperature += 0.1  ){         
+        for( double temperature = 0.3 ; temperature < 3.5 ; temperature += 0.01  ){         
         //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
         Ising2D chain2D(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
         //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
@@ -89,12 +89,12 @@ class IsingTestChi2D : public IsingTest {
         
         
         
-       /*ofstream data_out_w(fileout_w.c_str());
-        for( double temperature = 1.0 ; temperature < 3.0 ; temperature += 0.1  ){         
+       ofstream data_out_w(fileout_w.c_str());
+        for( double temperature = 0.3 ; temperature < 3.5 ; temperature += 0.01  ){         
         //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
         Ising2D chain2D(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
         //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
-        chain2D.MC_simulation(therm_t, prod_t, measure_f, METHOD_WOLFF);
+        chain2D.MC_simulation(therm_t, prod_t/10, measure_f, METHOD_WOLFF);
                 
         double chi      = chain2D.Chi(gettotalFname().c_str());
         //double chi_anal = exp(2./temperature)/temperature;
@@ -108,12 +108,10 @@ class IsingTestChi2D : public IsingTest {
                                          << chi-error << "\t"
                                          << chi+error << endl;
 
-        cout << std::scientific <<  temperature  << "\t" << chi << "\t" << chi_anal << "\t" <<  error << endl;
-                                                                                          
-                                                                                          
+        cout << std::scientific <<  temperature  << "\t" << chi << "\t" /*<< chi_anal */<< "\t" <<  error << endl;                                                                                                                                                         
         }// end of for(temp)
         data_out_w.close();  
-        */
+        
         
         ofstream data_out2(fileout2.c_str());
         double temperature=1.;

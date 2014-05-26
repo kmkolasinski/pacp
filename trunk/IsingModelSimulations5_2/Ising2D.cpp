@@ -1,4 +1,5 @@
 #include "Ising2D.h"
+#include "Tools.h"
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -364,6 +365,46 @@ cluster_stat_2D Ising2D::cluster_freq2D() {
     cls.cmax=max_cl;
     return cls;
 }
+
+double Ising2D::Chi(string totalFname) {
+    // Calculates the magnetic susceptibility of the system
+    // which is stored in file totalFname
+    //parameter: totalFname - name of file
+    
+    //Raw simulation data flows from disk to vector container
+    vector<vector<short> > SS = readDATAtoVectors(totalFname, N);
+
+    return Chi(SS);
+}
+
+double Ising2D::Chi( vector<vector<short> > SS ) {
+ // Calculates the magnetic susceptibility of the system
+    // which is stored in vector SS
+    //parameter: SS - Raw simulation data
+    
+    //number of time samples
+    int t_steps=SS.size();
+    //auxiliary variables
+    double M_temp, aM, aM2;
+    
+    aM=0.; aM2=0.;
+    for(int j=0;j<t_steps;j++){
+        M_temp=0.;
+        //calculation of magnetisation M
+        for(int i=0;i<N;i++){
+            M_temp+=SS[j][i];
+        }        
+        //calculation of <M> and <M^2>
+        aM+=abs(M_temp);
+        aM2+=M_temp*M_temp;
+    }
+    //normalization by number of measures and sites
+    aM=aM/t_steps/(double)N; 
+    aM2=aM2/t_steps/(double)(N*N);
+    
+    return (aM2-aM*aM)/T; //Chi
+}
+
 cluster_stat_2D Ising2D::cluster_freq2D(vector<short> SS) {
     
     vector<float> tt(N+1, 0); 

@@ -44,7 +44,7 @@ class IsingTestChi2D : public IsingTest {
         double magneticField = 0.0;
         int therm_t          = 1000;   //thermalization time
         int measure_f        = 10;     //measure frequency
-        int prod_t           = 10000;  //productiontime
+        int prod_t           = 100000;  //productiontime
         int maxGdist         = 10;     //domain of correlation function extends from 0 to maxGdist-1
         int maxTsep          = 2;
         double initState     = 0.7;    //values between 0.5 and 1.0
@@ -94,7 +94,7 @@ class IsingTestChi2D : public IsingTest {
         //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
         Ising2D chain2D(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
         //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
-        chain2D.MC_simulation(therm_t, prod_t/10, measure_f, METHOD_WOLFF);
+        chain2D.MC_simulation(therm_t, prod_t/1000, measure_f, METHOD_WOLFF);
                 
         double chi      = chain2D.Chi(gettotalFname().c_str());
         //double chi_anal = exp(2./temperature)/temperature;

@@ -1,0 +1,600 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Susceptibility computation for Ising model for 1D and 2D
+\end_layout
+
+\begin_layout Standard
+This is short theoretical explanation of the test: 
+\series bold
+IsingTestChi1D.h
+\series default
+ and 
+\series bold
+IsingTestChi2D.h
+\series default
+.
+\end_layout
+
+\begin_layout Section
+Theory
+\end_layout
+
+\begin_layout Standard
+Magnetic susceptibility (
+\begin_inset Formula $\chi$
+\end_inset
+
+) is defined by the relationship:
+\begin_inset Formula 
+\[
+\chi=\frac{\partial M}{\partial h},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $M$
+\end_inset
+
+ is magnetization of the system
+\begin_inset Formula 
+\[
+M=\sum_{i}s_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and 
+\begin_inset Formula $h$
+\end_inset
+
+ is magnetic field strength.
+ We focus on calculating the magnetic susceptibility at zero magnetic field:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\chi_{0}=\frac{\partial M}{\partial h}|_{h=0},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+calculated per one site.
+\end_layout
+
+\begin_layout Standard
+For the system of spins 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+ in external magnetic field 
+\begin_inset Formula $h$
+\end_inset
+
+, the Hamiltonian is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\hat{H}=-J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}-h\sum_{i}s_{i},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\beta=1/(k_{B}T)$
+\end_inset
+
+, 
+\begin_inset Formula $J$
+\end_inset
+
+ is interaction energy between the adjacent spins and the first sum runs
+ over pairs of neighboring sites 
+\begin_inset Formula $s_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We can calculate 
+\begin_inset Formula $\chi_{0}$
+\end_inset
+
+ as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\chi_{0}=\frac{\partial\left\langle M\right\rangle }{\partial h}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here the value of magnetization is averaged over the configurations 
+\begin_inset Formula $\{s\}$
+\end_inset
+
+ of spins:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\left\langle M\right\rangle =\frac{1}{Z}\sum_{\{s\}}M\exp(\beta J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}+\beta h\sum_{i}s_{i}),\label{eq:meanM}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula 
+\[
+Z=\sum_{\{s\}}\exp(\beta J\sum_{\left\langle i,j\right\rangle }s_{i}s_{j}+\beta h\sum_{i}s_{i}).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To obtain a formula useful for the numerical calculation of 
+\begin_inset Formula $\chi_{0}$
+\end_inset
+
+, let us take the derivative of the 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:meanM"
+
+\end_inset
+
+ with respect to 
+\begin_inset Formula $h$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\partial\left\langle M\right\rangle }{\partial h}=\frac{\beta}{Z}\sum_{\{s\}}M^{2}\exp(-\beta\hat{H})+\frac{\beta}{Z^{2}}\left[\sum_{\{s\}}M\exp(-\beta\hat{H})\right]^{2}=\beta\left(\left\langle M^{2}\right\rangle -\left\langle M\right\rangle ^{2}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In zero field:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\chi_{0}=\beta\left(\left\langle M^{2}\right\rangle |_{h=0}-\left\langle M\right\rangle ^{2}|_{h=0}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This formula allows for calculation of the 
+\begin_inset Formula $\chi_{0}$
+\end_inset
+
+ in the Monte Carlo simulation of Ising model.
+ 
+\end_layout
+
+\begin_layout Standard
+For comparison of the numerical results with the theoretical values of the
+ magnetization, let us consider the behavior of 
+\begin_inset Formula $\chi_{0}$
+\end_inset
+
+ in function of the temperature.
+ In one dimension, for a chain of 
+\begin_inset Formula $N$
+\end_inset
+
+spins the analytical formula is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\chi_{0}=\frac{\beta}{N}\exp\left(2\beta J\right).\label{eq:1Dchi_an}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For 2D square lattice of 
+\begin_inset Formula $N$
+\end_inset
+
+ spins we don't have the exact formula for the susceptibility, but we know
+ the behavior in the critical temperature:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\chi\sim\left|t\right|^{-\gamma},
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $t=\frac{T-T_{c}}{T_{c}}$
+\end_inset
+
+, 
+\begin_inset Formula $T_{c}$
+\end_inset
+
+ being the critical temperature, and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ is the critical exponent.
+ For an infinite 2D lattice their values are:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+T_{c}=2.269,\:\gamma=7/4.
+\]
+
+\end_inset
+
+It means that for the critical temperature the magnetic susceptibility diverges
+ at 
+\begin_inset Formula $T=T_{c}$
+\end_inset
+
+.
+ For finite lattice the critical temperature is slightly different and the
+ susceptibility is finite.
+\end_layout
+
+\begin_layout Section
+Results for 1D chain
+\end_layout
+
+\begin_layout Standard
+The appropriate test class has name: IsingTestChi1D.
+\end_layout
+
+\begin_layout Standard
+We performed the calculations of 
+\begin_inset Formula $\chi_{0}$
+\end_inset
+
+versus the temperature for a chain of 
+\begin_inset Formula $N=500$
+\end_inset
+
+ spins with 10000 Monte Carlo cycles for each 
+\begin_inset Formula $T$
+\end_inset
+
+.
+ We compared the results with the analytical solution.
+ The dependence is shown in the figure 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "chi_T"
+
+\end_inset
+
+.
+ For high temperatures we find a good agreement with the analytical solution.
+ However, for low temperatures there is a significant difference between
+ the numerical and analytical results.
+ We attribute this behavior to the low acceptance ratio of Metropolis algorithm,
+ which lowers the number of configurations used in the averaging.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename IsingTestChi1D.png
+	width 60page%
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "chi_T"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The numerical and analytical results for susceptibility versus the temperature.
+ The plot is generated by the IsingTestChi1D class.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Also, we performed the calculations of the magnetic susceptibility versus
+ the number of spins at 
+\begin_inset Formula $T=1$
+\end_inset
+
+ K.
+ According to 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:1Dchi_an"
+
+\end_inset
+
+, 
+\begin_inset Formula $\chi_{0}$
+\end_inset
+
+ is proportional to inverse 
+\begin_inset Formula $N$
+\end_inset
+
+.
+ Results are shown on Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chi_N"
+
+\end_inset
+
+.
+ We find a good agreement with the analytical solution.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename IsingTestChi1D_N.png
+	width 60page%
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "chi_N"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The numerical and analytical results for susceptibility versus the size
+ of chain.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Results for 2D lattice
+\end_layout
+
+\begin_layout Standard
+The appropriate test class has name: IsingTestChi2D.
+ 
+\end_layout
+
+\begin_layout Standard
+We computed the susceptibility versus temperature for a square lattice consistin
+g of 100 spins.
+ The results are shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chi_E2D"
+
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $T$
+\end_inset
+
+ we did 100000 cycles for Metropolis and 1000 Wolff cycles.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename IsingTestChi2D.png
+	width 60page%
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "chi_E2D"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Results for susceptibility versus the temperature.
+ Green points show the result for Wolff algorithm.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

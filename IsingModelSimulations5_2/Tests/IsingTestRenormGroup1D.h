@@ -15,9 +15,15 @@ class IsingTestRenormGroup1D : public IsingTest {
 
    public:
        IsingTestRenormGroup1D():IsingTest(){
-           test_name = "Test of renormalisation group with majority rule.";   
-           test_info = string(" Run test to calculate \n")+
-                       string(" We use majority rule to assign a spin for each block of 3 spins.\n")+
+           test_name = "Test of renormalisation group transformation with majority rule.";   
+           test_info = string(" Run test to get dependence of temperature (calculated from \n")+
+                       string(" correlation) on step of renormalisation.\n")+
+                       string(" We start with lattice of length which is power of 3.\n")+
+                       string(" We use majority rule to assign a spin for each block of 3 spins\n")+
+                       string(" and calculate temperature (derived from correlations) for such a shorter chain.\n")+
+                       string(" Then we repeat few times the whole operation.\n")+   
+                       string(" We expect that for shorter chains the temperature will wander off the critical point:\n")+
+                       string(" in 1-dimensional case it will go further form T=0 K.\n")+
                        string(" \n The results are saved in proper files:")+  
                        string(" 'IsingTestRenormGroup1D.txt' and 'IsingTestRenormGroup.png' in 'tests_out' directory. \n")+
                        string(" See run() function for more details.");

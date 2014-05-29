@@ -23,7 +23,7 @@ class IsingTestRenormGroup1D : public IsingTest {
                        string(" and calculate temperature (derived from correlations) for such a shorter chain.\n")+
                        string(" Then we repeat few times the whole operation.\n")+   
                        string(" We expect that for shorter chains the temperature will wander off the critical point:\n")+
-                       string(" in 1-dimensional case it will go further form T=0 K.\n")+
+                       string(" in 1-dimensional case it will go further from T=0 K.\n")+
                        string(" \n The results are saved in proper files:")+  
                        string(" 'IsingTestRenormGroup1D.txt' and 'IsingTestRenormGroup.png' in 'tests_out' directory. \n")+
                        string(" See run() function for more details.");
@@ -55,6 +55,8 @@ class IsingTestRenormGroup1D : public IsingTest {
          
          string fileout = test_dir_output+"IsingTestRenormGroup1D.txt";
          ofstream data_out(fileout.c_str());
+         string fileout2 = test_dir_output+"IsingTestRenormGroup1D_2.txt";
+         ofstream data_out2(fileout2.c_str());
          
          int coeff=81;
         
@@ -70,7 +72,7 @@ class IsingTestRenormGroup1D : public IsingTest {
 
       
          
-        for(coeff=81;coeff>1;){ 
+        for(coeff=81;coeff>3;){ 
         
         vector<vector<short> > SS3 = readDATAtoVectors(gettotalFname(), chainLength*coeff);
 
@@ -107,6 +109,48 @@ class IsingTestRenormGroup1D : public IsingTest {
         }
         
         data_out.close();
+        
+        
+        
+        for(temp=0.6; temp<4.01; temp+=0.2){
+        Ising chain3g(chainLength*9,temp,magneticField,initState,maxGdist,maxTsep);   
+        chain3g.MC_simulation(therm_t,prod_t,measure_f);
+        chain3g.mean_S_correlation(gettotalFname());
+        
+        vector<vector<short> > SS3 = readDATAtoVectors(gettotalFname(), chainLength*9);
+
+        vector<vector<short> >::iterator t;
+        vector<short>::iterator pos;
+        
+        fstream DATA(gettotalFname().c_str(), ios::out);
+        DATA.setf(ios::showpos);
+        
+        for (unsigned int i =  0; i < SS3.size() ; i++) { 
+            for (int k =  0; k < SS3[0].size() ; k+=3 ) { //loop over chain sites "pos" at fixed time
+                DATA <<  (( SS3[i][k] + SS3[i][k+1] + SS3[i][k+2]  ) >0?1:-1) << " ";
+            } 
+
+            DATA << endl;
+        }
+        DATA.close();
+        cout << "\n \n chainLength = " << chainLength*3 << endl;
+        Ising chain1g(chainLength*3,temp,magneticField,initState,maxGdist,maxTsep);   
+        chain1g.mean_S_correlation(gettotalFname()); 
+        
+                data_out2 << std::scientific <<  temp  << "\t" 
+                                         << chain3g.Gs[1] << "\t"
+                                         << chain1g.Gs[1] << "\t" 
+                                         << (1.0 / atanh(chain3g.Gs[1] / chain3g.Gs[0])) << "\t"
+                                         << (1.0 / atanh(chain1g.Gs[1] / chain1g.Gs[0])) << endl;
+
+ 
+
+        
+        
+        }
+        
+        data_out2.close();
+        
                                       
        }// end of run()
 

@@ -68,7 +68,7 @@ int main(int argc, char** argv) {
     // IsingTestMeanECorrelation isingTestMeanECorrelation;
     // IsingTestTCorr isingTestTCorr; // 
     // IsingTestMeanClusterFreq1D isingTestMeanClusterFreq1D; // Ising1D test for mean cluster size distribution
-     IsingTestRenormGroup1D  isingTestRenormGroup1D; // Ising1D test for renormalization group
+     //IsingTestRenormGroup1D  isingTestRenormGroup1D; // Ising1D test for renormalization group
     // IsingTestE1D isingTestE1D; //Ising1D test for energy behavior of the system.
     // IsingTestExact1D isingTestExact1D; // Ising1D calulation of extact values of Cv for 1D chain
     

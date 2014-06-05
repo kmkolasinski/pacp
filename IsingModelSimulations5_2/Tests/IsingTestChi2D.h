@@ -17,7 +17,7 @@ class IsingTestChi2D : public IsingTest {
         IsingTestChi2D():IsingTest(){
             test_name = "Magnetic susceptibility test.";   
             test_info = string(" Run test to calculate the Chi value in function of \n")+
-                        string(" temperature T for the 2D Ising matrix.\n The results are saved in proper files:")+  
+                        string(" temperature T for the 2D Ising matrix of size chainLength*chainLength.\n The results are saved in proper files:")+  
                         string(" 'IsingTestChi2D.txt' and 'IsingTestChi2D.png' in 'tests_out' directory. \n")+
                         string(" See run() function for more details.\n");
                         string(" We plot the dependence of Chi on temperature. We expect that we will find");
@@ -40,7 +40,7 @@ class IsingTestChi2D : public IsingTest {
         cout << " Running test..." << endl;    
             
         //SIMULATION INPUT DATA
-        int chainLength      = 20;        
+        int chainLength      = 5;        
         double magneticField = 0.0;
         int therm_t          = 1000;   //thermalization time
         int measure_f        = 10;     //measure frequency
@@ -64,7 +64,7 @@ class IsingTestChi2D : public IsingTest {
         
         
 
-        for( double temperature = 0.3 ; temperature < 3.5 ; temperature += 0.01  ){         
+        for( double temperature = 0.3 ; temperature < 3.5 ; temperature += 0.1  ){         
         //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
         Ising2D chain2D(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
         //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
@@ -90,11 +90,11 @@ class IsingTestChi2D : public IsingTest {
         
         
        ofstream data_out_w(fileout_w.c_str());
-        for( double temperature = 0.3 ; temperature < 3.5 ; temperature += 0.01  ){         
+        for( double temperature = 0.3 ; temperature < 3.5 ; temperature += 0.1  ){         
         //CREATION AND INITIALIZATION OF THE INSTANCE OF ISING CLASS
         Ising2D chain2D(chainLength, temperature, magneticField, initState, maxGdist, maxTsep);
         //CALL TO THE ISING CLASS MEMBER FUNCTION PERFORMING SIMULATION
-        chain2D.MC_simulation(therm_t, prod_t/1000, measure_f, METHOD_WOLFF);
+        chain2D.MC_simulation(therm_t, prod_t, measure_f, METHOD_WOLFF);
                 
         double chi      = chain2D.Chi(gettotalFname().c_str());
         //double chi_anal = exp(2./temperature)/temperature;

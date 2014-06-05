@@ -69,12 +69,12 @@ int main(int argc, char** argv) {
 //2D ISING MODEL ON SQUARE LATTICE WITH PERIODIC BOUNDARY CONDITIONS 
     // IsingTestChi2D isingTestChi2D;  //  Ising2D test of Chi in function of T
     // IsingTestError2D isingTestError2D;   //  Ising2D test of ERROR funtion for Chi for different prod_time
-    // IsingTestCv2D isingTestCv2D;   //  Ising2D test of CC in function of T for different lattices
-    // IsingTestM2D isingTestM2D;     //  Ising2D test of M in function of T for different lattices        
-    // IsingTestExact2D isingTestExact2D; // Ising2D test which calculates the exacts values of Cv for  small lattices
+    // IsingTestCv2D isingTestCv2D;         //  Ising2D test of CC in function of T for different lattices
+    // IsingTestM2D isingTestM2D;           //  Ising2D test of M in function of T for different lattices        
+    // IsingTestExact2D isingTestExact2D;   // Ising2D test which calculates the exacts values of Cv for  small lattices
     // IsingTestClusterFreq2D isingTestClusterFreq2D;
     // IsingTestMeanClusterFreq2D isingTestMeanClusterFreq2D;
-    //  IsingTestExact2D isingTestExact2D; // Ising2D test which calculates the exacts values of Cv for  small lattices
+    //  IsingTestExact2D isingTestExact2D;   // Ising2D test which calculates the exacts values of Cv for  small lattices
     
     
 

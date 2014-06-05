@@ -8,7 +8,7 @@
 #ifndef ISING2D_H
 #define	ISING2D_H
 
-#include "Ising5_2.h"
+#include "Ising1D.h"
 
 #define To2D(i,j)( i + (j)*nx )
 #define Yfrom2D(site)( int(site/nx) ) // map from 1D array to y coordinate of 2D array

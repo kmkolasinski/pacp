@@ -35,9 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Ising1D.o \
 	${OBJECTDIR}/Ising2D.o \
-	${OBJECTDIR}/Ising5_2.o \
-	${OBJECTDIR}/IsingMain5_2.o \
+	${OBJECTDIR}/IsingMain.o \
 	${OBJECTDIR}/RNG.o \
 	${OBJECTDIR}/Tools.o
 
@@ -66,20 +66,20 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/isingmodelsimulations5_2: ${OBJECTFIL
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/isingmodelsimulations5_2 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/Ising1D.o: Ising1D.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ising1D.o Ising1D.cpp
+
 ${OBJECTDIR}/Ising2D.o: Ising2D.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ising2D.o Ising2D.cpp
 
-${OBJECTDIR}/Ising5_2.o: Ising5_2.cpp 
+${OBJECTDIR}/IsingMain.o: IsingMain.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Ising5_2.o Ising5_2.cpp
-
-${OBJECTDIR}/IsingMain5_2.o: IsingMain5_2.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IsingMain5_2.o IsingMain5_2.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IsingMain.o IsingMain.cpp
 
 ${OBJECTDIR}/RNG.o: RNG.cpp 
 	${MKDIR} -p ${OBJECTDIR}

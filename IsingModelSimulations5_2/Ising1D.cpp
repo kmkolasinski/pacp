@@ -1,6 +1,4 @@
-/* 
- * File:   Ising5_2.cpp
- */
+
 //////////////////////////////////////////////////////////////////////////////
 // IMPLEMENTATION OF Ising CLASS MEMBER FUNCTION
 //This file contains four sections :
@@ -18,12 +16,6 @@
 // Just take into account that project has to be developed according to standards 
 // of collaborative work. We are its contributors. 
 //////////////////////////////////////////////////////////////////////////////
-
-/*** PLEASE MAKE COPY OF THIS FILE. USE IT ON YOUR LOCAL COMPUTER 
- *** TO WRITE, ADD,  AND TEST FUNCTIONS.
- *** 
- *** HANG BACK THE FUNCTIONS YOU HAVE CREATED ON OUR EXCHANGE BLACKBOARD.*/
-
 
 
 
@@ -308,42 +300,6 @@ vector<double> Ising::E_correlation(int maxGdist, double E, vector<short> SS) {
 
 }
 
-/*vector<double> Ising::mean_E_correlation(vector <vector<short> > SS) {
-    /*
-     * Function allows to measure energy correlation by calculating its
-     * time mean value.
-     * 
-     
-     
-    //Declaration of iterators
-    vector<vector<short> >::iterator t;
-    vector<short> s;
-    vector<short>::iterator pos;
-
-    //TEMPORARY VARIABLE FOR E CORRELATION
-    vector<double> E_corr(maxGdist,0);
-
-    int i;
-
-    for (t = SS.begin(); t != SS.end(); t++) { //loop over time "t" (time unity in MC cycles = prod_t/measure_f)
-
-        i = 0;
-        for (pos = t->begin(); pos != t->end(); pos++) { //loop over chain sites "pos" at fixed time
-            S[i] = *pos;
-            i++;
-        } //We are leaving the loop with an instantaneous state of the chain contained in the Ising class member vector S
-
-        double E_tot =E();
-        E_corr = E_correlation(maxGdist, E_tot);
-        for (int j = 0; j < maxGdist; j++)
-            Ge[j] += E_corr[j]; //accumulation of instantaneous results (we are in time loop)
-    }
-    for (int j = 0; j < maxGdist; j++)
-        Ge[j] /= SS.size(); //normalization by number of measures
-
-    return Ge;
-}
- */
 vector<double> Ising::mean_E_correlation(vector <vector<short> > SS) {
     /*
      * Function allows to measure energy correlation by calculating its

@@ -92,7 +92,7 @@ vector<short> Ising2D::Metropolis_cycle() {
         siteD = To2D(site_i,(site_j- 1 + nx)%nx); 
         siteU = To2D(site_i,(site_j+1      )%nx); 
         
-        // helicoidal 
+        // helicoidal bc
         //siteL = (To2D(site_i - 1,site_j)  + N) % N; 
         //siteR = (To2D(site_i + 1,site_j)     ) % N; 
         //siteD = (To2D(site_i ,site_j-1)   + N) % N; 
@@ -194,12 +194,6 @@ void Ising2D::MC_simulation(int therm_t, int prod_t, int measure_f,ISING_METHOD_
     ising_method_type = mt;
     RNG::initializeRNG(seed1); // initializes integer random number generator
     
-//    cout << "----------------------------------------" << endl;
-//    cout << "MC simulation start..." << endl;
-//    cout << "Thermalization time:" <<  therm_t    << endl;
-//    cout << "Production     time:" <<  prod_t     << endl;
-//    cout << "Measure frequency  :" <<  measure_f  << endl;
-    
     
     //*** INITIAL MC CYCLES ***
     //Thermalization of initial non-equilibrium state.
@@ -256,14 +250,8 @@ double Ising2D::E(){
     for(int j=0;j<nx;j++){        
         E+= -S[To2D(i,j)]*
                 ( S[To2D((i+1)%nx,j)] + S[To2D(i,(j+1)%nx)] ) + h*S[To2D(i,j)]; 
-                //( S[To2D((i+1),j)%N] + S[To2D(i,(j+1))%N] ) + h*S[To2D(i,j)]; 
     }}
-    
-    
 
-        //siteR = (To2D(site_i + 1,site_j)     ) % N; 
-
-        //siteU = (To2D(site_i ,site_j+1)      ) % N; 
     return E;
 }
 

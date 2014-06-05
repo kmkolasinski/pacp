@@ -20,7 +20,7 @@ class IsingTestError2D : public IsingTest {
                        string(" http://en.wikipedia.org/wiki/Bootstrapping_(statistics).\n ")+  
                        string(" \nThe results are saved in following files:")+  
                        string(" 'IsingTestError2D.txt' and 'IsingTestError2D.png' in 'tests_out' directory. \n")+
-                       string(" This test shows that the error decreases with number of prod_t. We founded that \n")+
+                       string(" This test shows that the error decreases with number of prod_t. We found that \n")+
                        string(" the asymptotic behavior of error(prod_t) behaves like 1/sqrt(prod_t) which \n")+
                        string(" agrees with the general result for error known in MC integration methods. For more \n")+
                        string(" details see: http://en.wikipedia.org/wiki/Monte_Carlo_integration. \n")+

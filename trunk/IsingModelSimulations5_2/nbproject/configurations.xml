@@ -24,12 +24,12 @@
     </logicalFolder>
     <logicalFolder name="Tests" displayName="Tests" projectFiles="true">
       <itemPath>Tests/IsingTest.h</itemPath>
-      <itemPath>Tests/IsingTestCC2D.h</itemPath>
       <itemPath>Tests/IsingTestChi1D.h</itemPath>
       <itemPath>Tests/IsingTestChi2D.h</itemPath>
       <itemPath>Tests/IsingTestClusterFreq2D.h</itemPath>
       <itemPath>Tests/IsingTestClusterStat.h</itemPath>
       <itemPath>Tests/IsingTestCorrelationLength.h</itemPath>
+      <itemPath>Tests/IsingTestCv2D.h</itemPath>
       <itemPath>Tests/IsingTestE1D.h</itemPath>
       <itemPath>Tests/IsingTestError1D.h</itemPath>
       <itemPath>Tests/IsingTestError2D.h</itemPath>
@@ -78,8 +78,6 @@
       </item>
       <item path="Tests/IsingTest.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Tests/IsingTestCC2D.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Tests/IsingTestChi1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestChi2D.h" ex="false" tool="3" flavor2="0">
@@ -89,6 +87,8 @@
       <item path="Tests/IsingTestClusterStat.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestCorrelationLength.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestCv2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestE1D.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -159,8 +159,6 @@
       </item>
       <item path="Tests/IsingTest.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Tests/IsingTestCC2D.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Tests/IsingTestChi1D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestChi2D.h" ex="false" tool="3" flavor2="0">
@@ -170,6 +168,8 @@
       <item path="Tests/IsingTestClusterStat.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestCorrelationLength.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tests/IsingTestCv2D.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Tests/IsingTestE1D.h" ex="false" tool="3" flavor2="0">
       </item>

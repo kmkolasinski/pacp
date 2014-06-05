@@ -6,10 +6,10 @@
 
 #include "IsingTest.h"
 
-class IsingTestCC2D : public IsingTest {
+class IsingTestCv2D : public IsingTest {
 
     public:
-        IsingTestCC2D():IsingTest(){
+        IsingTestCv2D():IsingTest(){
             test_name = "Test of specific heat in function of T .";   
             test_info = string(" Run test to calculate the Cv value in function of  \n")+
                         string(" temperature T for the 2D Ising lattice. The test is performed \n")+

@@ -1,8 +1,3 @@
-/* 
- * File:   IsingMain5_2.cpp
- *
- */
-
 //////////////////////////////////////////////////////////////////////////////
 // MAIN FUNCTION
 //////////////////////////////////////////////////////////////////////////////
@@ -19,7 +14,7 @@
 #include <iomanip>
 #include <cmath>
 
-//#include<stack> //LIFO (Last In First Out) container for Wolff MC algorithm
+
 
 #include "Tools.h"
 #include "Ising1D.h"
@@ -83,10 +78,7 @@ int main(int argc, char** argv) {
     //  IsingTestExact2D isingTestExact2D; // Ising2D test which calculates the exacts values of Cv for  small lattices
     
     
-//TOOLS
-    // TestError TestError; //  Generic test of ERROR funtion for some input data 
-    //                           and any algorithm serving for calculation of physical
-    //                           quantity.
+
         
     
     

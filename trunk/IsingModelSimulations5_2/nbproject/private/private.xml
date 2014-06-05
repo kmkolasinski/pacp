@@ -19,6 +19,9 @@
             <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Tests/IsingTestExact2D.h</file>
             <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Tests/IsingTestExact1D.h</file>
         </group>
-        <group name="PatCP"/>
+        <group name="PatCP">
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/Ising1D.cpp</file>
+            <file>file:/home/mkk/DANE/Doktorat/ZAJECIA/PhysicsAtCP/trunk/IsingModelSimulations5_2/IsingMain.cpp</file>
+        </group>
     </open-files>
 </project-private>

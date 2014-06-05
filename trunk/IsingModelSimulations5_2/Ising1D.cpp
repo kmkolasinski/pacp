@@ -27,7 +27,7 @@
 
 
 
-#include "Ising5_2.h"
+#include "Ising1D.h"
 #include "Tools.h"
 
 

@@ -17,14 +17,14 @@ class IsingTestCv2D : public IsingTest {
                         string(" temperature is Tc=2.27. From theoretical results we know that\n")+
                         string(" Cv should obtain maximum value near the Tc value. For large and\n")+
                         string(" very small values of T the Cv should tend to zero.\n")+
-                        string(" The results are saved in following files:")+  
-                        string(" 'IsingTestCC2D.txt' and 'IsingTestCC2D.png' in 'tests_out' directory. \n")+
+                        string(" The results are saved in following files:\n")+  
+                        string(" 'IsingTestCv2D.txt' and 'IsingTestCv2D.png' in 'tests_out' directory. \n")+
                         string(" See run() function for more details.");
             
             info(); 
             run(); // run all calculations
-            string cmd =string("cd ")+test_dir_output+string(";gnuplot IsingTestCC2D.plt");
-            //int info = system(cmd.c_str());
+            string cmd =string("cd ")+test_dir_output+string(";gnuplot IsingTestCv2D.plt");
+            int info = system(cmd.c_str());
         }   
         
         /**
@@ -40,7 +40,7 @@ class IsingTestCv2D : public IsingTest {
         double magneticField = 0.0;
         int therm_t          =  50;    //thermalization time
         int measure_f        =   1;    //measure frequency
-        int prod_t           =5000;    //productiontime
+        int prod_t           = 500;    //productiontime
         int maxGdist         =  10;    //domain of correlation function extends from 0 to maxGdist-1
         int maxTsep          =   2;
         double initState     = 0.7;    //values between 0.5 and 1.0
@@ -55,8 +55,8 @@ class IsingTestCv2D : public IsingTest {
         // ---------------------------------------------------------
         // Calculation for NxN lattice.
         // ---------------------------------------------------------
-        for(int i=2 ; i < 6 ; i++){                    
-            chainLength  = i ;// pow(2,i+1); // choosing proper lattice size
+        for(int i=0 ; i < 4 ; i++){                    
+            chainLength  = pow(2,i+1); // choosing proper lattice size
             cout << "Starting simulation for lattice "<<chainLength << "x" <<  chainLength << "...\n";  
             
             for(unsigned int t = 0 ; t < dataT.size() ; t++ ){ 
@@ -70,17 +70,17 @@ class IsingTestCv2D : public IsingTest {
                 vector<double> data;
                 data.push_back(cc); 
                 data.push_back(error); 
-                dataNxN[i-2].push_back(data);
+                dataNxN[i].push_back(data);
             }// end of for            
         } // end of for over lattice sizes
         
         // saving data to file       
-        string fileout = test_dir_output+"IsingTestCC2DForExact.txt";
+        string fileout = test_dir_output+"IsingTestCv2D.txt";
         ofstream data_out(fileout.c_str());     
         
         for(unsigned int t = 0 ; t < dataT.size() ; t++ ){
              data_out << std::scientific << dataT[t] << "\t";   
-             for(int i = 0; i < 5 ; i++){
+             for(int i = 0; i < 4 ; i++){
                  data_out << dataNxN[i][t][0] << "\t";
                  data_out << dataNxN[i][t][1] << "\t";
              }
